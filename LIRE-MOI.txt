@@ -1,0 +1,32 @@
+Digital Concepts — traduction arabe corrigée et portraits mobiles recadrés
+
+Décompressez et envoyez tous les fichiers au même niveau sur GitHub.
+
+Palette : dominante neutre, particules 47 % bleu, 26 % orange, 13 % rose, 9 % violet, 5 % cyan. Répartition approximative estimée depuis les zones colorées de l’aperçu PC du site de référence ; ce ne sont pas les pourcentages exacts de pixels du site animé.
+
+Effets : GSAP et ScrollTrigger issus du dossier fourni, inclus localement. Apparitions des titres/cartes, animation des séparateurs, progression, parallaxe, reflets au pointeur.
+Verre : remplissage transparent, contenu opaque, filtre de déplacement du fond selon le support navigateur ; flou léger de secours. Le menu des langues conserve un fond lisible.
+GIFs : recoloration par CSS dans le site, fichiers source et animations conservés.
+
+Contrôles : affichage arabe et passage français/arabe vérifiés dans le navigateur sur les cinq pages, sans erreur JavaScript ni débordement horizontal sur mobile.
+
+Animation des textes : titres progressivement éclaircis au scroll (35 à 100 %), montée douce des titres et descriptions, entrée décalée du texte du hero. Réinitialisation après traduction ; réduction des animations respectée.
+
+Mise à jour : mot accentué des titres en police italique distincte, animation et couleur dédiée. Cadres PC/mobile transparents, reflets au survol, boutons portfolio à halo spectral.
+Fond interactif : background-3d.js est partagé par index, ecommerce, landing-page et site-vitrine. droit.html ne charge pas ce fichier. Le navigateur peut le mettre en cache ; le fond est réinitialisé lors de chaque navigation complète.
+
+Corrections de cette version : textes arabes reformulés, affichage de droite à gauche stabilisé, menu des langues corrigé sur la page juridique. Les noms de l’équipe sont conservés. Sur mobile, les portraits de « Qui sommes-nous » sont recadrés pour afficher le personnage dans le cercle bleu. Les trois fichiers team-mobile-*.webp doivent rester à côté de index.html.
+
+
+Fond mobile — mise à jour du 24 octobre 2026
+Le fond mobile utilise une boucle locale de 20 secondes (720 × 1280, environ 1 Mo), les deux bandes liquides et une révélation discrète du code au toucher/glissement. Le défilement reste natif.
+Une affiche WebP de 17 Ko apparaît avant la lecture. Le rendu du code est effectué par le GPU, sans lecture des pixels sur le processeur ; résolution plafonnée et cadence limitée à 24 images/s. L’animation est suspendue lorsque la page est masquée. Une affiche fixe est utilisée avec la réduction des animations ou l’économie de données.
+Les téléphones/appareils tactiles et fenêtres de 900 px ou moins utilisent ce fond. Sur ordinateur large avec souris, la 3D originale est chargée à la demande. La page juridique conserve son comportement.
+Publier tous les fichiers de ce ZIP au même niveau, y compris background-loader.js et les quatre fichiers mobile-background.*.
+Validation : syntaxe JS, sélection mobile/ordinateur et dépendances des quatre pages vérifiées. Lecture vidéo : 20 secondes. Test visuel et tactile réel à confirmer sur téléphone.
+
+Luminosité du fond mobile augmentée de 40 % (vidéo, code et image d’attente).
+
+Ajustement : rayon de révélation réduit de 60 % (148 au lieu de 370), dégradé proportionnel. Luminosité du fond augmentée de 10 % supplémentaires (facteur final 1,54).
+
+Dernier ajustement : rayon de révélation augmenté de 45 % par rapport au réglage précédent (214,6 au lieu de 148), dégradé proportionnel.

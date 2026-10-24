@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script>(function(){try{var l=localStorage.getItem('lang')||(navigator.language||'en').slice(0,2);if(l==='ar'){document.documentElement.lang='ar';document.documentElement.dir='rtl';}}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agence Web — Page Principale</title>
+<meta name="description" content="Agence de création de sites web : landing pages, sites vitrines et boutiques en ligne conçus pour convertir vos visiteurs en clients.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --navy: #03040a; --electric: #dce4f3; --white: #f6f7fb; --accent: #b6bfce; }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Montserrat', sans-serif; background: var(--navy); color: var(--white); overflow-x: hidden; cursor: none; }
+
+  
+  #bg-matrix-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  #bg-spotlight     { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: rgba(3,4,10,0.93); }
+  #bg-plexus        { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+  #bg-scanlines     { position: fixed; inset: 0; z-index: 3; pointer-events: none; background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px); }
+  #bg-vignette      { position: fixed; inset: 0; z-index: 4; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(3,4,10,.55) 100%); }
+
+  
+  #cursor     { position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
+  #cursor-dot { width:6px; height:6px; background:var(--electric); border-radius:50%; position:absolute; transform:translate(-50%,-50%); box-shadow:0 0 8px var(--electric),0 0 20px var(--electric); }
+  #cursor-ring{ width:38px; height:38px; border:1px solid rgba(210,225,255,.35); border-radius:50%; position:absolute; transform:translate(-50%,-50%); }
+
+  
+  #navbar {
+    position:fixed; inset:0 0 auto 0; z-index:1000; padding:20px 40px;
+    transition:transform .45s cubic-bezier(.4,0,.2,1);
+  }
+  #navbar.nav-hidden { transform:translateY(-100%); }
+  #navbar nav { display:flex; align-items:center; max-width:1200px; margin:0 auto; }
+  .nav-pill {
+    display:flex; align-items:center; height:48px; padding:0 24px;
+    border-radius:999px; background:rgba(14,14,23,0.8); border:1px solid rgba(210,225,255,0.2);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    text-decoration:none; transition:border-color .2s;
+  }
+  .nav-pill:hover { border-color:rgba(210,225,255,0.4); }
+  .nav-line { flex:1; height:1px; background:linear-gradient(90deg, rgba(210,225,255,0.3), rgba(210,225,255,0.1), rgba(210,225,255,0.3)); margin:0 8px; }
+  #navbar .logo { font-family:'DM Serif Display',serif; font-size:20px; letter-spacing:1px; color:var(--white); }
+  #navbar .logo span { font-style:italic; color:var(--electric); text-shadow:0 0 20px rgba(210,225,255,0.4); }
+  #navbar .logo-img { height:32px; width:auto; display:block; filter:drop-shadow(0 0 20px rgba(210,225,255,0.4)); }
+  .nav-links { gap:28px; }
+  .nav-links a { color:rgba(245,247,250,0.75); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; transition:color .2s; white-space:nowrap; }
+  .nav-links a:hover { color:var(--electric); }
+
+  
+  .lang-switcher { position:relative; font-family:'Montserrat',sans-serif; }
+  .lang-trigger {
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(14,14,23,0.8); border:1px solid rgba(210,225,255,0.2);
+    color:var(--white); padding:0 20px; height:48px; border-radius:999px;
+    font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
+    cursor:pointer; transition:border-color .2s;
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    font-family:inherit;
+  }
+  .lang-trigger:hover { border-color:rgba(210,225,255,0.4); }
+  .lang-trigger .caret { transition:transform .25s ease; display:inline-block; font-size:10px; opacity:.7; }
+  .lang-trigger[aria-expanded="true"] .caret { transform:rotate(180deg); }
+  .lang-menu {
+    position:absolute; top:calc(100% + 10px); right:0; min-width:180px;
+    background:rgba(14,14,23,0.92); border:1px solid rgba(210,225,255,0.18);
+    border-radius:14px; padding:8px; list-style:none;
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    box-shadow:0 12px 40px rgba(0,0,0,0.55), 0 0 24px rgba(210,225,255,0.08);
+    opacity:0; transform:translateY(-6px) scale(.98); pointer-events:none;
+    transition:opacity .18s ease, transform .22s cubic-bezier(.2,.9,.3,1.4);
+    z-index:1001;
+  }
+  .lang-switcher.open .lang-menu { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+  .lang-menu li { margin:0; }
+  .lang-menu button {
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    width:100%; background:none; border:none; padding:10px 14px; border-radius:10px;
+    color:rgba(245,247,250,0.78); font-family:inherit; font-size:13px; font-weight:500;
+    cursor:pointer; text-align:left; transition:background .15s, color .15s;
+  }
+  .lang-menu button:hover { background:rgba(210,225,255,0.08); color:var(--white); }
+  .lang-menu button.active { color:var(--electric); }
+  .lang-menu button .check { opacity:0; font-size:12px; color:var(--electric); }
+  .lang-menu button.active .check { opacity:1; }
+
+  
+  .ws-spy{position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:900;padding:10px 6px;opacity:0;transition:opacity .6s ease .2s;font-family:'Montserrat',system-ui,sans-serif}
+  .ws-spy.is-ready{opacity:1}
+  .ws-spy ul{position:relative;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:22px}
+  .ws-spy ul::before{content:"";position:absolute;top:4px;bottom:4px;right:11px;width:1px;background:rgba(210,225,255,.22)}
+  .ws-spy button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:4px 6px 4px 12px;color:rgba(245,247,250,.55);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:color .3s ease}
+  .ws-spy button:focus-visible{outline:1px solid #dce4f3;outline-offset:4px;border-radius:2px}
+  .ws-spy .lbl{display:inline-block;opacity:0;transform:translateX(8px);transition:opacity .32s cubic-bezier(.22,1,.36,1),transform .32s cubic-bezier(.22,1,.36,1),color .3s ease;white-space:nowrap;pointer-events:none}
+  .ws-spy:hover .lbl,.ws-spy button:focus-visible .lbl,.ws-spy button.is-active .lbl{opacity:1;transform:translateX(0)}
+  .ws-spy button.is-active .lbl{color:#dce4f3}
+  .ws-spy .tick{display:inline-block;width:14px;height:1px;background:rgba(245,247,250,.45);transition:width .38s cubic-bezier(.22,1,.36,1),background-color .3s ease,box-shadow .3s ease}
+  .ws-spy button:hover .tick{width:22px;background:#f6f7fb}
+  .ws-spy button.is-active .tick{width:28px;background:#dce4f3;box-shadow:0 0 8px rgba(210,225,255,.7)}
+  @media (max-width:900px){.ws-spy{right:14px}.ws-spy button{font-size:10px}.ws-spy .tick{width:10px}.ws-spy button.is-active .tick{width:20px}}
+  @media (max-width:600px){.ws-spy{right:8px;padding:8px 4px}.ws-spy ul{gap:16px}.ws-spy ul::before{right:8px}.ws-spy .lbl{display:none}.ws-spy button:focus-visible .lbl{display:inline-block}.ws-spy .tick{width:8px}.ws-spy button.is-active .tick{width:16px}}
+  @media (prefers-reduced-motion:reduce){.ws-spy,.ws-spy *{transition:none!important}}
+
+  @media (hover: none) {
+    .lang-trigger, .lang-menu button, .ws-spy button { cursor: pointer; }
+  }
+
+  @media (max-width:680px) {
+    #navbar { padding:16px 16px; }
+    .nav-pill { height:44px; padding:0 16px; }
+    .lang-trigger { height:44px; padding:0 16px; }
+    .nav-links { gap:14px; }
+    .nav-links a.nav-hide-sm { display:none; }
+  }
+
+  
+  section { position:relative; z-index:10; background:transparent; }
+
+  .section-inner { max-width:1140px; margin:0 auto; padding:110px 32px; }
+  .section-label { font-size:11px; letter-spacing:3.5px; text-transform:uppercase; color:var(--electric); margin-bottom:14px; }
+  .section-title { font-family:'DM Serif Display',serif; font-size:clamp(28px,4vw,46px); line-height:1.18; color:var(--white); margin-bottom:56px; }
+
+  
+  #hero { height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; }
+
+  .hero-content { max-width:860px; padding:0 24px; animation:heroFadeIn 1.2s ease forwards; }
+  @keyframes heroFadeIn { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)} }
+
+  .hero-tag { display:inline-block; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--electric); border:1px solid rgba(210,225,255,0.3); padding:6px 18px; border-radius:30px; margin-bottom:28px; background:rgba(210,225,255,0.05); backdrop-filter:blur(4px); }
+
+  .hero-title { font-family:'DM Serif Display',serif; font-size:clamp(36px,6vw,72px); line-height:1.12; color:var(--white); margin-bottom:22px; text-shadow:0 2px 40px rgba(0,0,0,0.5); }
+  .hero-title em { font-style:italic; color:var(--electric); text-shadow:0 0 30px rgba(210,225,255,0.4); }
+
+  .hero-subtitle { font-size:clamp(14px,1.8vw,18px); color:rgba(245,247,250,0.72); line-height:1.7; max-width:620px; margin:0 auto 44px; }
+
+  .hero-scroll { display:flex; align-items:center; gap:10px; justify-content:center; color:rgba(245,247,250,0.4); font-size:12px; letter-spacing:2px; text-transform:uppercase; animation:bounce 2s infinite; }
+  .hero-scroll svg { width:20px; height:20px; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+  
+  .divider { height:1px; background:linear-gradient(90deg,transparent,rgba(210,225,255,0.15),transparent); }
+
+  
+  .cards-container { display:flex; gap:34px; flex-wrap:wrap; justify-content:center; }
+  .card-wrapper { perspective:900px; width:320px; }
+
+  .card-outer { background:rgba(14,14,23,0.72); border-radius:20px; padding:18px; position:relative; transform-style:preserve-3d; transition:transform 0.08s ease-out,box-shadow 0.08s ease-out; will-change:transform; box-shadow:0 8px 30px rgba(0,0,0,0.45); cursor:default; border:1px solid rgba(210,225,255,0.1); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
+  .card-glare { position:absolute; inset:0; border-radius:20px; pointer-events:none; opacity:0; transition:opacity 0.1s; z-index:10; }
+  .card-inner { background:linear-gradient(160deg,rgba(21,20,30,0.92) 0%,rgba(12,12,20,0.96) 100%); border-radius:14px; padding:24px 24px 28px; text-align:center; position:relative; padding-top:58px; margin-top:42px; border:1px solid rgba(210,225,255,0.07); }
+
+  .card-icon { width:94px; height:94px; background:linear-gradient(135deg,#171321 0%,#332340 100%); border-radius:50%; position:absolute; top:-47px; left:50%; transform:translateX(-50%); box-shadow:0 4px 18px rgba(0,0,0,0.45),0 0 30px rgba(210,105,255,0.15); overflow:hidden; }
+  .icon-static,.icon-gif { position:absolute; top:0; left:0; width:100%; height:100%; border-radius:50%; display:block; object-fit:cover; transition:opacity 0.2s; }
+  .icon-gif { opacity:0; }
+  .zoom-gif .icon-static,.zoom-gif .icon-gif { width:150%;height:150%;top:-25%;left:-25%;object-fit:cover; }
+  .card-outer:hover .icon-static { opacity:0; }
+  .card-outer:hover .icon-gif    { opacity:1; }
+
+  .card-title { font-size:20px; font-weight:700; color:var(--white); margin-bottom:14px; margin-top:4px; }
+  .card-text  { font-size:14px; color:rgba(245,247,250,0.62); line-height:1.75; margin-bottom:26px; }
+  .card-btn   { background:linear-gradient(135deg,#b6bfce,#4774ff); color:#fff; border:none; border-radius:30px; padding:13px 32px; font-size:14px; font-family:'Montserrat',sans-serif; font-weight:600; cursor:pointer; transition:opacity .2s,transform .2s; box-shadow:0 4px 18px rgba(197,163,239,0.3); }
+  .card-btn:hover { opacity:.88; transform:translateY(-1px); }
+  a { text-decoration:none; }
+
+  
+  .timeline-wrap { position:relative; max-width:960px; margin:0 auto; }
+
+  
+  .timeline-wrap::before {
+    content:''; position:absolute; left:50%; top:0; bottom:0; width:2px;
+    background:linear-gradient(to bottom,transparent,rgba(210,225,255,0.2) 8%,rgba(210,225,255,0.2) 92%,transparent);
+    transform:translateX(-50%);
+  }
+
+  
+  .tl-row {
+    display:grid;
+    grid-template-columns: 1fr 56px 1fr;
+    align-items:center;
+    margin-bottom: 56px;
+    gap: 0;
+  }
+
+  
+  .tl-left  { padding-right:32px; display:flex; justify-content:flex-end; }
+  
+  .tl-right { padding-left:32px;  display:flex; justify-content:flex-start; }
+  
+  .tl-mid   { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0; }
+
+  
+  .tl-node {
+    width:18px; height:18px; border-radius:50%;
+    background:var(--navy); border:2px solid var(--electric);
+    box-shadow:0 0 0 0 rgba(210,225,255,0.4);
+    z-index:2; flex-shrink:0;
+    transition: box-shadow .3s;
+  }
+  
+  .tl-row.visible .tl-node {
+    animation: nodePulse 2.4s ease-in-out infinite;
+  }
+  @keyframes nodePulse {
+    0%,100% { box-shadow:0 0 0 0 rgba(210,225,255,0.45), 0 0 10px rgba(210,225,255,0.3); }
+    50%      { box-shadow:0 0 0 10px rgba(210,225,255,0), 0 0 18px rgba(210,225,255,0.5); }
+  }
+
+  
+  .tl-connector {
+    width:100%; height:1px;
+    background:linear-gradient(90deg,rgba(210,225,255,0.15),rgba(210,225,255,0.35));
+  }
+  .tl-left  .tl-connector { background:linear-gradient(90deg,rgba(210,225,255,0.08),rgba(210,225,255,0.35)); }
+  .tl-right .tl-connector { background:linear-gradient(90deg,rgba(210,225,255,0.35),rgba(210,225,255,0.08)); }
+
+  
+  .tl-card {
+    background:rgba(255,255,255,0.035);
+    border:1px solid rgba(210,225,255,0.1);
+    border-radius:16px; padding:26px 28px;
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    transition:border-color .35s, box-shadow .35s, transform .35s;
+    width:100%; max-width:390px;
+  }
+  .tl-card:hover {
+    border-color:rgba(210,225,255,0.3);
+    box-shadow:0 8px 40px rgba(210,225,255,0.08);
+    transform:translateY(-3px);
+  }
+  .tl-left  .tl-card { text-align:right; }
+  .tl-right .tl-card { text-align:left; }
+
+  
+  .tl-row .tl-left  .tl-card { opacity:0; transform:translateX(-40px); transition:opacity .65s ease,transform .65s ease,border-color .35s,box-shadow .35s; }
+  .tl-row .tl-right .tl-card { opacity:0; transform:translateX( 40px); transition:opacity .65s ease,transform .65s ease,border-color .35s,box-shadow .35s; }
+  .tl-row .tl-mid               { opacity:0; transform:scale(0.5);       transition:opacity .4s ease .2s,transform .4s ease .2s; }
+
+  .tl-row.visible .tl-left  .tl-card { opacity:1; transform:translateX(0); }
+  .tl-row.visible .tl-right .tl-card { opacity:1; transform:translateX(0); }
+  .tl-row.visible .tl-mid            { opacity:1; transform:scale(1); }
+
+  
+  .tl-empty { width:100%; }
+
+  
+  .tl-stat    { font-family:'DM Serif Display',serif; font-size:38px; color:var(--electric); line-height:1; margin-bottom:8px; text-shadow:0 0 22px rgba(210,225,255,0.35); }
+  .tl-heading { font-size:15px; font-weight:700; color:var(--white); margin-bottom:8px; }
+  .tl-desc    { font-size:13px; color:rgba(245,247,250,0.60); line-height:1.7; }
+
+  
+  @media (max-width:680px) {
+    .tl-row { grid-template-columns:28px 1fr; grid-template-rows:auto; }
+    .tl-left, .tl-right { padding:0 0 0 16px; justify-content:flex-start; grid-column:2; }
+    .tl-mid  { grid-column:1; grid-row:1; align-self:flex-start; padding-top:26px; }
+    .tl-left  .tl-card,
+    .tl-right .tl-card { text-align:left; max-width:100%; }
+    .timeline-wrap::before { left:13px; }
+  }
+
+  
+  #contact {
+    background: #070911;
+    z-index: 20;
+  }
+  #contact .section-inner { padding-bottom:80px; text-align:center; }
+
+  .contact-card { background:rgba(255,255,255,0.04); border:1px solid rgba(210,225,255,0.14); border-radius:24px; padding:54px 44px; max-width:760px; margin:0 auto; text-align:left; }
+  .contact-card .section-title { margin-bottom:14px; text-align:left; }
+  .contact-card .section-label { text-align:left; }
+  .contact-card .lead { color:rgba(245,247,250,0.65); font-size:15px; line-height:1.7; margin-bottom:36px; text-align:left; }
+
+  .btn-cta { display:inline-block; background:linear-gradient(135deg,#b6bfce,#4774ff); color:#fff; font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; letter-spacing:1px; padding:16px 44px; border-radius:50px; text-decoration:none; border:none; cursor:pointer; box-shadow:0 4px 30px rgba(197,163,239,0.35); transition:opacity .2s,transform .2s; }
+  .btn-cta:hover { opacity:.88; transform:translateY(-2px); }
+  .btn-cta:disabled { opacity:.55; cursor:not-allowed; transform:none; }
+
+  
+  .contact-form { display:grid; grid-template-columns:1fr 1fr; gap:18px 20px; }
+  .form-field { display:flex; flex-direction:column; }
+  .form-field.full { grid-column:1 / -1; }
+  .form-field label { font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(245,247,250,0.85); margin-bottom:8px; }
+  .form-field label .req { color:var(--electric); margin-left:4px; }
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    background:rgba(3,4,10,0.55);
+    border:1px solid rgba(210,225,255,0.18);
+    border-radius:10px;
+    padding:13px 14px;
+    color:var(--white);
+    font-family:'Montserrat',sans-serif;
+    font-size:14px;
+    transition:border-color .2s, box-shadow .2s, background .2s;
+    outline:none;
+    width:100%;
+  }
+  .form-field textarea { resize:vertical; min-height:130px; line-height:1.55; }
+  .form-field input::placeholder,
+  .form-field textarea::placeholder { color:rgba(245,247,250,0.32); }
+  .form-field input:focus,
+  .form-field textarea:focus,
+  .form-field select:focus {
+    border-color:var(--electric);
+    box-shadow:0 0 0 3px rgba(210,225,255,0.12);
+    background:rgba(3,4,10,0.75);
+  }
+  .phone-row { display:grid; grid-template-columns:120px 1fr; gap:8px; }
+  .phone-row select { padding-right:6px; }
+  .form-actions { grid-column:1 / -1; display:flex; align-items:center; justify-content:flex-start; gap:18px; margin-top:8px; }
+  .form-status { font-size:13px; color:rgba(245,247,250,0.7); }
+  .form-status.ok  { color:var(--electric); }
+  .form-status.err { color:#ff6b6b; }
+  
+  .hp-field { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; overflow:hidden; }
+
+  @media (max-width:680px) {
+    .contact-card { padding:38px 22px; }
+    .contact-form { grid-template-columns:1fr; }
+    .phone-row    { grid-template-columns:110px 1fr; }
+  }
+
+  footer { position:relative; z-index:20; background:#03040a; text-align:center; padding:24px; font-size:12px; color:rgba(245,247,250,0.25); letter-spacing:1px; border-top:1px solid rgba(210,225,255,0.06); }
+
+  @media (max-width:680px) {
+    .tl-item,.tl-item:nth-child(even) { flex-direction:column; align-items:flex-start; padding-left:36px; }
+    .tl-content { width:100%; text-align:left !important; }
+    .timeline-wrap::before { left:10px; }
+    .tl-node { left:10px; top:0; transform:none; }
+  }
+
+  
+  /* ============ CORE TEAM REVEAL ============ */
+  #equipe { position:relative; z-index:10; }
+  #equipe .section-inner { padding-top:55px; padding-bottom:60px; }
+  .core-stage {
+    position:relative; width:100%; max-width:960px; margin:0 auto;
+    aspect-ratio: 16 / 10;
+    perspective: 1200px;
+  }
+  @media (max-width:720px){ .core-stage{ aspect-ratio: 4 / 5; } }
+
+  .core-svg { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:2; overflow:visible; }
+  .core-line { fill:none; stroke:rgba(210,225,255,0.35); stroke-width:1; opacity:0; transition:opacity .6s ease; }
+  .core-stage.revealed .core-line { opacity:1; }
+  .core-pulse { fill:var(--electric); filter: drop-shadow(0 0 6px var(--electric)); opacity:0; }
+  .core-stage.revealed .core-pulse { opacity:1; }
+
+  .sphere-wrap {
+    position:absolute; left:50%; top:50%; width:220px; height:220px;
+    transform:translate(-50%,-50%); z-index:3; pointer-events:none;
+    transition: opacity .5s ease;
+  }
+  .core-stage.revealed .sphere-wrap { opacity:0; }
+  .sphere-halo {
+    position:absolute; inset:-60px; border-radius:50%;
+    background: radial-gradient(circle at 50% 50%, rgba(210,225,255,0.35) 0%, rgba(210,225,255,0.12) 30%, transparent 65%);
+    filter: blur(6px);
+    animation: sphereHalo 3.6s ease-in-out infinite;
+  }
+  .sphere-core {
+    position:absolute; inset:50px; border-radius:50%;
+    background: radial-gradient(circle at 35% 35%, #baffff 0%, var(--electric) 35%, #026a7a 75%, #012a33 100%);
+    box-shadow: 0 0 40px rgba(210,225,255,0.55), inset 0 0 40px rgba(210,225,255,0.4);
+    animation: sphereFloat 5s ease-in-out infinite, spherePulse 2.4s ease-in-out infinite;
+  }
+  .sphere-ring {
+    position:absolute; inset:0; border-radius:50%;
+    border:1px solid rgba(210,225,255,0.55);
+    box-shadow: 0 0 12px rgba(210,225,255,0.35);
+  }
+  .sphere-ring.r1 { transform: rotateX(70deg); animation: ringSpin1 6s linear infinite; }
+  .sphere-ring.r2 { transform: rotateY(70deg); animation: ringSpin2 8s linear infinite reverse; }
+  .sphere-ring.r3 { transform: rotate3d(1,1,0,60deg); animation: ringSpin3 10s linear infinite; }
+  .sphere-particle {
+    position:absolute; left:50%; top:50%; width:4px; height:4px; border-radius:50%;
+    background:var(--electric); box-shadow:0 0 8px var(--electric);
+    transform-origin: 0 0;
+  }
+
+  .burst {
+    position:absolute; left:50%; top:50%; width:0; height:0;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    border:2px solid rgba(210,225,255,0.85);
+    box-shadow: 0 0 40px rgba(210,225,255,0.55);
+    opacity:0; z-index:4; pointer-events:none;
+  }
+  .burst.play { animation: burstExpand 1.1s cubic-bezier(.2,.7,.2,1) forwards; }
+  .fragment {
+    position:absolute; left:50%; top:50%; width:6px; height:1px;
+    background: linear-gradient(90deg, transparent, var(--electric), transparent);
+    box-shadow:0 0 6px var(--electric);
+    opacity:0; z-index:4; pointer-events:none;
+  }
+  .fragment.play { animation: fragFly 1.1s cubic-bezier(.2,.6,.2,1) forwards; }
+
+  @keyframes sphereFloat { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-8px);} }
+  @keyframes spherePulse {
+    0%,100%{ box-shadow: 0 0 40px rgba(210,225,255,0.55), inset 0 0 40px rgba(210,225,255,0.4);}
+    50%{ box-shadow: 0 0 70px rgba(210,225,255,0.85), inset 0 0 55px rgba(210,225,255,0.55);}
+  }
+  @keyframes sphereHalo { 0%,100%{opacity:.75;} 50%{opacity:1;} }
+  @keyframes ringSpin1 { to { transform: rotateX(70deg) rotateZ(360deg);} }
+  @keyframes ringSpin2 { to { transform: rotateY(70deg) rotateZ(360deg);} }
+  @keyframes ringSpin3 { to { transform: rotate3d(1,1,0,60deg) rotateZ(360deg);} }
+  @keyframes burstExpand {
+    0%   { width:0; height:0; opacity:0; border-width:2px; }
+    20%  { opacity:1; }
+    100% { width:900px; height:900px; opacity:0; border-width:1px; }
+  }
+  @keyframes fragFly {
+    0%   { opacity:0; transform: translate(-50%,-50%) rotate(var(--a)) translateX(0) scale(1);}
+    15%  { opacity:1; }
+    100% { opacity:0; transform: translate(-50%,-50%) rotate(var(--a)) translateX(var(--d)) scale(.4);}
+  }
+  @keyframes screenShake {
+    0%,100%{ transform: translate(0,0);}
+    20%{ transform: translate(-3px,2px);}
+    40%{ transform: translate(3px,-2px);}
+    60%{ transform: translate(-2px,-2px);}
+    80%{ transform: translate(2px,2px);}
+  }
+  .core-stage.shake { animation: screenShake .5s ease-out; }
+
+  .core-member {
+    position:absolute; width:170px; z-index:5;
+    display:flex; flex-direction:column; align-items:center;
+    opacity:0;
+    transition:
+      left .9s cubic-bezier(.16,.9,.3,1),
+      top .9s cubic-bezier(.16,.9,.3,1),
+      opacity .7s ease,
+      filter .5s ease,
+      transform .5s ease;
+    left:50%; top:50%;
+    transform: translate(-50%,-50%) scale(.6);
+    filter: blur(0);
+  }
+  .core-stage.revealed .core-member { opacity:1; transform: translate(-50%,-50%) scale(1); }
+  .core-stage.revealed .core-member.ceo      { left:50%; top:22%; }
+  .core-stage.revealed .core-member.designer { left:22%; top:72%; }
+  .core-stage.revealed .core-member.dev      { left:78%; top:72%; }
+  @media (max-width:720px){
+    .core-member { width:130px; }
+    .core-stage.revealed .core-member.ceo      { left:50%; top:18%; }
+    .core-stage.revealed .core-member.designer { left:26%; top:70%; }
+    .core-stage.revealed .core-member.dev      { left:74%; top:70%; }
+  }
+
+  .core-avatar {
+    position:relative; width:150px; height:150px; border-radius:50%;
+    border:2px solid var(--electric); overflow:hidden;
+    background:var(--navy);
+    box-shadow: 0 0 22px rgba(210,225,255,0.35), 0 12px 40px rgba(0,0,0,.55);
+    cursor:pointer;
+    animation: memberBreath 4.5s ease-in-out infinite;
+    transition: transform .4s ease, box-shadow .4s ease, filter .4s ease;
+    transform-style: preserve-3d;
+  }
+  @media (max-width:720px){ .core-avatar { width:110px; height:110px; } }
+  .core-avatar img {
+    width:100%; height:100%; object-fit:cover; object-position:center center;
+    display:block; transform:scale(1.55); transform-origin:center center;
+  }
+  .core-avatar::after {
+    content:""; position:absolute; inset:-6px; border-radius:50%;
+    border:1px solid rgba(210,225,255,0.25); pointer-events:none;
+  }
+  .core-member:hover .core-avatar {
+    box-shadow: 0 0 40px rgba(210,225,255,0.7), 0 16px 48px rgba(0,0,0,.6);
+    transform: scale(1.06) rotateY(var(--rx,0deg)) rotateX(var(--ry,0deg));
+  }
+  @keyframes memberBreath {
+    0%,100%{ box-shadow: 0 0 22px rgba(210,225,255,0.35), 0 12px 40px rgba(0,0,0,.55);}
+    50%{ box-shadow: 0 0 34px rgba(210,225,255,0.55), 0 12px 40px rgba(0,0,0,.55);}
+  }
+
+  .scan-overlay {
+    position:absolute; inset:0; border-radius:50%; overflow:hidden;
+    pointer-events:none; opacity:0; transition:opacity .3s;
+  }
+  .scan-overlay::before {
+    content:""; position:absolute; left:0; right:0; height:6px; top:-10%;
+    background: linear-gradient(180deg, transparent, rgba(210,225,255,0.8), transparent);
+    box-shadow: 0 0 12px var(--electric);
+    animation: scanMove 2s linear infinite;
+  }
+  .selected-ring {
+    position:absolute; inset:-12px; border-radius:50%;
+    border:1px dashed rgba(210,225,255,0.7);
+    opacity:0; animation: selectedSpin 6s linear infinite;
+    pointer-events:none;
+  }
+  .core-member.selected .scan-overlay { opacity:1; }
+  .core-member.selected .selected-ring { opacity:1; }
+  .core-member.selected .core-avatar {
+    box-shadow: 0 0 50px rgba(210,225,255,0.85), 0 16px 48px rgba(0,0,0,.6);
+  }
+  .core-member.dimmed { filter: blur(2px) brightness(.55); opacity:.5; }
+  @keyframes scanMove { 0%{ top:-10%;} 100%{ top:110%;} }
+  @keyframes selectedSpin { to { transform: rotate(360deg);} }
+
+  .core-name {
+    margin-top:14px; font-family:'DM Serif Display',serif;
+    font-size:18px; color:var(--white); text-align:center;
+    opacity:0; transform:translateY(6px);
+    transition:opacity .35s, transform .35s;
+  }
+  .core-role {
+    margin-top:2px; font-size:10px; font-weight:600;
+    letter-spacing:2.5px; text-transform:uppercase; color:var(--electric);
+    text-align:center;
+    opacity:0; transform:translateY(6px);
+    transition:opacity .35s .05s, transform .35s .05s;
+  }
+  .core-stage.revealed .core-member .core-name,
+  .core-stage.revealed .core-member .core-role { opacity:1; transform:translateY(0); }
+  .core-member:hover .core-name { text-shadow: 0 0 12px rgba(210,225,255,0.6); }
+
+  .core-panel {
+    max-width:820px; margin:34px auto 0;
+    overflow:hidden; max-height:0; opacity:0;
+    transition: max-height .6s cubic-bezier(.4,0,.2,1), opacity .45s ease .1s;
+  }
+  .core-panel.open { max-height:560px; opacity:1; }
+  .core-panel-inner {
+    padding:30px 34px;
+    background:rgba(14,14,23,0.85);
+    border:1px solid rgba(210,225,255,0.18);
+    border-radius:20px;
+    box-shadow:0 12px 48px rgba(0,0,0,.45);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    display:grid; grid-template-columns: 3px 1fr; gap:28px;
+  }
+  .core-panel-bar { background:var(--electric); border-radius:3px; box-shadow:0 0 12px rgba(210,225,255,0.4); }
+  .core-panel .pName {
+    font-family:'DM Serif Display',serif; font-size:30px; color:var(--white);
+    line-height:1.1; margin-bottom:6px;
+    opacity:0; transform:translateY(8px); transition:opacity .4s, transform .4s;
+  }
+  .core-panel .pRole {
+    font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+    color:var(--electric); margin-bottom:14px;
+    opacity:0; transform:translateY(8px); transition:opacity .4s .05s, transform .4s .05s;
+  }
+  .core-panel .pBio {
+    font-size:14px; line-height:1.75; color:rgba(245,247,250,0.72);
+    opacity:0; transform:translateY(8px); transition:opacity .4s .1s, transform .4s .1s;
+    margin-bottom:22px;
+  }
+  .core-panel.open .pName,
+  .core-panel.open .pRole,
+  .core-panel.open .pBio { opacity:1; transform:translateY(0); }
+
+  .core-stats { display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; }
+  .core-stat {
+    padding:16px 14px; border:1px solid rgba(210,225,255,0.18);
+    border-radius:14px; background:rgba(210,225,255,0.03);
+    text-align:center;
+    opacity:0; transform:translateY(10px); transition:opacity .5s, transform .5s;
+  }
+  .core-panel.open .core-stat { opacity:1; transform:translateY(0); }
+  .core-panel.open .core-stat:nth-child(2) { transition-delay:.12s; }
+  .core-panel.open .core-stat:nth-child(3) { transition-delay:.24s; }
+  .core-stat .num {
+    font-family:'DM Serif Display',serif; font-size:30px; color:var(--electric);
+    line-height:1; letter-spacing:.5px;
+    text-shadow: 0 0 12px rgba(210,225,255,0.35);
+  }
+  .core-stat .lbl {
+    margin-top:8px; font-size:9.5px; font-weight:600; letter-spacing:2.4px;
+    text-transform:uppercase; color:rgba(245,247,250,0.62);
+  }
+  .core-stat .spec { font-family:'Montserrat',sans-serif; font-size:14px; color:var(--white); font-weight:600; line-height:1.3; }
+  @media (max-width:680px){
+    .core-panel-inner { grid-template-columns: 1fr; padding:22px; }
+    .core-panel-bar { height:3px; width:60px; }
+    .core-stats { grid-template-columns: repeat(3, 1fr); gap:10px; }
+    .core-stat { padding:12px 8px; }
+    .core-stat .num { font-size:22px; }
+    .core-stat .spec { font-size:12px; }
+  }
+
+  .core-hint {
+    text-align:center; margin-top:26px; font-size:11px;
+    letter-spacing:2.5px; text-transform:uppercase;
+    color:var(--electric); opacity:.5;
+    transition:opacity .3s;
+  }
+  .core-hint.off { opacity:0; pointer-events:none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sphere-core, .sphere-halo, .sphere-ring, .core-avatar,
+    .scan-overlay::before, .selected-ring, .core-pulse { animation:none !important; }
+    .core-member { transition-duration:.2s; }
+  }
+</style>
+ <link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="stylesheet" href="identity.css?v=3">
+<link rel="stylesheet" href="arabic.css?v=3">
+<link rel="stylesheet" href="team-carousel.css">
+<link rel="preload" as="image" href="mobile-background.webp" media="(max-width:900px)">
+<link rel="stylesheet" href="mobile-background.css">
+</head>
+<body>
+
+
+<canvas id="bg-matrix-canvas"></canvas>
+<div id="bg-spotlight"></div>
+<div id="bg-plexus"></div>
+<div id="bg-scanlines"></div>
+<div id="bg-vignette"></div>
+
+<div id="cursor"><div id="cursor-dot"></div><div id="cursor-ring"></div></div>
+
+
+<header id="navbar">
+  <nav aria-label="Navigation principale">
+    <a href="#hero" class="nav-pill logo"><img class="logo-img" src="digital-concepts-logo.webp" alt="Digital Concepts"></a>
+    <div class="nav-line" aria-hidden="true"></div>
+    <div class="lang-switcher" id="langSwitcher">
+      <button type="button" class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false">
+        <span id="langCurrent">FR</span>
+        <span class="caret">▾</span>
+      </button>
+      <ul class="lang-menu" role="listbox" id="langMenu"></ul>
+    </div>
+  </nav>
+</header>
+<script>
+/* ═══ HEADER SCROLL BEHAVIOR — hide on scroll down, show on scroll up ═══ */
+(function () {
+  const header = document.getElementById('navbar');
+  if (!header) return;
+  const REVEAL_THRESHOLD = 80; // toujours visible tant qu'on est proche du haut
+  let lastY = window.scrollY;
+  let ticking = false;
+
+  function update() {
+    const y = window.scrollY;
+    if (y <= REVEAL_THRESHOLD) {
+      header.classList.remove('nav-hidden');
+    } else if (y > lastY) {
+      header.classList.add('nav-hidden');
+    } else if (y < lastY) {
+      header.classList.remove('nav-hidden');
+    }
+    lastY = y;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+</script>
+<script>
+/* ═══════════════════════════════
+   MULTILINGUAL SYSTEM — WebStudio
+   Auto-detect, persist, and apply
+════════════════════════════════ */
+const LANGS = [{"code":"ar","label":"العربية","flag":""},
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "en", label: "English",  flag: "🇬🇧" },
+  { code: "de", label: "Deutsch",  flag: "🇩🇪" },
+  { code: "es", label: "Español",  flag: "🇪🇸" },
+  { code: "it", label: "Italiano", flag: "🇮🇹" },
+];
+const AVAILABLE = LANGS.map(l => l.code);
+
+function detectLang() {
+  const saved = localStorage.getItem("lang");
+  if (saved && AVAILABLE.includes(saved)) return saved;
+  const nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+  return AVAILABLE.includes(nav) ? nav : "en";
+}
+
+const DICTS = {ar:{"meta":{"title":"Digital Concepts — تصميم المواقع وصفحات الهبوط والمتاجر الإلكترونية","description":"نصمّم مواقع تعريفية وصفحات هبوط ومتاجر إلكترونية تساعدك على جذب الزوار وتحويلهم إلى عملاء."},"nav":{"services":"خدماتنا","pourquoi":"لماذا نحن؟","contact":"تواصل معنا"},"langSwitcher":{"label":"تغيير اللغة"},"hero":{"tag":"وكالة تصميم وتطوير المواقع","titleHtml":"موقع إلكتروني <em>يعزّز صورتك</em><br>ويساعد أعمالك على النمو","subtitleHtml":"نصمّم صفحات هبوط ومواقع تعريفية ومتاجر إلكترونية تجذب الزوار وتقنعهم وتحوّلهم إلى عملاء.","scroll":"اكتشف خدماتنا"},"services":{"label":"حلولنا","title":"ما نوع الموقع المناسب لمشروعك؟","cta":"اكتشف المزيد","card1":{"title":"صفحة هبوط","textHtml":"مثالية للمدرّبين والخدمات والحرفيين والمطاعم والفعاليات والحملات الإعلانية."},"card2":{"title":"موقع تعريفي","textHtml":"مثالي للشركات والعيادات ومكاتب المحاماة والمستقلين والوكالات والمشاريع المحلية والجمعيات."},"card3":{"title":"متجر إلكتروني","textHtml":"مثالي للتجارة الإلكترونية وبيع المنتجات والمتاجر وصنّاع المنتجات والبيع دون تخزين والأسواق الإلكترونية."}},"pourquoi":{"label":"التزامنا لك","title":"لماذا تختارنا؟","row1":{"stat":"120+","heading":"مشاريع منجزة — رضا العملاء بنسبة 98%","desc":"أكثر من 5 سنوات من الخبرة في تطوير مواقع فعّالة، ورضا عملائنا يعكس جودة عملنا."},"row2":{"stat":"من 5 إلى 14 يومًا","heading":"إنجاز سريع ومواعيد واضحة","desc":"نسلّم موقعك خلال 5 أيام إلى أسبوعين حسب تعقيد المشروع، مع الالتزام بالمواعيد المتفق عليها."},"row3":{"stat":"3×","heading":"تحويل المزيد من الزوار إلى عملاء","desc":"مواقع متجاوبة بالكامل، مصمّمة لزيادة التحويلات، مع نتائج قد تصل إلى ثلاثة أضعاف حسب المشروع."},"row3b":{"stat":"من البداية إلى النهاية","heading":"مرافقة في كل خطوة","desc":"متابعة منظّمة في جميع مراحل المشروع، وتحسينات بعد التسليم للوصول إلى نتيجة تناسب أهدافك."},"row4":{"stat":"أقل من ثانيتين","heading":"سرعة وتهيئة لمحركات البحث","desc":"مواقع سريعة جدًا، بزمن تحميل أقل من ثانيتين، ومهيّأة لمحركات البحث منذ التصميم لتعزيز ظهورك منذ الإطلاق."}},"equipe":{"label":"فريقنا","titleHtml":"من <em>نحن</em>؟","intro":"فريق من المبدعين الشغوفين تجمعهم رؤية واحدة: ابتكار تجارب رقمية فريدة لا تُنسى.","hint":"اضغط على الصورة للتعرّف إلى صاحبها","stats":{"projects":"مشاريع منجزة","years":"سنوات الخبرة","specialty":"التخصّص"}},"contact":{"label":"احصل على عرض سعر مجاني","title":"هل لديك مشروع في ذهنك؟ لنتحدّث عنه.","lead":"نحوّل أفكارك إلى موقع إلكتروني فعّال. أخبرنا عن مشروعك لتحصل على عرض واضح وسريع يناسب أهدافك.","honeypot":"اترك هذا الحقل فارغًا","firstName":"الاسم الأول","firstNamePh":"محمد","lastName":"اسم العائلة","lastNamePh":"العلوي","email":"البريد الإلكتروني","emailPh":"example@domain.com","phone":"رقم الهاتف","phonePh":"0 00 00 00 00","dialAria":"رمز الاتصال الدولي","message":"رسالتك","messagePh":"أسئلتك أو ملاحظاتك","submit":"إرسال الرسالة","submitting":"جارٍ الإرسال…","ok":"✓ تم إرسال رسالتك. سنرد عليك خلال 24 ساعة.","err":"✗ حدث خطأ. حاول مجددًا أو تواصل معنا مباشرة.","netErr":"✗ تعذّر الاتصال. تحقّق من اتصالك بالإنترنت وحاول مجددًا."},"footer":"© Digital Concepts 2026 — جميع الحقوق محفوظة"},
+  fr: {
+    meta: {
+      title: "Agence Web — Landing Pages, Sites Vitrines & E-commerce",
+      description: "Agence de création de sites web : landing pages, sites vitrines et boutiques en ligne conçus pour convertir vos visiteurs en clients.",
+    },
+    nav: { services: "Services", pourquoi: "Pourquoi nous", contact: "Contact" },
+    langSwitcher: { label: "Changer de langue" },
+    hero: {
+      tag: "Agence Web",
+      titleHtml: "Un site web qui <em>valorise</em><br>votre image et développe<br>votre activité",
+      subtitleHtml: "Landing pages, sites vitrines et e-commerce conçus pour attirer,<br>convaincre et transformer vos visiteurs en clients.",
+      scroll: "Découvrir",
+    },
+    services: {
+      label: "Nos solutions",
+      title: "Quel site vous correspond ?",
+      cta: "En savoir plus",
+      card1: { title: "Page d'accueil", textHtml: "→ Idéal pour : coachs, services,<br>artisans, restaurants, événements,<br>campagnes publicitaires..." },
+      card2: { title: "Site Vitrine", textHtml: "→ Idéal pour : entreprises, cabinets<br>(avocats, médecins…),<br>indépendants, agences, PME,<br>entreprises locales, associations..." },
+      card3: { title: "Boutique en ligne", textHtml: "→ Idéal pour : e-commerce, vente de<br>produits, boutiques, créateurs,<br>dropshipping, marketplaces..." },
+    },
+    pourquoi: {
+      label: "Nos engagements",
+      title: "Pourquoi nous choisir",
+      row1: { stat: "120+", heading: "Projets réalisés — 98% satisfaits", desc: "Plus de 5 ans d'expérience dans la création de sites web performants, avec une satisfaction client qui parle d'elle-même." },
+      row2: { stat: "5–14j", heading: "Délais rapides et maîtrisés", desc: "Livraison de votre site en 5 jours à 2 semaines selon la complexité. Des délais tenus, sans mauvaises surprises." },
+      row3: { stat: "3×", heading: "Conversion optimisée", desc: "Sites 100% responsive conçus pour maximiser vos conversions — avec des résultats jusqu'à 3× supérieurs selon les projets." },
+      row3b: { stat: "A → Z", heading: "Accompagnement complet", desc: "Un suivi structuré à chaque étape, avec des optimisations après livraison pour garantir un résultat à la hauteur de vos objectifs." },
+      row4: { stat: "<2s", heading: "Performance & SEO intégrés", desc: "Sites ultra-rapides (<2s) et optimisés SEO dès la conception — pour être visible et performant dès le lancement." },
+    },
+    equipe: {
+      label: "Notre équipe",
+      titleHtml: 'Qui sommes-<em style="font-style:italic;color:var(--electric);">nous</em>&nbsp;?',
+      intro: "Des créatifs passionnés réunis autour d'une même vision : donner vie à des expériences digitales uniques et mémorables.",
+      hint: "&#8593; Cliquez sur un portrait pour en savoir plus",
+          stats: { projects: "Projets réalisés", years: "Années d'expérience", specialty: "Spécialité" },
+},
+    contact: {
+      label: "Obtenez votre devis gratuitement",
+      title: "Un projet en tête ? Parlons-en.",
+      lead: "Nous transformons vos idées en un site web performant, parlez-nous de votre projet et recevez une proposition claire, rapide et adaptée à vos objectifs.",
+      honeypot: "Ne pas remplir",
+      firstName: "Prénom", firstNamePh: "John",
+      lastName: "Nom", lastNamePh: "Doe",
+      email: "Email", emailPh: "exemple@domaine.com",
+      phone: "Téléphone", phonePh: "0 00 00 00 00",
+      dialAria: "Indicatif pays",
+      message: "Message", messagePh: "Vos questions ou commentaires",
+      submit: "Envoyer le message",
+      submitting: "Envoi en cours…",
+      ok: "✓ Message envoyé. Nous vous répondons sous 24h.",
+      err: "✗ Une erreur est survenue. Réessayez ou écrivez-nous directement.",
+      netErr: "✗ Connexion impossible. Vérifiez votre réseau et réessayez.",
+    },
+    footer: "© Digital Concepts 2026 — Tous droits réservés",
+  },
+  en: {
+    meta: {
+      title: "Web Agency — Landing Pages, Business Websites & E-commerce",
+      description: "A web design agency building landing pages, business websites and online stores made to turn visitors into customers.",
+    },
+    nav: { services: "Services", pourquoi: "Why us", contact: "Contact" },
+    langSwitcher: { label: "Change language" },
+    hero: {
+      tag: "Web Agency",
+      titleHtml: "A website that <em>elevates</em><br>your brand and grows<br>your business",
+      subtitleHtml: "Landing pages, business websites and online stores built to attract,<br>convince, and turn your visitors into customers.",
+      scroll: "Explore",
+    },
+    services: {
+      label: "Our solutions",
+      title: "Which site is right for you?",
+      cta: "Learn more",
+      card1: { title: "Landing Page", textHtml: "→ Perfect for: coaches, service providers,<br>tradespeople, restaurants, events,<br>ad campaigns..." },
+      card2: { title: "Business Website", textHtml: "→ Perfect for: companies, practices<br>(lawyers, doctors…),<br>freelancers, agencies, SMEs,<br>local businesses, nonprofits..." },
+      card3: { title: "Online Store", textHtml: "→ Perfect for: e-commerce, product<br>sales, boutiques, creators,<br>dropshipping, marketplaces..." },
+    },
+    pourquoi: {
+      label: "Our commitments",
+      title: "Why choose us",
+      row1: { stat: "120+", heading: "120+ projects delivered — 98% satisfaction", desc: "Over 5 years of experience building high-performing websites, with client satisfaction that speaks for itself." },
+      row2: { stat: "5–14 days", heading: "Fast, reliable turnaround", desc: "Your site delivered in 5 days to 2 weeks depending on complexity. Deadlines we keep, with no surprises." },
+      row3: { stat: "3×", heading: "Built to convert", desc: "Fully responsive sites designed to maximize conversions — with results up to 3× higher on some projects." },
+      row3b: { stat: "A to Z", heading: "End-to-end support", desc: "Structured guidance at every step, plus post-launch optimization to make sure the result matches your goals." },
+      row4: { stat: "<2s", heading: "Performance & SEO built in", desc: "Ultra-fast sites (under 2s) optimized for SEO from day one — visible and high-performing right from launch." },
+    },
+    equipe: {
+      label: "Our team",
+      titleHtml: 'Who are <em style="font-style:italic;color:var(--electric);">we</em>?',
+      intro: "A team of passionate creatives united by one vision: bringing unique, memorable digital experiences to life.",
+      hint: "&#8593; Click a portrait to learn more",
+          stats: { projects: "Projects delivered", years: "Years of experience", specialty: "Specialty" },
+},
+    contact: {
+      label: "Get your free quote",
+      title: "Got a project in mind? Let's talk.",
+      lead: "We turn your ideas into a high-performing website. Tell us about your project and get a clear, fast proposal tailored to your goals.",
+      honeypot: "Leave this blank",
+      firstName: "First name", firstNamePh: "John",
+      lastName: "Last name", lastNamePh: "Doe",
+      email: "Email", emailPh: "example@domain.com",
+      phone: "Phone", phonePh: "0 00 00 00 00",
+      dialAria: "Country code",
+      message: "Message", messagePh: "Your questions or comments",
+      submit: "Send message",
+      submitting: "Sending…",
+      ok: "✓ Message sent. We'll get back to you within 24h.",
+      err: "✗ Something went wrong. Please try again or email us directly.",
+      netErr: "✗ Connection failed. Check your network and try again.",
+    },
+    footer: "© Digital Concepts 2026 — All rights reserved",
+  },
+  de: {
+    meta: {
+      title: "Webagentur — Landingpages, Websites & Online-Shops",
+      description: "Eine Webagentur, die Landingpages, Unternehmenswebsites und Online-Shops entwickelt, die Besucher in Kunden verwandeln.",
+    },
+    nav: { services: "Leistungen", pourquoi: "Warum wir", contact: "Kontakt" },
+    langSwitcher: { label: "Sprache ändern" },
+    hero: {
+      tag: "Webagentur",
+      titleHtml: "Eine Website, die Ihr Image <em>aufwertet</em><br>und Ihr Geschäft<br>voranbringt",
+      subtitleHtml: "Landingpages, Unternehmenswebsites und Online-Shops, die überzeugen<br>und Ihre Besucher in Kunden verwandeln.",
+      scroll: "Entdecken",
+    },
+    services: {
+      label: "Unsere Lösungen",
+      title: "Welche Website passt zu Ihnen?",
+      cta: "Mehr erfahren",
+      card1: { title: "Landingpage", textHtml: "→ Ideal für: Coaches, Dienstleister,<br>Handwerker, Restaurants, Events,<br>Werbekampagnen ..." },
+      card2: { title: "Unternehmenswebsite", textHtml: "→ Ideal für: Unternehmen, Kanzleien<br>(Anwälte, Ärzte …),<br>Selbstständige, Agenturen, KMU,<br>lokale Betriebe, Vereine ..." },
+      card3: { title: "Online-Shop", textHtml: "→ Ideal für: E-Commerce, Produktverkauf,<br>Boutiquen, Creator,<br>Dropshipping, Marktplätze ..." },
+    },
+    pourquoi: {
+      label: "Unser Versprechen",
+      title: "Warum uns wählen",
+      row1: { stat: "120+", heading: "120+ realisierte Projekte — 98 % zufrieden", desc: "Über 5 Jahre Erfahrung in der Entwicklung leistungsstarker Websites — die Kundenzufriedenheit spricht für sich." },
+      row2: { stat: "5–14 Tage", heading: "Schnelle, verlässliche Umsetzung", desc: "Ihre Website in 5 Tagen bis 2 Wochen, je nach Umfang. Termine, auf die Sie sich verlassen können." },
+      row3: { stat: "3×", heading: "Auf Conversion optimiert", desc: "Vollständig responsive Websites, die Ihre Conversion maximieren — bei manchen Projekten bis zu 3× höher." },
+      row3b: { stat: "A bis Z", heading: "Rundum-Betreuung", desc: "Strukturierte Begleitung in jeder Phase, inklusive Optimierungen nach dem Launch, damit das Ergebnis Ihren Zielen entspricht." },
+      row4: { stat: "<2s", heading: "Performance & SEO inklusive", desc: "Ultraschnelle Websites (unter 2s), von Anfang an SEO-optimiert — sichtbar und leistungsstark ab dem ersten Tag." },
+    },
+    equipe: {
+      label: "Unser Team",
+      titleHtml: 'Wer sind <em style="font-style:italic;color:var(--electric);">wir</em>?',
+      intro: "Ein Team leidenschaftlicher Kreativer, vereint durch eine gemeinsame Vision: einzigartige, unvergessliche digitale Erlebnisse zu schaffen.",
+      hint: "&#8593; Klicken Sie auf ein Porträt, um mehr zu erfahren",
+          stats: { projects: "Realisierte Projekte", years: "Jahre Erfahrung", specialty: "Spezialität" },
+},
+    contact: {
+      label: "Kostenloses Angebot anfordern",
+      title: "Ein Projekt im Kopf? Lassen Sie uns sprechen.",
+      lead: "Wir verwandeln Ihre Ideen in eine leistungsstarke Website. Erzählen Sie uns von Ihrem Projekt und erhalten Sie ein klares, schnelles Angebot, das zu Ihren Zielen passt.",
+      honeypot: "Bitte freilassen",
+      firstName: "Vorname", firstNamePh: "Max",
+      lastName: "Nachname", lastNamePh: "Mustermann",
+      email: "E-Mail", emailPh: "beispiel@domain.de",
+      phone: "Telefon", phonePh: "0 00 00 00 00",
+      dialAria: "Ländervorwahl",
+      message: "Nachricht", messagePh: "Ihre Fragen oder Anmerkungen",
+      submit: "Nachricht senden",
+      submitting: "Wird gesendet …",
+      ok: "✓ Nachricht gesendet. Wir antworten innerhalb von 24 Std.",
+      err: "✗ Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
+      netErr: "✗ Keine Verbindung möglich. Bitte prüfen Sie Ihr Netzwerk und versuchen Sie es erneut.",
+    },
+    footer: "© Digital Concepts 2026 — Alle Rechte vorbehalten",
+  },
+  es: {
+    meta: {
+      title: "Agencia Web — Landing Pages, Sitios Web y Tiendas Online",
+      description: "Una agencia web que crea landing pages, sitios corporativos y tiendas online diseñados para convertir visitantes en clientes.",
+    },
+    nav: { services: "Servicios", pourquoi: "Por qué nosotros", contact: "Contacto" },
+    langSwitcher: { label: "Cambiar idioma" },
+    hero: {
+      tag: "Agencia Web",
+      titleHtml: "Un sitio web que <em>realza</em><br>tu imagen e impulsa<br>tu negocio",
+      subtitleHtml: "Landing pages, sitios corporativos y tiendas online creados para atraer,<br>convencer y convertir a tus visitantes en clientes.",
+      scroll: "Descubrir",
+    },
+    services: {
+      label: "Nuestras soluciones",
+      title: "¿Qué sitio se adapta a ti?",
+      cta: "Saber más",
+      card1: { title: "Landing Page", textHtml: "→ Ideal para: coaches, servicios,<br>artesanos, restaurantes, eventos,<br>campañas publicitarias..." },
+      card2: { title: "Sitio Corporativo", textHtml: "→ Ideal para: empresas, despachos<br>(abogados, médicos…),<br>autónomos, agencias, pymes,<br>negocios locales, asociaciones..." },
+      card3: { title: "Tienda Online", textHtml: "→ Ideal para: e-commerce, venta de<br>productos, boutiques, creadores,<br>dropshipping, marketplaces..." },
+    },
+    pourquoi: {
+      label: "Nuestro compromiso",
+      title: "Por qué elegirnos",
+      row1: { stat: "120+", heading: "120+ proyectos entregados — 98% satisfechos", desc: "Más de 5 años de experiencia creando sitios web de alto rendimiento, con una satisfacción del cliente que habla por sí sola." },
+      row2: { stat: "5–14 días", heading: "Plazos rápidos y controlados", desc: "Tu sitio entregado en 5 días a 2 semanas según la complejidad. Plazos que cumplimos, sin sorpresas." },
+      row3: { stat: "3×", heading: "Conversión optimizada", desc: "Sitios 100% responsive diseñados para maximizar tus conversiones, con resultados hasta 3× superiores en algunos proyectos." },
+      row3b: { stat: "De la A a la Z", heading: "Acompañamiento integral", desc: "Un seguimiento estructurado en cada etapa, con optimizaciones tras el lanzamiento para garantizar un resultado a la altura de tus objetivos." },
+      row4: { stat: "<2s", heading: "Rendimiento y SEO integrados", desc: "Sitios ultrarrápidos (menos de 2s) y optimizados para SEO desde el diseño, para ser visible y eficaz desde el lanzamiento." },
+    },
+    equipe: {
+      label: "Nuestro equipo",
+      titleHtml: '¿Quiénes <em style="font-style:italic;color:var(--electric);">somos</em>?',
+      intro: "Un equipo de creativos apasionados unidos por una misma visión: dar vida a experiencias digitales únicas y memorables.",
+      hint: "&#8593; Haz clic en un retrato para saber más",
+          stats: { projects: "Proyectos realizados", years: "Años de experiencia", specialty: "Especialidad" },
+},
+    contact: {
+      label: "Obtén tu presupuesto gratis",
+      title: "¿Tienes un proyecto en mente? Hablemos.",
+      lead: "Transformamos tus ideas en un sitio web de alto rendimiento. Cuéntanos tu proyecto y recibe una propuesta clara y rápida, adaptada a tus objetivos.",
+      honeypot: "Dejar en blanco",
+      firstName: "Nombre", firstNamePh: "Juan",
+      lastName: "Apellido", lastNamePh: "Pérez",
+      email: "Email", emailPh: "ejemplo@dominio.com",
+      phone: "Teléfono", phonePh: "0 00 00 00 00",
+      dialAria: "Prefijo del país",
+      message: "Mensaje", messagePh: "Tus preguntas o comentarios",
+      submit: "Enviar mensaje",
+      submitting: "Enviando…",
+      ok: "✓ Mensaje enviado. Te responderemos en menos de 24h.",
+      err: "✗ Ha ocurrido un error. Inténtalo de nuevo o escríbenos directamente.",
+      netErr: "✗ No se pudo conectar. Comprueba tu red e inténtalo de nuevo.",
+    },
+    footer: "© Digital Concepts 2026 — Todos los derechos reservados",
+  },
+  it: {
+    meta: {
+      title: "Agenzia Web — Landing Page, Siti Vetrina ed E-commerce",
+      description: "Un'agenzia web che crea landing page, siti vetrina e negozi online pensati per trasformare i visitatori in clienti.",
+    },
+    nav: { services: "Servizi", pourquoi: "Perché noi", contact: "Contatti" },
+    langSwitcher: { label: "Cambia lingua" },
+    hero: {
+      tag: "Agenzia Web",
+      titleHtml: "Un sito web che <em>valorizza</em><br>la tua immagine e fa crescere<br>la tua attività",
+      subtitleHtml: "Landing page, siti vetrina ed e-commerce pensati per attrarre,<br>convincere e trasformare i visitatori in clienti.",
+      scroll: "Scopri di più",
+    },
+    services: {
+      label: "Le nostre soluzioni",
+      title: "Quale sito fa per te?",
+      cta: "Scopri di più",
+      card1: { title: "Landing Page", textHtml: "→ Ideale per: coach, servizi,<br>artigiani, ristoranti, eventi,<br>campagne pubblicitarie..." },
+      card2: { title: "Sito Vetrina", textHtml: "→ Ideale per: aziende, studi<br>(avvocati, medici…),<br>liberi professionisti, agenzie, PMI,<br>attività locali, associazioni..." },
+      card3: { title: "Negozio Online", textHtml: "→ Ideale per: e-commerce, vendita di<br>prodotti, boutique, creator,<br>dropshipping, marketplace..." },
+    },
+    pourquoi: {
+      label: "I nostri impegni",
+      title: "Perché scegliere noi",
+      row1: { stat: "120+", heading: "120+ progetti realizzati — 98% soddisfatti", desc: "Oltre 5 anni di esperienza nella creazione di siti web performanti, con una soddisfazione dei clienti che parla da sé." },
+      row2: { stat: "5–14gg", heading: "Tempi rapidi e rispettati", desc: "Il tuo sito consegnato in 5 giorni fino a 2 settimane a seconda della complessità. Tempistiche rispettate, senza sorprese." },
+      row3: { stat: "3×", heading: "Conversione ottimizzata", desc: "Siti 100% responsive pensati per massimizzare le conversioni — con risultati fino a 3× superiori in alcuni progetti." },
+      row3b: { stat: "Dalla A alla Z", heading: "Assistenza completa", desc: "Un accompagnamento strutturato in ogni fase, con ottimizzazioni dopo il lancio per garantire un risultato all'altezza dei tuoi obiettivi." },
+      row4: { stat: "<2s", heading: "Performance e SEO integrate", desc: "Siti ultra-veloci (meno di 2s) e ottimizzati SEO fin dalla progettazione, per essere visibili e performanti fin dal lancio." },
+    },
+    equipe: {
+      label: "Il nostro team",
+      titleHtml: 'Chi <em style="font-style:italic;color:var(--electric);">siamo</em>?',
+      intro: "Un team di creativi appassionati uniti da un'unica visione: dare vita a esperienze digitali uniche e memorabili.",
+      hint: "&#8593; Clicca su un ritratto per saperne di più",
+          stats: { projects: "Progetti realizzati", years: "Anni di esperienza", specialty: "Specialità" },
+},
+    contact: {
+      label: "Ricevi il tuo preventivo gratuito",
+      title: "Hai un progetto in mente? Parliamone.",
+      lead: "Trasformiamo le tue idee in un sito web performante. Raccontaci il tuo progetto e ricevi una proposta chiara e rapida, su misura per i tuoi obiettivi.",
+      honeypot: "Lasciare vuoto",
+      firstName: "Nome", firstNamePh: "Mario",
+      lastName: "Cognome", lastNamePh: "Rossi",
+      email: "Email", emailPh: "esempio@dominio.com",
+      phone: "Telefono", phonePh: "0 00 00 00 00",
+      dialAria: "Prefisso internazionale",
+      message: "Messaggio", messagePh: "Le tue domande o commenti",
+      submit: "Invia messaggio",
+      submitting: "Invio in corso…",
+      ok: "✓ Messaggio inviato. Ti risponderemo entro 24h.",
+      err: "✗ Si è verificato un errore. Riprova o scrivici direttamente.",
+      netErr: "✗ Connessione non riuscita. Controlla la rete e riprova.",
+    },
+    footer: "© Digital Concepts 2026 — Tutti i diritti riservati",
+  },
+};
+
+const TEAM_I18N = {ar:[{"name":"M. Zaki","role":"المؤسّس ومدير الاستراتيجية","bio":"يحدّد M. Zaki توجّه كل مشروع ليعزّز صورة العلامة التجارية ويجذب العملاء، ويشرف على التنفيذ لضمان الجودة.","stats":{"projects":28,"years":5,"specialty":"الاستراتيجية الرقمية والإدارة"}},{"name":"Y. Ferhat","role":"المدير الإبداعي","bio":"يصمّم Y. Ferhat واجهات أنيقة وعصرية تعزّز مصداقية الشركات وتوفّر تجربة تصفّح سلسة وواضحة.","stats":{"projects":24,"years":4,"specialty":"تصميم الواجهات وتجربة الاستخدام والهوية البصرية"}},{"name":"T. Ravel","role":"رئيس فريق التطوير","bio":"يحوّل T. Ravel التصاميم إلى مواقع سريعة وموثوقة ومحسّنة، مع أداء عالٍ وتوافق مع مختلف الأجهزة.","stats":{"projects":26,"years":4,"specialty":"تطوير المواقع وتحسين الأداء"}}],
+  fr: [
+    { name: "M. Zaki",   role: "Fondateur & Directeur de la Stratégie", bio: "M. Zaki définit la vision de chaque projet et veille à ce que chaque site serve un objectif clair : développer l'image de marque, générer des prospects et transformer les visiteurs en clients. Il supervise chaque réalisation pour garantir un niveau d'exigence élevé.", stats: { projects: 28, years: 5, specialty: "Stratégie Digitale & Direction" } },
+    { name: "Y. Ferhat", role: "Directeur Créatif", bio: "Y. Ferhat imagine des interfaces élégantes, modernes et mémorables. Il conçoit des expériences visuelles qui renforcent la crédibilité des entreprises tout en offrant une navigation fluide et intuitive.", stats: { projects: 24, years: 4, specialty: "UX/UI Design & Identité Visuelle" } },
+    { name: "T. Ravel",  role: "Lead Développeur", bio: "T. Ravel transforme chaque maquette en un site rapide, fiable et parfaitement optimisé. Son expertise garantit des performances élevées, une compatibilité sur tous les appareils et une expérience utilisateur irréprochable.", stats: { projects: 26, years: 4, specialty: "Développement Full-Stack & Optimisation" } },
+  ],
+  en: [
+    { name: "M. Zaki",   role: "Founder & Head of Strategy", bio: "M. Zaki sets the vision for every project and makes sure each website serves a clear goal: building the brand, generating leads and turning visitors into customers. He oversees every delivery to keep the bar high.", stats: { projects: 28, years: 5, specialty: "Digital Strategy & Direction" } },
+    { name: "Y. Ferhat", role: "Creative Director", bio: "Y. Ferhat crafts elegant, modern and memorable interfaces. He designs visual experiences that reinforce a brand's credibility while keeping navigation smooth and intuitive.", stats: { projects: 24, years: 4, specialty: "UX/UI Design & Visual Identity" } },
+    { name: "T. Ravel",  role: "Lead Developer", bio: "T. Ravel turns every mockup into a fast, reliable and fully optimized website. His expertise ensures high performance, compatibility across devices and a flawless user experience.", stats: { projects: 26, years: 4, specialty: "Full-Stack Development & Optimization" } },
+  ],
+  de: [
+    { name: "M. Zaki",   role: "Gründer & Strategie-Direktor", bio: "M. Zaki definiert die Vision jedes Projekts und sorgt dafür, dass jede Website ein klares Ziel verfolgt: die Marke stärken, Leads generieren und Besucher in Kunden verwandeln. Er überwacht jede Umsetzung mit höchstem Qualitätsanspruch.", stats: { projects: 28, years: 5, specialty: "Digitale Strategie & Direktion" } },
+    { name: "Y. Ferhat", role: "Kreativdirektor", bio: "Y. Ferhat entwirft elegante, moderne und einprägsame Interfaces. Er gestaltet visuelle Erlebnisse, die die Glaubwürdigkeit von Unternehmen stärken und zugleich eine flüssige, intuitive Navigation bieten.", stats: { projects: 24, years: 4, specialty: "UX/UI Design & Visuelle Identität" } },
+    { name: "T. Ravel",  role: "Lead Entwickler", bio: "T. Ravel verwandelt jedes Mockup in eine schnelle, zuverlässige und perfekt optimierte Website. Seine Expertise garantiert hohe Performance, Kompatibilität auf allen Geräten und eine einwandfreie Nutzererfahrung.", stats: { projects: 26, years: 4, specialty: "Full-Stack Entwicklung & Optimierung" } },
+  ],
+  es: [
+    { name: "M. Zaki",   role: "Fundador y Director de Estrategia", bio: "M. Zaki define la visión de cada proyecto y se asegura de que cada sitio web tenga un objetivo claro: fortalecer la marca, generar clientes potenciales y convertir a los visitantes en clientes. Supervisa cada entrega para mantener un alto nivel de exigencia.", stats: { projects: 28, years: 5, specialty: "Estrategia Digital y Dirección" } },
+    { name: "Y. Ferhat", role: "Director Creativo", bio: "Y. Ferhat imagina interfaces elegantes, modernas y memorables. Diseña experiencias visuales que refuerzan la credibilidad de las empresas ofreciendo una navegación fluida e intuitiva.", stats: { projects: 24, years: 4, specialty: "Diseño UX/UI e Identidad Visual" } },
+    { name: "T. Ravel",  role: "Lead Desarrollador", bio: "T. Ravel transforma cada maqueta en un sitio rápido, fiable y perfectamente optimizado. Su experiencia garantiza un alto rendimiento, compatibilidad en todos los dispositivos y una experiencia de usuario impecable.", stats: { projects: 26, years: 4, specialty: "Desarrollo Full-Stack y Optimización" } },
+  ],
+  it: [
+    { name: "M. Zaki",   role: "Fondatore & Direttore della Strategia", bio: "M. Zaki definisce la visione di ogni progetto e assicura che ogni sito web serva un obiettivo chiaro: sviluppare l'immagine del brand, generare contatti e trasformare i visitatori in clienti. Supervisiona ogni realizzazione per garantire un alto livello di qualità.", stats: { projects: 28, years: 5, specialty: "Strategia Digitale & Direzione" } },
+    { name: "Y. Ferhat", role: "Direttore Creativo", bio: "Y. Ferhat immagina interfacce eleganti, moderne e memorabili. Progetta esperienze visive che rafforzano la credibilità delle aziende offrendo una navigazione fluida e intuitiva.", stats: { projects: 24, years: 4, specialty: "UX/UI Design & Identità Visiva" } },
+    { name: "T. Ravel",  role: "Lead Sviluppatore", bio: "T. Ravel trasforma ogni mockup in un sito rapido, affidabile e perfettamente ottimizzato. La sua esperienza garantisce prestazioni elevate, compatibilità su tutti i dispositivi e un'esperienza utente impeccabile.", stats: { projects: 26, years: 4, specialty: "Sviluppo Full-Stack & Ottimizzazione" } },
+  ],
+};
+
+
+let currentLang = detectLang();
+
+function applyLanguage(lang) {
+  if (!AVAILABLE.includes(lang)) lang = "en";
+  currentLang = lang;
+  localStorage.setItem("lang", lang);
+  const t = DICTS[lang];
+
+  (document.documentElement.lang=lang,document.documentElement.dir=(lang==="ar"?"rtl":"ltr"));
+  document.title = t.meta.title;
+  const md = document.querySelector('meta[name="description"]');
+  if (md) md.setAttribute("content", t.meta.description);
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const keys = el.getAttribute("data-i18n").split(".");
+    let v = t; for (const k of keys) v = v && v[k];
+    if (typeof v === "string") el.textContent = v;
+  });
+
+  document.querySelectorAll("[data-i18n-html]").forEach(el => {
+    const keys = el.getAttribute("data-i18n-html").split(".");
+    let v = t; for (const k of keys) v = v && v[k];
+    if (typeof v === "string") el.innerHTML = v;
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const keys = el.getAttribute("data-i18n-placeholder").split(".");
+    let v = t; for (const k of keys) v = v && v[k];
+    if (typeof v === "string") el.setAttribute("placeholder", v);
+  });
+
+  document.querySelectorAll("[data-i18n-attr-aria-label]").forEach(el => {
+    const keys = el.getAttribute("data-i18n-attr-aria-label").split(".");
+    let v = t; for (const k of keys) v = v && v[k];
+    if (typeof v === "string") el.setAttribute("aria-label", v);
+  });
+
+  if (typeof window.refreshTeamI18n === "function") window.refreshTeamI18n(lang);
+  if (typeof window.wsSpyUpdateLabels === "function") window.wsSpyUpdateLabels(lang);
+
+  const cur = document.getElementById("langCurrent");
+  if (cur) cur.textContent = lang.toUpperCase();
+  document.querySelectorAll("#langMenu button[data-lang]").forEach(b => {
+    b.classList.toggle("active", b.getAttribute("data-lang") === lang);
+  });
+}
+
+function renderLangMenu() {
+  const menu = document.getElementById("langMenu");
+  if (!menu) return;
+  menu.innerHTML = LANGS.map(l => `
+    <li><button type="button" data-lang="${l.code}" class="${l.code === currentLang ? "active" : ""}">
+      <span>${l.flag} ${l.label}</span><span class="check">✓</span>
+    </button></li>`).join("");
+  menu.querySelectorAll("button[data-lang]").forEach(b => {
+    b.addEventListener("click", () => {
+      applyLanguage(b.getAttribute("data-lang"));
+      renderLangMenu();
+      const sw = document.getElementById("langSwitcher");
+      if (sw) sw.classList.remove("open");
+      const trigger = document.getElementById("langTrigger");
+      if (trigger) trigger.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  renderLangMenu();
+  applyLanguage(currentLang);
+
+  const trigger = document.getElementById("langTrigger");
+  const switcher = document.getElementById("langSwitcher");
+  if (trigger && switcher) {
+    trigger.addEventListener("click", () => {
+      const open = switcher.classList.toggle("open");
+      trigger.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    document.addEventListener("click", e => {
+      if (!switcher.contains(e.target)) {
+        switcher.classList.remove("open");
+        trigger.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+});
+</script>
+
+
+
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag" data-i18n="hero.tag">Agence Web</div>
+    <h1 class="hero-title" data-i18n-html="hero.titleHtml">Un site web qui <em>valorise</em><br>votre image et développe<br>votre activité</h1>
+    <p class="hero-subtitle" data-i18n-html="hero.subtitleHtml">Landing pages, sites vitrines et e-commerce conçus pour attirer,<br>convaincre et transformer vos visiteurs en clients.</p>
+    <div class="hero-scroll">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      <span data-i18n="hero.scroll">Découvrir</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<section id="services">
+  <div class="section-inner">
+    <div style="text-align:center;">
+      <div class="section-label" data-i18n="services.label">Nos solutions</div>
+      <div class="section-title" data-i18n="services.title">Quel site vous correspond ?</div>
+    </div>
+    <div class="cards-container">
+
+      <div class="card-wrapper">
+        <div class="card-outer" id="card1">
+          <div class="card-glare" id="glare1"></div>
+          <div class="card-inner">
+            <div class="card-icon">
+              <img class="icon-static" src="creation-de-sites-web_navy.webp" alt="Page d'accueil" loading="lazy" decoding="async">
+              <img class="icon-gif"    src="creation-de-sites-web_navy.webp" id="gif1" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="card-title" data-i18n="services.card1.title">Page d'accueil</div>
+            <div class="card-text" data-i18n-html="services.card1.textHtml">→ Idéal pour : coachs, services,<br>artisans, restaurants, événements,<br>campagnes publicitaires...</div>
+            <a href="landing-page.html"><button class="card-btn" data-i18n="services.cta">En savoir plus</button></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-wrapper">
+        <div class="card-outer" id="card2">
+          <div class="card-glare" id="glare2"></div>
+          <div class="card-inner">
+            <div class="card-icon">
+              <img class="icon-static" src="sensible_navy.webp" alt="Site Vitrine" loading="lazy" decoding="async">
+              <img class="icon-gif"    src="sensible_navy.webp" id="gif2" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="card-title" data-i18n="services.card2.title">Site Vitrine</div>
+            <div class="card-text" data-i18n-html="services.card2.textHtml">→ Idéal pour : entreprises, cabinets<br>(avocats, médecins…),<br>indépendants, agences, PME,<br>entreprises locales, associations...</div>
+            <a href="site-vitrine.html"><button class="card-btn" data-i18n="services.cta">En savoir plus</button></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-wrapper">
+        <div class="card-outer" id="card3">
+          <div class="card-glare" id="glare3"></div>
+          <div class="card-inner">
+            <div class="card-icon zoom-gif">
+              <img class="icon-static" src="achats_navy_v2_large.webp" alt="Boutique en ligne" loading="lazy" decoding="async">
+              <img class="icon-gif"    src="achats_navy_v2_large.webp" id="gif3" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="card-title" data-i18n="services.card3.title">Boutique en ligne</div>
+            <div class="card-text" data-i18n-html="services.card3.textHtml">→ Idéal pour : e-commerce, vente de<br>produits, boutiques, créateurs,<br>dropshipping, marketplaces...</div>
+            <a href="ecommerce.html"><button class="card-btn" data-i18n="services.cta">En savoir plus</button></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<section id="pourquoi">
+  <div class="section-inner">
+    <div style="text-align:center;">
+      <div class="section-label" data-i18n="pourquoi.label">Nos engagements</div>
+      <div class="section-title" data-i18n="pourquoi.title">Pourquoi nous choisir</div>
+    </div>
+    <div class="timeline-wrap">
+
+      
+      <div class="tl-row">
+        <div class="tl-left">
+          <div class="tl-card">
+            <div class="tl-stat" data-i18n="pourquoi.row1.stat">120+</div>
+            <div class="tl-heading" data-i18n="pourquoi.row1.heading">Projets réalisés — 98% satisfaits</div>
+            <div class="tl-desc" data-i18n="pourquoi.row1.desc">Plus de 5 ans d'expérience dans la création de sites web performants, avec une satisfaction client qui parle d'elle-même.</div>
+          </div>
+        </div>
+        <div class="tl-mid"><div class="tl-node"></div></div>
+        <div class="tl-right"><div class="tl-empty"></div></div>
+      </div>
+
+      
+      <div class="tl-row">
+        <div class="tl-left"><div class="tl-empty"></div></div>
+        <div class="tl-mid"><div class="tl-node"></div></div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="tl-stat" data-i18n="pourquoi.row2.stat">5–14j</div>
+            <div class="tl-heading" data-i18n="pourquoi.row2.heading">Délais rapides et maîtrisés</div>
+            <div class="tl-desc" data-i18n="pourquoi.row2.desc">Livraison de votre site en 5 jours à 2 semaines selon la complexité. Des délais tenus, sans mauvaises surprises.</div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="tl-row">
+        <div class="tl-left">
+          <div class="tl-card">
+            <div class="tl-stat" data-i18n="pourquoi.row3.stat">3×</div>
+            <div class="tl-heading" data-i18n="pourquoi.row3.heading">Conversion optimisée</div>
+            <div class="tl-desc" data-i18n="pourquoi.row3.desc">Sites 100% responsive conçus pour maximiser vos conversions — avec des résultats jusqu'à 3× supérieurs selon les projets.</div>
+          </div>
+        </div>
+        <div class="tl-mid"><div class="tl-node"></div></div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="tl-stat" data-i18n="pourquoi.row3b.stat">A → Z</div>
+            <div class="tl-heading" data-i18n="pourquoi.row3b.heading">Accompagnement complet</div>
+            <div class="tl-desc" data-i18n="pourquoi.row3b.desc">Un suivi structuré à chaque étape, avec des optimisations après livraison pour garantir un résultat à la hauteur de vos objectifs.</div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="tl-row">
+        <div class="tl-left">
+          <div class="tl-card">
+            <div class="tl-stat" data-i18n="pourquoi.row4.stat">&lt;2s</div>
+            <div class="tl-heading" data-i18n="pourquoi.row4.heading">Performance & SEO intégrés</div>
+            <div class="tl-desc" data-i18n="pourquoi.row4.desc">Sites ultra-rapides (&lt;2s) et optimisés SEO dès la conception — pour être visible et performant dès le lancement.</div>
+          </div>
+        </div>
+        <div class="tl-mid"><div class="tl-node"></div></div>
+        <div class="tl-right"><div class="tl-empty"></div></div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<div class="divider"></div>
+
+
+<section id="equipe">
+  <div class="section-inner">
+    <div style="text-align:center; margin-bottom:50px;">
+      <div class="section-label" data-i18n="equipe.label">Notre équipe</div>
+      <div class="section-title" data-i18n-html="equipe.titleHtml">Qui sommes-<em style="font-style:italic;color:var(--electric);">nous</em>&nbsp;?</div>
+      <p style="font-size:15px;color:rgba(245,247,250,0.62);max-width:520px;margin:20px auto 0;line-height:1.7;" data-i18n="equipe.intro">Des créatifs passionnés réunis autour d'une même vision : donner vie à des expériences digitales uniques et mémorables.</p>
+    </div>
+
+    <div class="dc-team-carousel" id="dcTeamCarousel" role="region" aria-roledescription="carousel" aria-label="Notre équipe" tabindex="0">
+      <article class="dc-team-card" aria-roledescription="slide" aria-label="1 / 3">
+        <div class="dc-team-visual">
+          <img class="dc-team-poster" src="team-still-zaki.webp" width="280" height="280" loading="lazy" decoding="async" alt="M. Zaki">
+          <canvas class="dc-team-canvas" width="480" height="480" aria-hidden="true" hidden></canvas>
+          <button class="dc-team-arrow dc-team-prev" type="button" aria-label="Personne précédente" aria-controls="dcTeamCopy" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
+          <button class="dc-team-arrow dc-team-next" type="button" aria-label="Personne suivante" aria-controls="dcTeamCopy" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
+        </div>
+        <div class="dc-team-copy" id="dcTeamCopy">
+          <h3 class="dc-team-name">M. Zaki</h3>
+          <p class="dc-team-role">CEO · Fondateur &amp; Directeur de la Stratégie</p>
+          <p class="dc-team-bio">M. Zaki définit la vision de chaque projet et veille à ce que chaque site serve un objectif clair : développer l'image de marque, générer des prospects et transformer les visiteurs en clients. Il supervise chaque réalisation pour garantir un niveau d'exigence élevé.</p>
+        </div>
+        <div class="dc-team-pagination" aria-hidden="true"><span class="is-current"></span><span></span><span></span><bdi class="dc-team-count">01 / 03</bdi></div>
+        <p class="dc-team-status" aria-live="polite" aria-atomic="true"></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-card">
+      <div class="section-label" data-i18n="contact.label">Obtenez votre devis gratuitement</div>
+      <div class="section-title" data-i18n="contact.title">Un projet en tête ? Parlons-en.</div>
+      <p class="lead" data-i18n="contact.lead">Nous transformons vos idées en un site web performant, parlez-nous de votre projet et recevez une proposition claire, rapide et adaptée à vos objectifs.</p>
+
+      <form id="contactForm" class="contact-form" action="https://formsubmit.co/digitalconcepts.info.contact@gmail.com" method="POST" novalidate>
+        
+        <input type="hidden" name="_subject" value="Nouveau message depuis le site WebStudio">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        
+        <div class="hp-field" aria-hidden="true">
+          <label data-i18n="contact.honeypot">Ne pas remplir<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+        </div>
+
+        <div class="form-field">
+          <label for="firstName" data-i18n="contact.firstName">Prénom</label>
+          <input id="firstName" name="Prénom" type="text" placeholder="John" autocomplete="given-name" data-i18n-placeholder="contact.firstNamePh">
+        </div>
+        <div class="form-field">
+          <label for="lastName" data-i18n="contact.lastName">Nom</label>
+          <input id="lastName" name="Nom" type="text" placeholder="Doe" autocomplete="family-name" data-i18n-placeholder="contact.lastNamePh">
+        </div>
+
+        <div class="form-field">
+          <label for="email"><span data-i18n="contact.email">Email</span> <span class="req">*</span></label>
+          <input id="email" name="Email" type="email" required placeholder="exemple@domaine.com" autocomplete="email" data-i18n-placeholder="contact.emailPh">
+        </div>
+
+        <div class="form-field">
+          <label for="phone" data-i18n="contact.phone">Téléphone</label>
+          <div class="phone-row">
+            <select id="dialCode" name="Indicatif" aria-label="Indicatif pays" data-i18n-attr-aria-label="contact.dialAria">
+              <option value="+33" data-flag="🇫🇷" data-country="FR">🇫🇷 +33</option>
+              <option value="+32" data-flag="🇧🇪" data-country="BE">🇧🇪 +32</option>
+              <option value="+41" data-flag="🇨🇭" data-country="CH" selected>🇨🇭 +41</option>
+              <option value="+1"  data-flag="🇨🇦" data-country="CA">🇨🇦 +1</option>
+              <option value="+1"  data-flag="🇺🇸" data-country="US">🇺🇸 +1</option>
+              <option value="+44" data-flag="🇬🇧" data-country="GB">🇬🇧 +44</option>
+              <option value="+49" data-flag="🇩🇪" data-country="DE">🇩🇪 +49</option>
+              <option value="+34" data-flag="🇪🇸" data-country="ES">🇪🇸 +34</option>
+              <option value="+39" data-flag="🇮🇹" data-country="IT">🇮🇹 +39</option>
+              <option value="+351" data-flag="🇵🇹" data-country="PT">🇵🇹 +351</option>
+              <option value="+212" data-flag="🇲🇦" data-country="MA">🇲🇦 +212</option>
+              <option value="+213" data-flag="🇩🇿" data-country="DZ">🇩🇿 +213</option>
+              <option value="+216" data-flag="🇹🇳" data-country="TN">🇹🇳 +216</option>
+              <option value="+221" data-flag="🇸🇳" data-country="SN">🇸🇳 +221</option>
+              <option value="+225" data-flag="🇨🇮" data-country="CI">🇨🇮 +225</option>
+              <option value="+971" data-flag="🇦🇪" data-country="AE">🇦🇪 +971</option>
+              <option value="+86" data-flag="🇨🇳" data-country="CN">🇨🇳 +86</option>
+              <option value="+81" data-flag="🇯🇵" data-country="JP">🇯🇵 +81</option>
+              <option value="+61" data-flag="🇦🇺" data-country="AU">🇦🇺 +61</option>
+              <option value="+55" data-flag="🇧🇷" data-country="BR">🇧🇷 +55</option>
+            </select>
+            <input id="phone" name="Téléphone" type="tel" placeholder="0 00 00 00 00" autocomplete="tel" data-i18n-placeholder="contact.phonePh">
+          </div>
+        </div>
+
+        <div class="form-field full">
+          <label for="message"><span data-i18n="contact.message">Message</span> <span class="req">*</span></label>
+          <textarea id="message" name="Message" required placeholder="Vos questions ou commentaires" data-i18n-placeholder="contact.messagePh"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-cta" id="submitBtn" data-i18n="contact.submit">Envoyer le message</button>
+          <span class="form-status" id="formStatus" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var form    = document.getElementById('contactForm');
+  var btn     = document.getElementById('submitBtn');
+  var status  = document.getElementById('formStatus');
+  var dial    = document.getElementById('dialCode');
+  var phone   = document.getElementById('phone');
+
+  if (!form) return;
+
+  // --- Auto-detect country dial code via IP geolocation (fallback: +41 Switzerland) ---
+  var FALLBACK_DIAL = '+41';
+  var detectedDial = null;
+
+  function selectDialByCountry(countryCode){
+    if (!countryCode || !dial) return false;
+    var opt = dial.querySelector('option[data-country="' + countryCode.toUpperCase() + '"]');
+    if (opt) {
+      dial.value = opt.value;
+      detectedDial = opt.value;
+      return true;
+    }
+    return false;
+  }
+
+  function applyFallbackDial(){
+    if (dial) dial.value = FALLBACK_DIAL;
+    detectedDial = FALLBACK_DIAL;
+  }
+
+  function detectCountryDialCode(){
+    if (!dial) return;
+
+    var controller = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var timeoutId = controller ? setTimeout(function(){ controller.abort(); }, 5000) : null;
+
+    fetch('https://ipapi.co/json/', controller ? { signal: controller.signal } : undefined)
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (timeoutId) clearTimeout(timeoutId);
+        var country = data && (data.country_code || data.country);
+        if (!selectDialByCountry(country)) applyFallbackDial();
+      })
+      .catch(function(){
+        if (timeoutId) clearTimeout(timeoutId);
+        // Secondary provider as a best-effort backup before giving up
+        fetch('https://ipwho.is/')
+          .then(function(r){ return r.json(); })
+          .then(function(data){
+            var country = data && data.country_code;
+            if (!(data && data.success !== false && selectDialByCountry(country))) applyFallbackDial();
+          })
+          .catch(function(){ applyFallbackDial(); });
+      });
+  }
+
+  detectCountryDialCode();
+
+  function t(key){
+    var dict = (typeof DICTS !== 'undefined' && typeof currentLang !== 'undefined') ? DICTS[currentLang] : null;
+    var v = dict; key.split('.').forEach(function(k){ v = v && v[k]; });
+    return v;
+  }
+
+  var originalBtnText = btn.textContent;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    status.className = 'form-status';
+    status.textContent = '';
+
+    // Build a combined phone number for the email
+    if (phone.value.trim()) {
+      var existing = form.querySelector('input[name="Téléphone complet"]');
+      if (!existing) {
+        existing = document.createElement('input');
+        existing.type = 'hidden';
+        existing.name = 'Téléphone complet';
+        form.appendChild(existing);
+      }
+      existing.value = dial.value + ' ' + phone.value.trim();
+    }
+
+    btn.disabled = true;
+    btn.textContent = t('contact.submitting') || 'Envoi en cours…';
+
+    var data = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(function(response){
+        if (!response.ok) throw new Error('Network error');
+        return response.json().catch(function(){ return {}; });
+      })
+      .then(function(){
+        status.className = 'form-status ok';
+        status.innerHTML = document.documentElement.lang === 'ar' ? '✓ تم إرسال رسالتك بنجاح. سنرد عليك خلال 24 ساعة.' : '✅ Votre message a été envoyé avec succès.<br>Nous vous répondrons sous 24 heures.';
+        form.reset();
+      })
+      .catch(function(){
+        status.className = 'form-status err';
+        status.textContent = document.documentElement.lang === 'ar' ? '✗ حدث خطأ. يرجى المحاولة مجددًا.' : '❌ Une erreur est survenue. Veuillez réessayer.';
+      })
+      .then(function(){
+        btn.disabled = false;
+        btn.textContent = document.documentElement.lang === 'ar' ? 'إرسال الرسالة' : originalBtnText;
+      });
+  });
+})();
+</script>
+
+<footer><a data-i18n="footer" href="droit.html" style="color:inherit;text-decoration:none;letter-spacing:inherit;">© Digital Concepts 2026 — Tous droits réservés</a></footer>
+
+
+<script data-cfasync="false" src="email-decode.js"></script>
+
+
+
+
+
+
+<script>
+  function setupGifRestart(cardId, gifId) {
+    const card=document.getElementById(cardId),gif=document.getElementById(gifId),orig=gif.src;
+    card.addEventListener('mouseenter',()=>{gif.src='';gif.src=orig;});
+  }
+  setupGifRestart('card1','gif1');setupGifRestart('card2','gif2');setupGifRestart('card3','gif3');
+
+  const MAX_TILT=15,SHADOW_DEPTH=40;
+  function setupCard(cardId,glareId){
+    const card=document.getElementById(cardId),glare=document.getElementById(glareId);
+    card.addEventListener('mousemove',(e)=>{
+      const rect=card.getBoundingClientRect();
+      const nx=(e.clientX-rect.left-rect.width/2)/(rect.width/2);
+      const ny=(e.clientY-rect.top-rect.height/2)/(rect.height/2);
+      card.style.transform=`rotateX(${-ny*MAX_TILT}deg) rotateY(${nx*MAX_TILT}deg) scale(1.04)`;
+      card.style.boxShadow=`${nx*SHADOW_DEPTH}px ${ny*SHADOW_DEPTH}px ${30+Math.abs(nx*20)+Math.abs(ny*20)}px rgba(210,105,255,0.2)`;
+      const gx=((e.clientX-rect.left)/rect.width)*100,gy=((e.clientY-rect.top)/rect.height)*100;
+      glare.style.background=`radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.14) 0%, transparent 65%)`;
+      glare.style.opacity='1';
+    });
+    card.addEventListener('mouseleave',()=>{
+      card.style.transform='rotateX(0deg) rotateY(0deg) scale(1)';
+      card.style.boxShadow='0 8px 30px rgba(0,0,0,0.45)';
+      card.style.transition='transform 0.4s ease,box-shadow 0.4s ease';
+      glare.style.opacity='0';
+      setTimeout(()=>{card.style.transition='transform 0.05s ease-out,box-shadow 0.05s ease-out';},400);
+    });
+  }
+  setupCard('card1','glare1');setupCard('card2','glare2');setupCard('card3','glare3');
+</script>
+
+
+<script>
+  const tlRows = document.querySelectorAll('.tl-row');
+  const tlObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        tlObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.18 });
+
+  tlRows.forEach((row, i) => {
+    const cards = row.querySelectorAll('.tl-card');
+    cards.forEach((card, j) => {
+      card.style.transitionDelay = (i * 0.07 + j * 0.13) + 's';
+    });
+    const mid = row.querySelector('.tl-mid');
+    if (mid) mid.style.transitionDelay = (i * 0.07 + 0.15) + 's';
+    tlObserver.observe(row);
+  });
+</script>
+
+
+
+<script src="team-carousel.js" defer></script>
+
+
+<nav class="ws-spy" aria-label="Navigation des sections" id="wsSpy">
+  <ul role="list">
+    <li><button type="button" data-target="hero"     aria-label="Aller a Accueil"><span class="lbl">Accueil</span><span class="tick"></span></button></li>
+    <li><button type="button" data-target="services" aria-label="Aller a Services"><span class="lbl">Services</span><span class="tick"></span></button></li>
+    <li><button type="button" data-target="pourquoi" aria-label="Aller a Pourquoi nous"><span class="lbl">Pourquoi nous</span><span class="tick"></span></button></li>
+    <li><button type="button" data-target="equipe"   aria-label="Aller a Equipe"><span class="lbl">Équipe</span><span class="tick"></span></button></li>
+    <li><button type="button" data-target="contact"  aria-label="Aller a Contact"><span class="lbl">Contact</span><span class="tick"></span></button></li>
+  </ul>
+</nav>
+<script>
+(function(){
+  var IDS=['hero','services','pourquoi','equipe','contact'];
+  var nav=document.getElementById('wsSpy'); if(!nav) return;
+  var btns={};
+  nav.querySelectorAll('button[data-target]').forEach(function(b){btns[b.dataset.target]=b;});
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- i18n for scrollspy labels (aligned with site languages) ---
+  var SPY_I18N={ar:{"nav":"التنقّل بين الأقسام","go":"انتقل إلى ","labels":{"hero":"الرئيسية","services":"خدماتنا","pourquoi":"لماذا نحن؟","equipe":"فريقنا","contact":"تواصل معنا","portfolio":"أعمالنا","faq":"الأسئلة الشائعة","pricing":"الأسعار"}},
+    fr:{nav:"Navigation des sections",go:"Aller à ",labels:{hero:"Accueil",services:"Services",pourquoi:"Pourquoi nous",equipe:"Équipe",contact:"Contact"}},
+    en:{nav:"Section navigation",go:"Go to ",labels:{hero:"Home",services:"Services",pourquoi:"Why us",equipe:"Team",contact:"Contact"}},
+    de:{nav:"Abschnittsnavigation",go:"Gehe zu ",labels:{hero:"Start",services:"Leistungen",pourquoi:"Warum wir",equipe:"Team",contact:"Kontakt"}},
+    es:{nav:"Navegación de secciones",go:"Ir a ",labels:{hero:"Inicio",services:"Servicios",pourquoi:"Por qué nosotros",equipe:"Equipo",contact:"Contacto"}},
+    it:{nav:"Navigazione delle sezioni",go:"Vai a ",labels:{hero:"Home",services:"Servizi",pourquoi:"Perché noi",equipe:"Team",contact:"Contatti"}}
+  };
+  function applySpyLabels(lang){
+    var dict=SPY_I18N[lang]||SPY_I18N.fr;
+    nav.setAttribute('aria-label',dict.nav);
+    IDS.forEach(function(id){
+      var b=btns[id]; if(!b) return;
+      var lbl=b.querySelector('.lbl');
+      var text=dict.labels[id];
+      if(lbl && text) lbl.textContent=text;
+      if(text) b.setAttribute('aria-label',dict.go+text);
+    });
+  }
+  window.wsSpyUpdateLabels=applySpyLabels;
+  // Apply whatever language is already active (currentLang comes from the main i18n script)
+  applySpyLabels(typeof currentLang!=='undefined'?currentLang:'fr');
+  function setActive(id){IDS.forEach(function(k){if(btns[k]) btns[k].classList.toggle('is-active',k===id);});}
+  nav.querySelectorAll('button[data-target]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var el=document.getElementById(b.dataset.target); if(!el) return;
+      el.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
+      setActive(b.dataset.target);
+    });
+  });
+  function mount(){
+    var visibility=new Map(); var current=null;
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){visibility.set(e.target.id,e.isIntersecting?e.intersectionRatio:0);});
+      var bestId=current,best=-1;
+      visibility.forEach(function(r,id){if(r>best){best=r;bestId=id;}});
+      if(best>0&&bestId!==current){current=bestId;setActive(bestId);}
+    },{rootMargin:'-35% 0px -55% 0px',threshold:[0,.25,.5,.75,1]});
+    var found=0;
+    IDS.forEach(function(id){var el=document.getElementById(id); if(el){io.observe(el);found++;}});
+    if(found>0) requestAnimationFrame(function(){nav.classList.add('is-ready');});
+  }
+  mount();
+})();
+</script>
+
+
+<script src="gsap.min.js" defer></script><script src="ScrollTrigger.min.js" defer></script><script src="background-loader.js" defer></script><script src="identity.js" defer></script><script src="text-motion.js?v=3" defer></script>
+</body>
+</html>

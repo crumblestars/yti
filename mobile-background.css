@@ -1,0 +1,11 @@
+@media(max-width:900px),(pointer:coarse){
+#bg-matrix-canvas,#bg-spotlight,#bg-plexus,#bg-scanlines,#bg-vignette,#cursor{display:none!important}
+body{cursor:auto!important}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:#03040a url('mobile-background.webp') center/cover no-repeat}
+}
+.dc-mobile-background{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;contain:strict;background:#03040a url('mobile-background.webp') center/cover no-repeat}
+.dc-mobile-background canvas,.dc-mobile-background video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+
+/* Fond mobile : luminosité augmentée de 54 %, contenu du site inchangé. */
+.dc-mobile-background{filter:brightness(1.54)}
+@media(max-width:900px),(pointer:coarse){body::before{filter:brightness(1.54)}}

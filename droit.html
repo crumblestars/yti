@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<script>(function(){try{var l=localStorage.getItem('lang')||(navigator.language||'en').slice(0,2);if(l==='ar'){document.documentElement.lang='ar';document.documentElement.dir='rtl';}}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGB — Allgemeine Geschäftsbedingungen | Digital Concepts</title>
+<meta name="description" content="Allgemeine Geschäftsbedingungen (AGB) von Zaki Digital Concepts – Bedingungen für die Erbringung digitaler Dienstleistungen, Webentwicklung und individuelle IT-Lösungen.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="./droit.html">
+<meta property="og:title" content="AGB — Digital Concepts">
+<meta property="og:description" content="Allgemeine Geschäftsbedingungen von Zaki Digital Concepts.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --navy:#03040a; --electric:#dce4f3; --white:#f6f7fb; --accent:#b6bfce; }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family:'Montserrat', sans-serif;
+    background:var(--navy);
+    color:var(--white);
+    min-height:100vh;
+    overflow-x:hidden;
+    line-height:1.7;
+    position:relative;
+  }
+
+  /* Ambient background layers reprised from main site */
+  .bg-vignette { position:fixed; inset:0; z-index:0; pointer-events:none;
+    background: radial-gradient(ellipse at 50% 0%, rgba(210,225,255,.06), transparent 55%),
+                radial-gradient(ellipse at 50% 100%, rgba(197,163,239,.05), transparent 60%),
+                var(--navy);
+  }
+  .bg-scanlines { position:fixed; inset:0; z-index:1; pointer-events:none;
+    background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px);
+  }
+
+  /* Navbar (identique en style au site) */
+  #navbar { position:fixed; inset:0 0 auto 0; z-index:1000; padding:20px 40px; transition:transform .45s cubic-bezier(.4,0,.2,1); }
+  #navbar.nav-hidden { transform:translateY(-100%); }
+  #navbar nav { display:flex; align-items:center; max-width:1200px; margin:0 auto; gap:14px; }
+  .nav-pill {
+    display:flex; align-items:center; height:48px; padding:0 24px;
+    border-radius:999px; background:rgba(14,14,23,0.8); border:1px solid rgba(210,225,255,0.2);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    text-decoration:none; color:var(--white); font-weight:600; font-size:13px; letter-spacing:.5px;
+    transition:border-color .2s, color .2s;
+  }
+  .nav-pill:hover { border-color:rgba(210,225,255,0.55); color:var(--electric); }
+  .nav-spacer { flex:1; }
+
+  /* Language switcher – même style que le site principal */
+  #langSwitcher { position:relative; }
+  #langTrigger {
+    display:flex; align-items:center; gap:8px; height:48px; padding:0 18px;
+    border-radius:999px; background:rgba(14,14,23,0.8); border:1px solid rgba(210,225,255,0.2);
+    backdrop-filter:blur(16px); color:var(--white); font-weight:600; font-size:13px; letter-spacing:.5px;
+    cursor:pointer; transition:border-color .2s;
+  }
+  #langTrigger:hover { border-color:rgba(210,225,255,0.55); }
+  #langMenu {
+    position:absolute; top:calc(100% + 8px); right:0;
+    background:rgba(14,14,23,.96); border:1px solid rgba(210,225,255,.2);
+    border-radius:14px; padding:6px; min-width:180px; list-style:none;
+    backdrop-filter:blur(16px);
+    opacity:0; pointer-events:none; transform:translateY(-6px); transition:.2s;
+  }
+  #langSwitcher.open #langMenu { opacity:1; pointer-events:auto; transform:translateY(0); }
+  #langMenu button {
+    width:100%; display:flex; align-items:center; justify-content:space-between;
+    padding:10px 12px; background:transparent; border:0; color:var(--white);
+    font:inherit; font-size:13px; text-align:left; cursor:pointer; border-radius:10px;
+  }
+  #langMenu button:hover { background:rgba(210,225,255,.08); }
+  #langMenu button.active { color:var(--electric); }
+  #langMenu .check { opacity:0; }
+  #langMenu button.active .check { opacity:1; }
+
+  /* Content */
+  main {
+    position:relative; z-index:5;
+    max-width:820px; margin:0 auto; padding:150px 28px 120px;
+  }
+  .page-tag {
+    display:inline-block; padding:6px 14px; border-radius:999px;
+    border:1px solid rgba(210,225,255,.25); background:rgba(210,225,255,.05);
+    font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--electric);
+    margin-bottom:22px;
+    animation: fadeUp .8s ease both;
+  }
+  h1.page-title {
+    font-family:'DM Serif Display', serif;
+    font-weight:400; font-size:clamp(38px, 6vw, 62px);
+    line-height:1.08; letter-spacing:-.5px; margin-bottom:14px;
+    animation: fadeUp .9s .05s ease both;
+  }
+  h1.page-title em { font-style:italic; color:var(--electric); }
+  .page-sub {
+    font-size:14px; color:rgba(245,247,250,.55); margin-bottom:6px;
+    animation: fadeUp .9s .1s ease both;
+  }
+  .page-meta {
+    font-size:12px; color:rgba(245,247,250,.4); letter-spacing:1px; text-transform:uppercase;
+    margin-bottom:56px;
+    animation: fadeUp .9s .15s ease both;
+  }
+  .page-meta a { color:var(--electric); text-decoration:none; letter-spacing:0; text-transform:none; }
+  .page-meta a:hover { text-decoration:underline; }
+
+  .divider {
+    height:1px; background:linear-gradient(90deg, transparent, rgba(210,225,255,.35), transparent);
+    margin:44px 0;
+  }
+
+  article section { margin-bottom:40px; animation: fadeUp .7s ease both; }
+  article h2 {
+    font-family:'DM Serif Display', serif;
+    font-weight:400; font-size:26px; line-height:1.25;
+    color:var(--white); margin-bottom:14px;
+    display:flex; align-items:baseline; gap:14px;
+  }
+  article h2 .num {
+    font-family:'Montserrat', sans-serif; font-size:13px; font-weight:700;
+    color:var(--electric); letter-spacing:2px;
+    padding:4px 10px; border:1px solid rgba(210,225,255,.3); border-radius:6px;
+    background:rgba(210,225,255,.04);
+  }
+  article p { color:rgba(245,247,250,.75); font-size:15.5px; margin-bottom:12px; }
+  article ul { list-style:none; padding-left:0; margin:12px 0 4px; }
+  article ul li {
+    position:relative; padding-left:22px; margin-bottom:8px;
+    color:rgba(245,247,250,.75); font-size:15px;
+  }
+  article ul li::before {
+    content:"→"; position:absolute; left:0; color:var(--electric); font-weight:700;
+  }
+  article em, article strong { color:var(--white); font-weight:600; font-style:normal; }
+
+  /* Back to top */
+  #toTop {
+    position:fixed; right:24px; bottom:24px; z-index:1500;
+    width:52px; height:52px; border-radius:50%;
+    background:rgba(14,14,23,.85); border:1px solid rgba(210,225,255,.35);
+    color:var(--electric); font-size:20px; cursor:pointer;
+    backdrop-filter:blur(12px);
+    opacity:0; pointer-events:none; transform:translateY(10px);
+    transition:.35s cubic-bezier(.4,0,.2,1);
+    box-shadow:0 4px 24px rgba(210,225,255,.1);
+  }
+  #toTop.show { opacity:1; pointer-events:auto; transform:translateY(0); }
+  #toTop:hover { border-color:var(--electric); box-shadow:0 0 24px rgba(210,225,255,.35); }
+
+  footer {
+    position:relative; z-index:20; background:#03040a; text-align:center;
+    padding:24px; font-size:12px; color:rgba(245,247,250,0.35); letter-spacing:1px;
+    border-top:1px solid rgba(210,225,255,0.06);
+  }
+  footer a { color:inherit; text-decoration:none; transition:color .2s; }
+  footer a:hover { color:var(--electric); }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+
+  @media (max-width:640px) {
+    #navbar { padding:14px 16px; }
+    .nav-pill, #langTrigger { height:42px; padding:0 16px; font-size:12px; }
+    main { padding:130px 20px 90px; }
+    article h2 { font-size:22px; gap:10px; }
+    article h2 .num { font-size:11px; padding:3px 8px; }
+  }
+</style>
+ <link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="stylesheet" href="identity.css?v=3">
+<link rel="stylesheet" href="arabic.css?v=3">
+</head>
+<body>
+
+<div class="bg-vignette"></div>
+<div class="bg-scanlines"></div>
+
+<header id="navbar">
+  <nav>
+    <a href="index.html" class="nav-pill" data-i18n="nav.back">← Zurück</a>
+    <div class="nav-spacer"></div>
+    <div id="langSwitcher">
+      <button id="langTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" data-i18n-attr-aria-label="langSwitcher.label">
+        <span>🌐</span><span id="langCurrent">DE</span>
+      </button>
+      <ul id="langMenu" role="listbox"></ul>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="page-tag" data-i18n="page.tag">Rechtliches</div>
+  <h1 class="page-title" data-i18n-html="page.titleHtml">Allgemeine <em>Geschäftsbedingungen</em></h1>
+  <p class="page-sub" data-i18n="page.brand">Zaki Digital Concepts — Digital Concepts</p>
+  <p class="page-meta">
+    <span data-i18n="page.contact">Kontakt</span>:
+    <a href="mailto:info@digital-concepts.ch">info@digital-concepts.ch</a>
+    &nbsp;·&nbsp;
+    <span data-i18n="page.updated">Stand</span>: <span data-i18n="page.date">Juli 2026</span>
+  </p>
+
+  <div class="divider"></div>
+
+  <article id="agb"><!-- rendered dynamically per language --></article>
+</main>
+
+<button id="toTop" aria-label="Back to top" title="Back to top">↑</button>
+
+<footer>
+  <a href="index.html">© Digital Concepts 2026 — <span data-i18n="footer.rights">Alle Rechte vorbehalten</span></a>
+</footer>
+
+<script>
+/* ============================================================
+   i18n system — même clé de stockage ("lang") que le site principal.
+   La langue est partagée automatiquement avec index.html.
+   ============================================================ */
+const LANGS = [{"code":"ar","label":"العربية","flag":""},
+  { code:"fr", label:"Français", flag:"🇫🇷" },
+  { code:"en", label:"English",  flag:"🇬🇧" },
+  { code:"de", label:"Deutsch",  flag:"🇩🇪" },
+  { code:"es", label:"Español",  flag:"🇪🇸" },
+  { code:"it", label:"Italiano", flag:"🇮🇹" },
+];
+const AVAILABLE = LANGS.map(l => l.code);
+
+function detectLang() {
+  const saved = localStorage.getItem("lang");
+  if (saved && AVAILABLE.includes(saved)) return saved;
+  const nav = (navigator.language || "en").slice(0,2).toLowerCase();
+  return AVAILABLE.includes(nav) ? nav : "en";
+}
+
+/* Sections de l'AGB — chaque entrée = { h: titre, b: [paragraphes | {list:[...]}]} */
+const AGB = {ar:{"meta":{"title":"الشروط العامة | Digital Concepts","description":"الشروط العامة لخدمات Zaki Digital Concepts الرقمية وتطوير المواقع والحلول التقنية حسب الطلب."},"sections":[{"h":"نطاق التطبيق","b":["تنظّم هذه الشروط العامة جميع العلاقات التجارية بين Zaki Digital Concepts (ويُشار إليه فيما يلي بـ «مقدّم الخدمة») وعملائه (ويُشار إليهم بـ «العميل»).","تسري على جميع الخدمات والعروض وعروض الأسعار والعقود، ما لم يُتفق كتابيًا على خلاف ذلك.","يُعدّ تقديم الطلب قبولًا من العميل لهذه الشروط العامة."]},{"h":"الخدمات","b":["يقدّم مقدّم الخدمة، على وجه الخصوص، الخدمات التالية:",{"list":["تخطيط المواقع الإلكترونية وتصميمها وتطويرها حسب الطلب","التنفيذ التقني لمشاريع الويب","تصميم واجهة المستخدم وتجربة الاستخدام","الأتمتة وحلول العمليات الرقمية","خدمات تقنية ورقمية مخصّصة حسب الاتفاق"]},"يُحدّد نطاق الخدمات حصريًا في عرض السعر أو في اتفاق مكتوب."]},{"h":"إبرام العقد","b":["يُبرم العقد بقبول عرض السعر كتابيًا أو إلكترونيًا، أو بالبدء في تنفيذ المشروع.","تسري عروض الأسعار لمدة 30 يومًا، ما لم يُذكر خلاف ذلك."]},{"h":"الأسعار","b":["جميع الأسعار بالدرهم المغربي (MAD).","تُعتمد الأسعار الواردة في عرض السعر المعني.","تُفوتر الخدمات الإضافية غير المشمولة بعرض السعر بصورة مستقلة."]},{"h":"شروط الدفع","b":["تُسدّد الفواتير دون خصم خلال <strong>10 أيام تقويمية</strong> من تاريخ إصدارها.","يجوز لمقدّم الخدمة طلب دفعات مقدّمة أو إصدار فواتير مرحلية للمشاريع الكبيرة.","في حال التأخّر في الدفع، يجوز لمقدّم الخدمة، على وجه الخصوص:",{"list":["تعليق الأعمال الجارية،","رفض تسليم الموقع أو نشره،","حجب الخدمات المستحقّة إلى حين السداد الكامل،","المطالبة بفوائد التأخير القانونية ورسوم تذكير معقولة."]},"لا تنتقل حقوق استخدام الموقع إلى العميل إلا بعد السداد الكامل."]},{"h":"التزامات العميل بالتعاون","b":["يقدّم العميل في الوقت المناسب جميع المحتويات والمعلومات والصور والشعارات والنصوص وبيانات الوصول اللازمة للمشروع.","يمدّد أي تأخير ناتج عن نقص التعاون المواعيد المتفق عليها بالقدر المقابل."]},{"h":"المحتوى الذي يقدّمه العميل","b":["يتحمّل العميل وحده مسؤولية المحتوى الذي يقدّمه.","ويضمن، على وجه الخصوص، ألّا ينتهك هذا المحتوى حقوق المؤلف أو العلامات التجارية أو الحقوق الشخصية أو أي حقوق أخرى للغير.","يُخلي مقدّم الخدمة مسؤوليته في هذا الشأن."]},{"h":"سير المشروع","b":["يطوّر مقدّم الخدمة الموقع المتفق عليه وفق عرض السعر.","يمكن تقديم عروض مرحلية لتقدّم العمل أثناء المشروع.","ينبغي تجميع طلبات التعديل وإرسالها معًا قدر الإمكان."]},{"h":"التعديلات","b":["يتضمّن العرض <strong>جولتين من التعديلات</strong>، ما لم يُتفق على خلاف ذلك.","تُعدّ الطلبات الإضافية والوظائف الجديدة والتوسعات اللاحقة خدمات تكميلية تُفوتر بصورة مستقلة."]},{"h":"تغيير نطاق العمل","b":["إذا طلب العميل، بعد تقديم الطلب، خدمات إضافية أو تغييرات جوهرية، جاز تعديل التكاليف والمواعيد تبعًا لذلك."]},{"h":"مواعيد التسليم","b":["مواعيد التسليم تقديرية وغير ملزمة.","يمدّد التأخير الناتج عن قوة قاهرة أو مشكلة تقنية أو نقص في تعاون العميل موعد التسليم تبعًا لذلك."]},{"h":"الاستلام والقبول","b":["يمكن للعميل مراجعة الموقع بعد إنجازه.","يجب تقديم أي اعتراض كتابيًا خلال <strong>10 أيام تقويمية</strong>.","في حال عدم الرد خلال هذه المهلة، أو البدء في الاستخدام الفعلي، تُعدّ الخدمة مقبولة."]},{"h":"حقوق الاستخدام","b":["بعد السداد الكامل، يحصل العميل على حق الاستخدام المتفق عليه للموقع المنجز.","تبقى جميع الحقوق مملوكة لمقدّم الخدمة إلى حين السداد الكامل.","يحتفظ مقدّم الخدمة بحق إعادة استخدام أساليب البرمجة العامة والمكوّنات القابلة لإعادة الاستخدام والقوالب وخبراته الخاصة في مشاريع أخرى."]},{"h":"الاستضافة والنطاقات ومقدّمو الخدمات الخارجيون","b":["من حيث المبدأ، <strong>لا يقدّم مقدّم الخدمة استضافة خاصة به</strong> ولا تسجيل نطاقات ولا خدمات خوادم.","يتحمّل العميل بنفسه مسؤولية:",{"list":["الاستضافة","تسجيل النطاق","الخوادم","خدمات البريد الإلكتروني","التكاليف المتكرّرة لمقدّمي الخدمات الخارجيين"]},"يمكن لمقدّم الخدمة، عند الطلب، مساعدة العميل في الإعداد التقني دون تحمّل مسؤولية خدمات الطرف الخارجي أو أعطاله أو تغيّر أسعاره.","تُبرم عقود الاستضافة والنطاقات وغيرها من الخدمات حصريًا بين العميل ومقدّم الخدمة الخارجي المعني."]},{"h":"الصيانة","b":["بعد إتمام المشروع وقبوله، لا يلتزم مقدّم الخدمة بصيانة الموقع أو تحديثه أو متابعته تقنيًا، إلا بموجب اتفاق مكتوب مستقل."]},{"h":"الضمان","b":["يلتزم مقدّم الخدمة بتنفيذ الموقع أو الحل الرقمي المتفق عليه وفق الأصول المهنية.","لا يُقدّم، على وجه الخصوص، <strong>أي ضمان</strong> بشأن:",{"list":["النجاح الاقتصادي،","زيادة الإيرادات،","استفسارات العملاء،","الترتيب في محركات البحث،","أداء الإعلانات،","التوافق مع الإصدارات المستقبلية للمتصفّحات أو البرامج،","خدمات الأطراف الخارجية أو توافرها."]}]},{"h":"المسؤولية","b":["في الحدود التي يسمح بها القانون، لا يتحمّل مقدّم الخدمة المسؤولية إلا عن الأضرار الناجمة عن القصد أو الإهمال الجسيم.","تُستبعد المسؤولية عن الأضرار غير المباشرة أو التبعية أو فوات الربح أو فقدان البيانات أو توقّف النشاط.","لا يتحمّل مقدّم الخدمة، على وجه الخصوص، مسؤولية الأضرار الناجمة عن:",{"list":["أعطال الاستضافة أو الخوادم،","مشكلات النطاقات،","تحديثات المتصفّحات أو البرامج،","ثغرات أمنية في برامج الأطراف الخارجية،","إضافات أو ملحقات خارجية،","تعديلات يجريها العميل أو الغير،","هجمات إلكترونية أو برمجيات خبيثة،","القوة القاهرة."]}]},{"h":"السرّية","b":["يلتزم الطرفان بالحفاظ على سرّية المعلومات الحسّاسة واستخدامها فقط لتنفيذ العقد."]},{"h":"عرض المشاريع ضمن الأعمال السابقة","b":["يجوز لمقدّم الخدمة عرض المشاريع المنجزة مع ذكر اسم العميل وإرفاق لقطات شاشة أو روابط، بوصفها نماذج أعمال على موقعه أو في مواده التسويقية، ما لم يعترض العميل كتابيًا قبل بدء المشروع."]},{"h":"حماية البيانات","b":["تُعالج البيانات الشخصية وفق الأحكام المعمول بها في القانون الفدرالي السويسري لحماية البيانات.","ترد معلومات إضافية في بيان حماية البيانات."]},{"h":"إنهاء التعاقد","b":["يجوز لأيّ من الطرفين إنهاء التكليفات المستمرة أو الخدمات المتكرّرة كتابيًا، مع إشعار مسبق مدته 30 يومًا ليصبح الإنهاء نافذًا في نهاية الشهر، ما لم يُتفق على خلاف ذلك.","تبقى مبالغ الخدمات المقدّمة بالفعل مستحقّة."]},{"h":"القوة القاهرة","b":["إذا حالت قوة قاهرة دون تنفيذ أحد الطرفين لالتزاماته، تُعلّق الالتزامات المعنية طوال مدة الحدث."]},{"h":"قابلية فصل الأحكام","b":["إذا تبيّن بطلان أحد أحكام هذه الشروط كليًا أو جزئيًا، فلا يؤثّر ذلك في صلاحية الأحكام الأخرى."]},{"h":"تعديل الشروط العامة","b":["يحتفظ مقدّم الخدمة بحق تعديل هذه الشروط في أي وقت.","تبقى العقود القائمة خاضعة للشروط السارية وقت إبرامها، ما لم يُتفق على خلاف ذلك."]},{"h":"القانون الواجب التطبيق والاختصاص القضائي","b":["يُطبّق حصريًا القانون الموضوعي السويسري.","يكون الاختصاص القضائي في مقرّ مقدّم الخدمة، مع مراعاة أي أحكام قانونية آمرة تقضي بخلاف ذلك."]}]},
+  de: {
+    meta: { title:"AGB — Allgemeine Geschäftsbedingungen | Digital Concepts",
+      description:"Allgemeine Geschäftsbedingungen (AGB) von Zaki Digital Concepts – Bedingungen für die Erbringung digitaler Dienstleistungen." },
+    sections: [
+      { h:"Geltungsbereich", b:[
+        "Diese Allgemeinen Geschäftsbedingungen (AGB) regeln sämtliche Geschäftsbeziehungen zwischen Zaki Digital Concepts (nachfolgend «Anbieter») und seinen Kunden (nachfolgend «Kunde»).",
+        "Sie gelten für sämtliche Dienstleistungen, Angebote, Offerten und Verträge, sofern keine abweichende schriftliche Vereinbarung getroffen wurde.",
+        "Mit der Auftragserteilung erklärt sich der Kunde mit diesen AGB einverstanden."
+      ]},
+      { h:"Dienstleistungen", b:[
+        "Der Anbieter erbringt insbesondere folgende Dienstleistungen:",
+        { list:[
+          "Konzeption, Gestaltung und Entwicklung individueller Webseiten",
+          "Technische Umsetzung von Webprojekten",
+          "UI-/UX-Design",
+          "Automatisierungen und digitale Prozesslösungen",
+          "Individuelle IT- und Digitaldienstleistungen nach Vereinbarung"
+        ]},
+        "Der genaue Leistungsumfang ergibt sich ausschliesslich aus der jeweiligen Offerte oder einer schriftlichen Vereinbarung."
+      ]},
+      { h:"Vertragsabschluss", b:[
+        "Ein Vertrag kommt durch die schriftliche oder elektronische Annahme einer Offerte oder durch den Beginn der Projektumsetzung zustande.",
+        "Offerten sind 30 Tage gültig, sofern nichts anderes vereinbart wurde."
+      ]},
+      { h:"Preise", b:[
+        "Alle Preise verstehen sich in marokkanischen Dirham (MAD).",
+        "Massgebend sind die Preise der jeweiligen Offerte.",
+        "Zusätzliche Leistungen, welche nicht Bestandteil der Offerte sind, werden separat verrechnet."
+      ]},
+      { h:"Zahlungsbedingungen", b:[
+        "Rechnungen sind innerhalb von <strong>10 Kalendertagen</strong> ab Rechnungsdatum ohne Abzug zahlbar.",
+        "Der Anbieter ist berechtigt, bei grösseren Projekten Teilrechnungen oder Anzahlungen zu verlangen.",
+        "Bei Zahlungsverzug kann der Anbieter insbesondere:",
+        { list:[
+          "laufende Arbeiten unterbrechen,",
+          "die Übergabe oder Veröffentlichung der Webseite verweigern,",
+          "offene Leistungen bis zum vollständigen Zahlungseingang zurückhalten,",
+          "gesetzliche Verzugszinsen sowie angemessene Mahngebühren geltend machen."
+        ]},
+        "Die Nutzungsrechte an der erstellten Website gehen erst nach vollständiger Bezahlung auf den Kunden über."
+      ]},
+      { h:"Mitwirkungspflichten des Kunden", b:[
+        "Der Kunde stellt sämtliche für das Projekt erforderlichen Inhalte, Informationen, Bilder, Logos, Texte sowie Zugangsdaten rechtzeitig zur Verfügung.",
+        "Verzögerungen aufgrund fehlender oder verspäteter Mitwirkung verlängern vereinbarte Lieferfristen entsprechend."
+      ]},
+      { h:"Inhalte des Kunden", b:[
+        "Der Kunde ist allein verantwortlich für sämtliche bereitgestellten Inhalte.",
+        "Er gewährleistet insbesondere, dass keine Urheber-, Marken-, Persönlichkeits- oder sonstigen Rechte Dritter verletzt werden.",
+        "Der Anbieter übernimmt hierfür keinerlei Haftung."
+      ]},
+      { h:"Projektablauf", b:[
+        "Der Anbieter entwickelt die vereinbarte Website gemäss Offerte.",
+        "Während des Projekts können Zwischenstände präsentiert werden.",
+        "Änderungswünsche sind möglichst gesammelt mitzuteilen."
+      ]},
+      { h:"Korrekturen", b:[
+        "Sofern nichts anderes vereinbart wurde, umfasst das Angebot <strong>zwei Korrekturrunden</strong>.",
+        "Weitere Änderungswünsche, zusätzliche Funktionen oder nachträgliche Erweiterungen gelten als Zusatzleistungen und werden separat verrechnet."
+      ]},
+      { h:"Änderungen des Leistungsumfangs", b:[
+        "Wünscht der Kunde nach Auftragserteilung zusätzliche Leistungen oder wesentliche Änderungen, können sich Kosten und Liefertermine entsprechend anpassen."
+      ]},
+      { h:"Lieferfristen", b:[
+        "Liefertermine gelten grundsätzlich als unverbindliche Richtwerte.",
+        "Verzögerungen aufgrund höherer Gewalt, technischer Probleme oder fehlender Mitwirkung des Kunden verlängern die Lieferfrist angemessen."
+      ]},
+      { h:"Abnahme", b:[
+        "Nach Fertigstellung erhält der Kunde Gelegenheit, die Website zu prüfen.",
+        "Beanstandungen sind innerhalb von <strong>10 Kalendertagen</strong> schriftlich mitzuteilen.",
+        "Erfolgt innerhalb dieser Frist keine Rückmeldung oder wird die Website produktiv genutzt, gilt die Leistung als abgenommen."
+      ]},
+      { h:"Nutzungsrechte", b:[
+        "Nach vollständigem Zahlungseingang erhält der Kunde das vereinbarte Nutzungsrecht an der erstellten Website.",
+        "Bis zur vollständigen Bezahlung verbleiben sämtliche Rechte beim Anbieter.",
+        "Der Anbieter bleibt berechtigt, allgemeine Programmiermethoden, wiederverwendbare Komponenten, Vorlagen und eigenes Know-how auch für andere Projekte zu verwenden."
+      ]},
+      { h:"Hosting, Domains und Drittanbieter", b:[
+        "Der Anbieter bietet grundsätzlich <strong>kein eigenes Hosting</strong>, keine Domainregistrierung und keine Serverdienstleistungen an.",
+        "Der Kunde ist selbst verantwortlich für:",
+        { list:["Hosting","Domainregistrierung","Server","E-Mail-Dienste","laufende Kosten externer Anbieter"]},
+        "Auf Wunsch unterstützt der Anbieter den Kunden bei der technischen Einrichtung oder Konfiguration. Diese Unterstützung erfolgt ohne Haftung für Leistungen, Ausfälle oder Preisänderungen des jeweiligen Drittanbieters.",
+        "Verträge mit Hosting-, Domain- oder sonstigen Drittanbietern werden ausschliesslich zwischen dem Kunden und dem jeweiligen Anbieter abgeschlossen."
+      ]},
+      { h:"Wartung", b:[
+        "Nach Abschluss und Abnahme des Projekts besteht keine Verpflichtung des Anbieters zur Wartung, Aktualisierung oder technischen Betreuung der Website, sofern keine separate schriftliche Vereinbarung getroffen wurde."
+      ]},
+      { h:"Gewährleistung", b:[
+        "Der Anbieter verpflichtet sich zur fachgerechten Erstellung der vereinbarten Website oder digitalen Lösung.",
+        "Es wird insbesondere <strong>keine Garantie</strong> übernommen für:",
+        { list:[
+          "wirtschaftlichen Erfolg,","Umsatzsteigerungen,","Kundenanfragen,","Suchmaschinenplatzierungen,",
+          "Werbeerfolge,","Kompatibilität mit zukünftigen Browser- oder Softwareversionen,","Leistungen oder Verfügbarkeit von Drittanbietern."
+        ]}
+      ]},
+      { h:"Haftung", b:[
+        "Soweit gesetzlich zulässig haftet der Anbieter ausschliesslich für vorsätzlich oder grobfahrlässig verursachte Schäden.",
+        "Die Haftung für indirekte Schäden, Folgeschäden, entgangenen Gewinn, Datenverluste oder Betriebsunterbrüche wird ausgeschlossen.",
+        "Der Anbieter haftet insbesondere nicht für Schäden aufgrund von:",
+        { list:[
+          "Hosting- oder Serverausfällen,","Domainproblemen,","Browser- oder Softwareupdates,",
+          "Sicherheitslücken von Drittsoftware,","Plugins oder Erweiterungen Dritter,",
+          "Änderungen durch den Kunden oder Dritte,","Hackerangriffen, Malware oder Cyberangriffen,","höherer Gewalt."
+        ]}
+      ]},
+      { h:"Vertraulichkeit", b:["Beide Parteien verpflichten sich, vertrauliche Informationen geheim zu halten und ausschliesslich zur Vertragsabwicklung zu verwenden."]},
+      { h:"Referenzrecht", b:["Der Anbieter ist berechtigt, abgeschlossene Projekte unter Nennung des Firmennamens des Kunden sowie mit Screenshots oder Verlinkungen als Referenz auf der eigenen Website oder in Marketingunterlagen zu präsentieren, sofern der Kunde dem nicht vor Projektbeginn schriftlich widerspricht."]},
+      { h:"Datenschutz", b:[
+        "Personendaten werden nach den geltenden Bestimmungen des Schweizer Datenschutzgesetzes (DSG) bearbeitet.",
+        "Weitere Informationen enthält die Datenschutzerklärung."
+      ]},
+      { h:"Kündigung", b:[
+        "Daueraufträge oder wiederkehrende Dienstleistungen können von beiden Parteien mit einer Frist von 30 Tagen auf Monatsende schriftlich gekündigt werden, sofern nichts anderes vereinbart wurde.",
+        "Bereits erbrachte Leistungen bleiben geschuldet."
+      ]},
+      { h:"Höhere Gewalt", b:["Kann eine Vertragspartei ihre Verpflichtungen aufgrund höherer Gewalt nicht erfüllen, ruhen die entsprechenden Verpflichtungen für die Dauer des Ereignisses."]},
+      { h:"Salvatorische Klausel", b:["Sollte eine Bestimmung dieser AGB ganz oder teilweise unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt."]},
+      { h:"Änderungen der AGB", b:[
+        "Der Anbieter ist berechtigt, diese AGB jederzeit anzupassen.",
+        "Für bestehende Verträge gelten die zum Zeitpunkt des Vertragsabschlusses gültigen AGB, sofern keine anderslautende Vereinbarung getroffen wurde."
+      ]},
+      { h:"Anwendbares Recht und Gerichtsstand", b:[
+        "Es gilt ausschliesslich materielles Schweizer Recht.",
+        "Gerichtsstand ist der Sitz des Anbieters, soweit keine zwingenden gesetzlichen Bestimmungen etwas anderes vorsehen."
+      ]}
+    ]
+  }
+};
+
+/* ---- Traductions FR/EN/ES/IT (contenu juridiquement équivalent, adapté à la langue) ---- */
+AGB.fr = {
+  meta:{ title:"CGV — Conditions Générales | Digital Concepts",
+    description:"Conditions générales de vente (CGV) de Zaki Digital Concepts – prestations digitales, développement web et solutions IT sur mesure." },
+  sections:[
+    { h:"Champ d'application", b:[
+      "Les présentes Conditions Générales (CG) régissent l'ensemble des relations d'affaires entre Zaki Digital Concepts (ci-après « le Prestataire ») et ses clients (ci-après « le Client »).",
+      "Elles s'appliquent à toutes les prestations, offres, devis et contrats, sauf accord écrit contraire.",
+      "En passant commande, le Client accepte les présentes CG."
+    ]},
+    { h:"Prestations", b:[
+      "Le Prestataire fournit notamment les prestations suivantes :",
+      { list:[
+        "Conception, design et développement de sites web sur mesure",
+        "Réalisation technique de projets web",
+        "Design UI/UX",
+        "Automatisations et solutions de processus numériques",
+        "Prestations IT et digitales individuelles sur accord"
+      ]},
+      "Le périmètre exact des prestations résulte exclusivement du devis ou d'un accord écrit."
+    ]},
+    { h:"Conclusion du contrat", b:[
+      "Le contrat est conclu par l'acceptation écrite ou électronique d'un devis, ou par le début de la mise en œuvre du projet.",
+      "Les devis sont valables 30 jours, sauf mention contraire."
+    ]},
+    { h:"Prix", b:[
+      "Tous les prix s'entendent en dirhams marocains (MAD).",
+      "Les prix du devis correspondant font foi.",
+      "Les prestations supplémentaires non incluses au devis sont facturées séparément."
+    ]},
+    { h:"Conditions de paiement", b:[
+      "Les factures sont payables sans escompte dans les <strong>10 jours calendaires</strong> suivant la date de facturation.",
+      "Le Prestataire peut exiger des acomptes ou des factures partielles pour les projets importants.",
+      "En cas de retard de paiement, le Prestataire peut notamment :",
+      { list:[
+        "interrompre les travaux en cours,",
+        "refuser la remise ou la publication du site,",
+        "retenir les prestations dues jusqu'au règlement complet,",
+        "réclamer les intérêts moratoires légaux et des frais de rappel raisonnables."
+      ]},
+      "Les droits d'usage du site créé ne sont transférés au Client qu'après paiement intégral."
+    ]},
+    { h:"Obligations de collaboration du Client", b:[
+      "Le Client fournit en temps utile l'ensemble des contenus, informations, images, logos, textes et accès nécessaires au projet.",
+      "Tout retard imputable à un manque de collaboration prolonge d'autant les délais convenus."
+    ]},
+    { h:"Contenus fournis par le Client", b:[
+      "Le Client est seul responsable des contenus qu'il fournit.",
+      "Il garantit notamment qu'ils ne violent aucun droit d'auteur, droit des marques, droit de la personnalité ou autre droit de tiers.",
+      "Le Prestataire décline toute responsabilité à cet égard."
+    ]},
+    { h:"Déroulement du projet", b:[
+      "Le Prestataire développe le site convenu conformément au devis.",
+      "Des états d'avancement peuvent être présentés en cours de projet.",
+      "Les demandes de modification doivent être communiquées de manière groupée dans la mesure du possible."
+    ]},
+    { h:"Corrections", b:[
+      "Sauf convention contraire, l'offre comprend <strong>deux séries de corrections</strong>.",
+      "Toute demande supplémentaire, fonctionnalité additionnelle ou extension ultérieure constitue une prestation complémentaire facturée séparément."
+    ]},
+    { h:"Modifications du périmètre", b:[
+      "Si le Client demande, après commande, des prestations supplémentaires ou des modifications substantielles, les coûts et délais peuvent être ajustés en conséquence."
+    ]},
+    { h:"Délais de livraison", b:[
+      "Les délais de livraison sont donnés à titre indicatif et non contraignant.",
+      "Tout retard dû à un cas de force majeure, à un problème technique ou à un défaut de collaboration du Client prolonge le délai en conséquence."
+    ]},
+    { h:"Réception", b:[
+      "Une fois le site finalisé, le Client peut le contrôler.",
+      "Toute réclamation doit être communiquée par écrit dans un délai de <strong>10 jours calendaires</strong>.",
+      "À défaut de retour dans ce délai ou en cas d'utilisation productive, la prestation est réputée acceptée."
+    ]},
+    { h:"Droits d'utilisation", b:[
+      "Après paiement intégral, le Client obtient le droit d'usage convenu sur le site créé.",
+      "Jusqu'au paiement complet, tous les droits demeurent la propriété du Prestataire.",
+      "Le Prestataire reste autorisé à réutiliser des méthodes de programmation générales, composants réutilisables, modèles et son propre savoir-faire pour d'autres projets."
+    ]},
+    { h:"Hébergement, domaines et prestataires tiers", b:[
+      "Le Prestataire ne propose en principe <strong>aucun hébergement propre</strong>, aucun enregistrement de domaine ni aucune prestation de serveur.",
+      "Le Client est lui-même responsable de :",
+      { list:["l'hébergement","l'enregistrement du domaine","les serveurs","les services e-mail","les coûts récurrents des prestataires externes"]},
+      "Sur demande, le Prestataire peut assister le Client dans la configuration technique, sans responsabilité quant aux prestations, pannes ou variations tarifaires du prestataire tiers.",
+      "Les contrats avec les prestataires d'hébergement, de domaine ou autres sont conclus exclusivement entre le Client et le prestataire concerné."
+    ]},
+    { h:"Maintenance", b:[
+      "Après clôture et réception du projet, le Prestataire n'a aucune obligation de maintenance, de mise à jour ou de suivi technique du site, sauf accord écrit distinct."
+    ]},
+    { h:"Garantie", b:[
+      "Le Prestataire s'engage à réaliser dans les règles de l'art le site ou la solution digitale convenue.",
+      "<strong>Aucune garantie</strong> n'est notamment donnée quant à :",
+      { list:["le succès économique,","l'augmentation du chiffre d'affaires,","les demandes clients,","le référencement dans les moteurs de recherche,","la performance publicitaire,","la compatibilité avec de futures versions de navigateurs ou de logiciels,","les prestations ou la disponibilité de tiers."]}
+    ]},
+    { h:"Responsabilité", b:[
+      "Dans la mesure permise par la loi, le Prestataire ne répond que des dommages causés intentionnellement ou par négligence grave.",
+      "Toute responsabilité pour dommages indirects, consécutifs, perte de gain, perte de données ou interruption d'exploitation est exclue.",
+      "Le Prestataire n'est notamment pas responsable des dommages résultant de :",
+      { list:["pannes d'hébergement ou de serveur,","problèmes de domaine,","mises à jour de navigateurs ou de logiciels,","failles de sécurité de logiciels tiers,","plugins ou extensions tiers,","modifications par le Client ou des tiers,","attaques informatiques, logiciels malveillants ou cyberattaques,","force majeure."]}
+    ]},
+    { h:"Confidentialité", b:["Les deux parties s'engagent à garder confidentielles les informations sensibles et à ne les utiliser qu'aux fins de l'exécution du contrat."]},
+    { h:"Droit de référence", b:["Le Prestataire est autorisé à présenter les projets réalisés en mentionnant le nom du Client, avec captures d'écran ou liens, à titre de référence sur son propre site ou dans ses supports marketing, sauf opposition écrite du Client avant le début du projet."]},
+    { h:"Protection des données", b:[
+      "Les données personnelles sont traitées conformément aux dispositions applicables de la Loi fédérale suisse sur la protection des données (LPD).",
+      "De plus amples informations figurent dans la déclaration de protection des données."
+    ]},
+    { h:"Résiliation", b:[
+      "Les mandats permanents ou prestations récurrentes peuvent être résiliés par écrit par les deux parties moyennant un préavis de 30 jours pour la fin d'un mois, sauf accord contraire.",
+      "Les prestations déjà fournies restent dues."
+    ]},
+    { h:"Force majeure", b:["Si une partie est empêchée d'exécuter ses obligations par un cas de force majeure, ces obligations sont suspendues pour la durée de l'événement."]},
+    { h:"Clause salvatrice", b:["Si une disposition des présentes CG s'avérait totalement ou partiellement invalide, la validité des autres dispositions n'en serait pas affectée."]},
+    { h:"Modifications des CG", b:[
+      "Le Prestataire se réserve le droit de modifier à tout moment les présentes CG.",
+      "Les contrats en cours restent régis par les CG en vigueur à la date de leur conclusion, sauf accord contraire."
+    ]},
+    { h:"Droit applicable et for", b:[
+      "Le droit matériel suisse est exclusivement applicable.",
+      "Le for est le siège du Prestataire, sous réserve de dispositions légales impératives contraires."
+    ]}
+  ]
+};
+
+AGB.en = {
+  meta:{ title:"Terms & Conditions | Digital Concepts",
+    description:"General Terms and Conditions of Zaki Digital Concepts — digital services, web development and custom IT solutions." },
+  sections:[
+    { h:"Scope", b:[
+      "These General Terms and Conditions (GTC) govern all business relationships between Zaki Digital Concepts (\"the Provider\") and its clients (\"the Client\").",
+      "They apply to all services, offers, quotes and contracts unless otherwise agreed in writing.",
+      "By placing an order, the Client accepts these GTC."
+    ]},
+    { h:"Services", b:[
+      "The Provider offers, among others, the following services:",
+      { list:[
+        "Conception, design and development of custom websites",
+        "Technical implementation of web projects",
+        "UI / UX design",
+        "Automations and digital process solutions",
+        "Custom IT and digital services on request"
+      ]},
+      "The exact scope of services is defined exclusively by the relevant quote or a written agreement."
+    ]},
+    { h:"Conclusion of contract", b:[
+      "A contract is concluded upon written or electronic acceptance of a quote, or by the start of project implementation.",
+      "Quotes are valid for 30 days unless otherwise stated."
+    ]},
+    { h:"Prices", b:[
+      "All prices are in Moroccan dirhams (MAD).",
+      "The prices of the corresponding quote apply.",
+      "Additional services not included in the quote will be billed separately."
+    ]},
+    { h:"Payment terms", b:[
+      "Invoices are payable without discount within <strong>10 calendar days</strong> of the invoice date.",
+      "For larger projects, the Provider may request partial invoices or down payments.",
+      "In the event of late payment, the Provider may in particular:",
+      { list:[
+        "suspend ongoing work,",
+        "refuse to hand over or publish the website,",
+        "withhold outstanding services until full payment is received,",
+        "claim statutory default interest and reasonable reminder fees."
+      ]},
+      "The usage rights to the created website transfer to the Client only upon full payment."
+    ]},
+    { h:"Client's duty to cooperate", b:[
+      "The Client shall provide all content, information, images, logos, texts and access data required for the project in a timely manner.",
+      "Delays caused by missing or late cooperation extend agreed delivery deadlines accordingly."
+    ]},
+    { h:"Client's content", b:[
+      "The Client is solely responsible for all content provided.",
+      "The Client warrants that no copyright, trademark, personality or other third-party rights are infringed.",
+      "The Provider accepts no liability in this regard."
+    ]},
+    { h:"Project workflow", b:[
+      "The Provider develops the agreed website in accordance with the quote.",
+      "Intermediate stages may be presented during the project.",
+      "Change requests should preferably be submitted in a consolidated manner."
+    ]},
+    { h:"Revisions", b:[
+      "Unless otherwise agreed, the offer includes <strong>two rounds of revisions</strong>.",
+      "Further change requests, additional features or later extensions are considered additional services and are billed separately."
+    ]},
+    { h:"Changes to the scope", b:[
+      "If the Client requests additional services or significant changes after the order has been placed, costs and delivery dates may be adjusted accordingly."
+    ]},
+    { h:"Delivery deadlines", b:[
+      "Delivery dates are generally non-binding target dates.",
+      "Delays due to force majeure, technical issues or lack of cooperation by the Client extend the delivery deadline appropriately."
+    ]},
+    { h:"Acceptance", b:[
+      "Upon completion, the Client is given the opportunity to review the website.",
+      "Any complaints must be communicated in writing within <strong>10 calendar days</strong>.",
+      "If no feedback is received within this period, or if the website is used productively, the service is deemed accepted."
+    ]},
+    { h:"Usage rights", b:[
+      "After receipt of full payment, the Client obtains the agreed right of use to the created website.",
+      "Until full payment, all rights remain with the Provider.",
+      "The Provider remains entitled to reuse general programming methods, reusable components, templates and its own know-how for other projects."
+    ]},
+    { h:"Hosting, domains and third-party providers", b:[
+      "The Provider generally does <strong>not offer its own hosting</strong>, domain registration or server services.",
+      "The Client is responsible for:",
+      { list:["Hosting","Domain registration","Servers","E-mail services","Recurring costs of external providers"]},
+      "On request, the Provider may assist the Client with technical setup or configuration, without any liability for the services, downtime or price changes of the respective third party.",
+      "Contracts with hosting, domain or other third-party providers are concluded exclusively between the Client and the respective provider."
+    ]},
+    { h:"Maintenance", b:[
+      "After completion and acceptance of the project, the Provider is not obliged to maintain, update or provide technical support for the website, unless a separate written agreement has been made."
+    ]},
+    { h:"Warranty", b:[
+      "The Provider undertakes to produce the agreed website or digital solution professionally.",
+      "In particular, <strong>no guarantee</strong> is given for:",
+      { list:["economic success,","increase in revenue,","customer enquiries,","search engine rankings,","advertising success,","compatibility with future browser or software versions,","the services or availability of third parties."]}
+    ]},
+    { h:"Liability", b:[
+      "To the extent permitted by law, the Provider is liable exclusively for damage caused intentionally or through gross negligence.",
+      "Liability for indirect damage, consequential damage, loss of profit, data loss or business interruption is excluded.",
+      "In particular, the Provider is not liable for damages resulting from:",
+      { list:["hosting or server outages,","domain issues,","browser or software updates,","security vulnerabilities in third-party software,","third-party plugins or extensions,","changes made by the Client or third parties,","hacker attacks, malware or cyberattacks,","force majeure."]}
+    ]},
+    { h:"Confidentiality", b:["Both parties undertake to keep confidential information secret and to use it exclusively for the performance of the contract."]},
+    { h:"Right of reference", b:["The Provider is entitled to present completed projects — including the Client's name, screenshots or links — as references on its own website or in marketing materials, unless the Client objects in writing before the start of the project."]},
+    { h:"Data protection", b:[
+      "Personal data is processed in accordance with the applicable provisions of the Swiss Federal Act on Data Protection (FADP).",
+      "Further information can be found in the privacy policy."
+    ]},
+    { h:"Termination", b:[
+      "Ongoing mandates or recurring services may be terminated in writing by either party with 30 days' notice to the end of a month, unless otherwise agreed.",
+      "Services already rendered remain payable."
+    ]},
+    { h:"Force majeure", b:["If a party is unable to fulfil its obligations due to force majeure, the corresponding obligations are suspended for the duration of the event."]},
+    { h:"Severability", b:["Should any provision of these GTC be wholly or partly invalid, the validity of the remaining provisions shall remain unaffected."]},
+    { h:"Changes to the GTC", b:[
+      "The Provider is entitled to amend these GTC at any time.",
+      "For existing contracts, the GTC valid at the time of conclusion of the contract apply, unless otherwise agreed."
+    ]},
+    { h:"Applicable law and jurisdiction", b:[
+      "Swiss substantive law applies exclusively.",
+      "The place of jurisdiction is the registered office of the Provider, subject to mandatory statutory provisions to the contrary."
+    ]}
+  ]
+};
+
+AGB.es = {
+  meta:{ title:"Términos y Condiciones | Digital Concepts",
+    description:"Condiciones Generales de Zaki Digital Concepts — servicios digitales, desarrollo web y soluciones IT a medida." },
+  sections:[
+    { h:"Ámbito de aplicación", b:[
+      "Las presentes Condiciones Generales (CG) regulan todas las relaciones comerciales entre Zaki Digital Concepts (en adelante, «el Prestador») y sus clientes (en adelante, «el Cliente»).",
+      "Se aplican a todos los servicios, ofertas, presupuestos y contratos, salvo acuerdo escrito en contrario.",
+      "Al realizar un pedido, el Cliente acepta estas CG."
+    ]},
+    { h:"Servicios", b:[
+      "El Prestador ofrece, entre otros, los siguientes servicios:",
+      { list:["Concepción, diseño y desarrollo de sitios web a medida","Implementación técnica de proyectos web","Diseño UI/UX","Automatizaciones y soluciones de procesos digitales","Servicios IT y digitales individuales según acuerdo"]},
+      "El alcance exacto se define exclusivamente en el presupuesto correspondiente o en un acuerdo escrito."
+    ]},
+    { h:"Conclusión del contrato", b:[
+      "El contrato se concluye mediante la aceptación escrita o electrónica de un presupuesto, o con el inicio de la ejecución del proyecto.",
+      "Los presupuestos tienen una validez de 30 días, salvo indicación en contrario."
+    ]},
+    { h:"Precios", b:[
+      "Todos los precios se expresan en dírhams marroquíes (MAD).",
+      "Son válidos los precios del presupuesto correspondiente.",
+      "Los servicios adicionales no incluidos en el presupuesto se facturan por separado."
+    ]},
+    { h:"Condiciones de pago", b:[
+      "Las facturas son pagaderas sin descuento en un plazo de <strong>10 días naturales</strong> desde la fecha de facturación.",
+      "En proyectos de mayor envergadura, el Prestador puede exigir facturas parciales o anticipos.",
+      "En caso de retraso en el pago, el Prestador podrá, en particular:",
+      { list:["suspender los trabajos en curso,","denegar la entrega o publicación del sitio web,","retener los servicios pendientes hasta el pago íntegro,","reclamar los intereses legales de demora y gastos razonables de reclamación."]},
+      "Los derechos de uso del sitio creado se transfieren al Cliente únicamente tras el pago íntegro."
+    ]},
+    { h:"Obligaciones de colaboración del Cliente", b:[
+      "El Cliente proporcionará a tiempo todos los contenidos, información, imágenes, logotipos, textos y accesos necesarios para el proyecto.",
+      "Los retrasos causados por falta de colaboración prolongan en consecuencia los plazos de entrega acordados."
+    ]},
+    { h:"Contenidos del Cliente", b:[
+      "El Cliente es el único responsable de los contenidos aportados.",
+      "Garantiza especialmente que no se vulneran derechos de autor, marcas, derechos de la personalidad ni otros derechos de terceros.",
+      "El Prestador declina toda responsabilidad al respecto."
+    ]},
+    { h:"Desarrollo del proyecto", b:[
+      "El Prestador desarrolla el sitio web acordado conforme al presupuesto.",
+      "Durante el proyecto pueden presentarse avances.",
+      "Las solicitudes de modificación deben comunicarse, en la medida de lo posible, de manera agrupada."
+    ]},
+    { h:"Correcciones", b:[
+      "Salvo pacto en contrario, la oferta incluye <strong>dos rondas de correcciones</strong>.",
+      "Cualquier solicitud adicional, funcionalidad extra o ampliación posterior constituye una prestación adicional y se factura por separado."
+    ]},
+    { h:"Modificaciones del alcance", b:[
+      "Si tras la contratación el Cliente solicita servicios adicionales o modificaciones sustanciales, los costes y plazos podrán ajustarse en consecuencia."
+    ]},
+    { h:"Plazos de entrega", b:[
+      "Los plazos de entrega son, en principio, orientativos y no vinculantes.",
+      "Los retrasos por causa de fuerza mayor, problemas técnicos o falta de colaboración del Cliente prolongan el plazo de forma razonable."
+    ]},
+    { h:"Recepción", b:[
+      "Una vez finalizado, el Cliente podrá revisar el sitio web.",
+      "Cualquier reclamación debe comunicarse por escrito en un plazo de <strong>10 días naturales</strong>.",
+      "Si no se recibe respuesta en dicho plazo o si el sitio se usa productivamente, la prestación se considerará aceptada."
+    ]},
+    { h:"Derechos de uso", b:[
+      "Tras el pago íntegro, el Cliente obtiene el derecho de uso acordado sobre el sitio creado.",
+      "Hasta el pago completo, todos los derechos permanecen en el Prestador.",
+      "El Prestador conserva el derecho a reutilizar métodos generales de programación, componentes reutilizables, plantillas y su propio know-how para otros proyectos."
+    ]},
+    { h:"Hosting, dominios y proveedores externos", b:[
+      "El Prestador, en principio, <strong>no ofrece hosting propio</strong>, ni registro de dominios ni servicios de servidor.",
+      "El Cliente es responsable de:",
+      { list:["Hosting","Registro de dominio","Servidores","Servicios de correo electrónico","Costes recurrentes de proveedores externos"]},
+      "A petición, el Prestador podrá asistir al Cliente en la configuración técnica, sin asumir responsabilidad por las prestaciones, caídas o cambios de precio del proveedor externo.",
+      "Los contratos con proveedores de hosting, dominio u otros terceros se celebran exclusivamente entre el Cliente y el proveedor correspondiente."
+    ]},
+    { h:"Mantenimiento", b:[
+      "Tras la finalización y aceptación del proyecto, el Prestador no está obligado a realizar mantenimiento, actualización ni soporte técnico del sitio, salvo acuerdo escrito específico."
+    ]},
+    { h:"Garantía", b:[
+      "El Prestador se compromete a ejecutar de forma profesional el sitio web o la solución digital acordada.",
+      "En particular, <strong>no se ofrece ninguna garantía</strong> respecto a:",
+      { list:["el éxito económico,","el aumento de facturación,","las solicitudes de clientes,","el posicionamiento en buscadores,","el éxito publicitario,","la compatibilidad con futuras versiones de navegadores o software,","las prestaciones o disponibilidad de terceros."]}
+    ]},
+    { h:"Responsabilidad", b:[
+      "En la medida permitida por la ley, el Prestador solo responde de los daños causados con dolo o negligencia grave.",
+      "Se excluye la responsabilidad por daños indirectos, daños consecuentes, lucro cesante, pérdida de datos o interrupciones del negocio.",
+      "En particular, el Prestador no responde por daños derivados de:",
+      { list:["caídas de hosting o servidor,","problemas de dominio,","actualizaciones de navegador o software,","vulnerabilidades de software de terceros,","plugins o extensiones de terceros,","cambios realizados por el Cliente o terceros,","ataques informáticos, malware o ciberataques,","fuerza mayor."]}
+    ]},
+    { h:"Confidencialidad", b:["Ambas partes se comprometen a mantener la confidencialidad de la información sensible y a utilizarla únicamente para la ejecución del contrato."]},
+    { h:"Derecho de referencia", b:["El Prestador puede presentar los proyectos finalizados mencionando el nombre del Cliente, con capturas o enlaces, como referencia en su propio sitio o en materiales de marketing, salvo oposición escrita del Cliente antes del inicio del proyecto."]},
+    { h:"Protección de datos", b:[
+      "Los datos personales se tratan conforme a la Ley Federal Suiza de Protección de Datos (LPD).",
+      "Puede consultar más información en la política de privacidad."
+    ]},
+    { h:"Rescisión", b:[
+      "Los encargos permanentes o servicios recurrentes pueden rescindirse por escrito por cualquiera de las partes con un preaviso de 30 días a fin de mes, salvo pacto en contrario.",
+      "Las prestaciones ya realizadas siguen siendo debidas."
+    ]},
+    { h:"Fuerza mayor", b:["Si una parte no puede cumplir sus obligaciones por causa de fuerza mayor, dichas obligaciones quedarán suspendidas mientras dure el evento."]},
+    { h:"Cláusula de salvaguardia", b:["Si alguna disposición de estas CG resultara total o parcialmente nula, la validez de las restantes disposiciones no se verá afectada."]},
+    { h:"Modificaciones de las CG", b:[
+      "El Prestador se reserva el derecho de modificar estas CG en cualquier momento.",
+      "Para los contratos existentes se aplicarán las CG vigentes en el momento de la celebración del contrato, salvo pacto en contrario."
+    ]},
+    { h:"Derecho aplicable y jurisdicción", b:[
+      "Se aplicará exclusivamente el derecho material suizo.",
+      "La jurisdicción competente es la sede del Prestador, salvo disposición legal imperativa en contrario."
+    ]}
+  ]
+};
+
+AGB.it = {
+  meta:{ title:"Termini e Condizioni | Digital Concepts",
+    description:"Condizioni Generali di Zaki Digital Concepts — servizi digitali, sviluppo web e soluzioni IT personalizzate." },
+  sections:[
+    { h:"Ambito di applicazione", b:[
+      "Le presenti Condizioni Generali (CG) disciplinano tutti i rapporti d'affari tra Zaki Digital Concepts (di seguito «il Prestatore») e i suoi clienti (di seguito «il Cliente»).",
+      "Si applicano a tutte le prestazioni, offerte, preventivi e contratti, salvo diverso accordo scritto.",
+      "Con l'ordine il Cliente accetta le presenti CG."
+    ]},
+    { h:"Prestazioni", b:[
+      "Il Prestatore fornisce in particolare i seguenti servizi:",
+      { list:["Ideazione, progettazione e sviluppo di siti web su misura","Realizzazione tecnica di progetti web","Design UI/UX","Automazioni e soluzioni di processi digitali","Servizi IT e digitali individuali su accordo"]},
+      "L'esatto perimetro delle prestazioni deriva esclusivamente dal preventivo o da un accordo scritto."
+    ]},
+    { h:"Conclusione del contratto", b:[
+      "Il contratto si conclude con l'accettazione scritta o elettronica di un preventivo o con l'inizio della realizzazione del progetto.",
+      "I preventivi sono validi 30 giorni, salvo diversa indicazione."
+    ]},
+    { h:"Prezzi", b:[
+      "Tutti i prezzi si intendono in dirham marocchini (MAD).",
+      "Fanno fede i prezzi del preventivo di riferimento.",
+      "Le prestazioni supplementari non incluse nel preventivo sono fatturate separatamente."
+    ]},
+    { h:"Condizioni di pagamento", b:[
+      "Le fatture sono pagabili senza sconto entro <strong>10 giorni di calendario</strong> dalla data di fatturazione.",
+      "Per progetti più importanti il Prestatore può richiedere fatture parziali o acconti.",
+      "In caso di ritardo nel pagamento il Prestatore può in particolare:",
+      { list:["sospendere i lavori in corso,","rifiutare la consegna o la pubblicazione del sito,","trattenere le prestazioni fino al saldo integrale,","richiedere gli interessi di mora legali e spese di sollecito ragionevoli."]},
+      "I diritti d'uso sul sito realizzato passano al Cliente soltanto dopo il pagamento integrale."
+    ]},
+    { h:"Obblighi di collaborazione del Cliente", b:[
+      "Il Cliente fornisce tempestivamente tutti i contenuti, le informazioni, le immagini, i loghi, i testi e i dati di accesso necessari.",
+      "Ritardi dovuti a mancata o tardiva collaborazione prolungano di conseguenza i termini di consegna concordati."
+    ]},
+    { h:"Contenuti del Cliente", b:[
+      "Il Cliente è l'unico responsabile dei contenuti forniti.",
+      "Garantisce in particolare che non vengano violati diritti d'autore, marchi, diritti della personalità o altri diritti di terzi.",
+      "Il Prestatore non assume alcuna responsabilità al riguardo."
+    ]},
+    { h:"Svolgimento del progetto", b:[
+      "Il Prestatore sviluppa il sito concordato secondo il preventivo.",
+      "Durante il progetto possono essere presentati stati di avanzamento.",
+      "Le richieste di modifica dovrebbero essere comunicate, per quanto possibile, in modo aggregato."
+    ]},
+    { h:"Correzioni", b:[
+      "Salvo diverso accordo, l'offerta comprende <strong>due giri di correzioni</strong>.",
+      "Ulteriori richieste, funzionalità aggiuntive o estensioni successive costituiscono prestazioni aggiuntive fatturate separatamente."
+    ]},
+    { h:"Modifiche del perimetro", b:[
+      "Se dopo l'ordine il Cliente richiede prestazioni supplementari o modifiche sostanziali, costi e tempi potranno essere adeguati di conseguenza."
+    ]},
+    { h:"Termini di consegna", b:[
+      "I termini di consegna sono in linea di principio indicativi e non vincolanti.",
+      "Ritardi dovuti a cause di forza maggiore, problemi tecnici o mancata collaborazione del Cliente prolungano ragionevolmente il termine."
+    ]},
+    { h:"Accettazione", b:[
+      "Al termine del lavoro il Cliente ha la possibilità di verificare il sito.",
+      "Eventuali contestazioni devono essere comunicate per iscritto entro <strong>10 giorni di calendario</strong>.",
+      "Se entro tale termine non perviene alcun riscontro o se il sito viene utilizzato in produzione, la prestazione si considera accettata."
+    ]},
+    { h:"Diritti d'uso", b:[
+      "A pagamento integrale ricevuto, il Cliente ottiene il diritto d'uso concordato sul sito realizzato.",
+      "Fino al pagamento completo tutti i diritti restano in capo al Prestatore.",
+      "Il Prestatore conserva il diritto di riutilizzare metodi generali di programmazione, componenti riutilizzabili, template e proprio know-how anche per altri progetti."
+    ]},
+    { h:"Hosting, domini e fornitori terzi", b:[
+      "Il Prestatore in linea di principio <strong>non offre hosting proprio</strong>, né registrazione di domini, né servizi server.",
+      "Il Cliente è responsabile di:",
+      { list:["Hosting","Registrazione del dominio","Server","Servizi e-mail","Costi ricorrenti dei fornitori esterni"]},
+      "Su richiesta il Prestatore può assistere il Cliente nella configurazione tecnica, senza responsabilità per prestazioni, interruzioni o variazioni di prezzo del fornitore terzo.",
+      "I contratti con fornitori di hosting, domini o altri terzi sono conclusi esclusivamente tra il Cliente e il rispettivo fornitore."
+    ]},
+    { h:"Manutenzione", b:[
+      "Dopo la conclusione e l'accettazione del progetto, il Prestatore non ha alcun obbligo di manutenzione, aggiornamento o assistenza tecnica del sito, salvo accordo scritto separato."
+    ]},
+    { h:"Garanzia", b:[
+      "Il Prestatore si impegna a realizzare a regola d'arte il sito web o la soluzione digitale concordata.",
+      "In particolare, <strong>non viene fornita alcuna garanzia</strong> in merito a:",
+      { list:["successo economico,","aumento del fatturato,","richieste da parte dei clienti,","posizionamento sui motori di ricerca,","riuscita pubblicitaria,","compatibilità con future versioni di browser o software,","prestazioni o disponibilità di terzi."]}
+    ]},
+    { h:"Responsabilità", b:[
+      "Nei limiti consentiti dalla legge, il Prestatore risponde esclusivamente dei danni causati con dolo o colpa grave.",
+      "È esclusa la responsabilità per danni indiretti, danni consequenziali, mancato guadagno, perdita di dati o interruzioni dell'attività.",
+      "In particolare il Prestatore non risponde di danni derivanti da:",
+      { list:["interruzioni di hosting o server,","problemi di dominio,","aggiornamenti di browser o software,","vulnerabilità di software di terzi,","plugin o estensioni di terzi,","modifiche da parte del Cliente o di terzi,","attacchi informatici, malware o cyberattacchi,","forza maggiore."]}
+    ]},
+    { h:"Riservatezza", b:["Entrambe le parti si impegnano a mantenere riservate le informazioni sensibili e a utilizzarle esclusivamente per l'esecuzione del contratto."]},
+    { h:"Diritto di referenza", b:["Il Prestatore ha il diritto di presentare i progetti conclusi indicando il nome del Cliente, con screenshot o link, come referenza sul proprio sito o nei materiali di marketing, salvo opposizione scritta del Cliente prima dell'inizio del progetto."]},
+    { h:"Protezione dei dati", b:[
+      "I dati personali sono trattati conformemente alle disposizioni della Legge federale svizzera sulla protezione dei dati (LPD).",
+      "Ulteriori informazioni sono contenute nell'informativa sulla privacy."
+    ]},
+    { h:"Recesso", b:[
+      "Mandati permanenti o prestazioni ricorrenti possono essere disdetti per iscritto da entrambe le parti con un preavviso di 30 giorni a fine mese, salvo diverso accordo.",
+      "Le prestazioni già eseguite restano dovute."
+    ]},
+    { h:"Forza maggiore", b:["Se una parte è impossibilitata ad adempiere ai propri obblighi per cause di forza maggiore, tali obblighi sono sospesi per la durata dell'evento."]},
+    { h:"Clausola salvatoria", b:["Qualora una disposizione delle presenti CG risultasse in tutto o in parte invalida, la validità delle restanti disposizioni non ne sarà pregiudicata."]},
+    { h:"Modifiche delle CG", b:[
+      "Il Prestatore si riserva il diritto di modificare in qualsiasi momento le presenti CG.",
+      "Ai contratti in corso si applicano le CG in vigore al momento della conclusione del contratto, salvo diverso accordo."
+    ]},
+    { h:"Diritto applicabile e foro competente", b:[
+      "Si applica esclusivamente il diritto materiale svizzero.",
+      "Il foro competente è la sede del Prestatore, fatte salve disposizioni di legge imperative contrarie."
+    ]}
+  ]
+};
+
+/* UI strings shared across the page */
+const UI = {ar:{"nav":{"back":"→ العودة"},"langSwitcher":{"label":"تغيير اللغة"},"page":{"tag":"معلومات قانونية","titleHtml":"الشروط <em>العامة</em>","brand":"Zaki Digital Concepts — Digital Concepts","contact":"تواصل معنا","updated":"آخر تحديث","date":"يوليو 2026"},"footer":{"rights":"جميع الحقوق محفوظة"}},
+  fr:{ nav:{back:"← Retour"}, langSwitcher:{label:"Changer de langue"},
+       page:{ tag:"Mentions légales", titleHtml:"Conditions <em>Générales</em>", brand:"Zaki Digital Concepts — Digital Concepts",
+              contact:"Contact", updated:"Mise à jour", date:"Juillet 2026"},
+       footer:{rights:"Tous droits réservés"} },
+  en:{ nav:{back:"← Back"}, langSwitcher:{label:"Change language"},
+       page:{ tag:"Legal", titleHtml:"Terms & <em>Conditions</em>", brand:"Zaki Digital Concepts — Digital Concepts",
+              contact:"Contact", updated:"Last updated", date:"July 2026"},
+       footer:{rights:"All rights reserved"} },
+  de:{ nav:{back:"← Zurück"}, langSwitcher:{label:"Sprache ändern"},
+       page:{ tag:"Rechtliches", titleHtml:"Allgemeine <em>Geschäftsbedingungen</em>", brand:"Zaki Digital Concepts — Digital Concepts",
+              contact:"Kontakt", updated:"Stand", date:"Juli 2026"},
+       footer:{rights:"Alle Rechte vorbehalten"} },
+  es:{ nav:{back:"← Volver"}, langSwitcher:{label:"Cambiar idioma"},
+       page:{ tag:"Aviso legal", titleHtml:"Términos y <em>Condiciones</em>", brand:"Zaki Digital Concepts — Digital Concepts",
+              contact:"Contacto", updated:"Actualizado", date:"Julio 2026"},
+       footer:{rights:"Todos los derechos reservados"} },
+  it:{ nav:{back:"← Indietro"}, langSwitcher:{label:"Cambia lingua"},
+       page:{ tag:"Note legali", titleHtml:"Termini e <em>Condizioni</em>", brand:"Zaki Digital Concepts — Digital Concepts",
+              contact:"Contatto", updated:"Aggiornato", date:"Luglio 2026"},
+       footer:{rights:"Tutti i diritti riservati"} }
+};
+
+let currentLang = detectLang();
+
+function renderArticle(lang) {
+  const data = AGB[lang] || AGB.de;
+  const html = data.sections.map((s,i) => {
+    const num = String(i+1).padStart(2,"0");
+    const body = s.b.map(item => {
+      if (typeof item === "string") return `<p>${item}</p>`;
+      if (item.list) return `<ul>${item.list.map(li => `<li>${li}</li>`).join("")}</ul>`;
+      return "";
+    }).join("");
+    return `<section><h2><span class="num">${num}</span>${s.h}</h2>${body}</section>`;
+  }).join('<div class="divider" style="margin:36px 0"></div>');
+  document.getElementById("agb").innerHTML = html;
+}
+
+function applyLanguage(lang) {
+  if (!AVAILABLE.includes(lang)) lang = "en";
+  currentLang = lang;
+  localStorage.setItem("lang", lang);
+  const t = UI[lang];
+  const meta = (AGB[lang] || AGB.de).meta;
+
+  (document.documentElement.lang=lang,document.documentElement.dir=(lang==="ar"?"rtl":"ltr"));
+  document.title = meta.title;
+  const md = document.querySelector('meta[name="description"]');
+  if (md) md.setAttribute("content", meta.description);
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const keys = el.getAttribute("data-i18n").split(".");
+    let v = t; for (const k of keys) v = v && v[k];
+    if (typeof v === "string") el.textContent = v;
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => {
+    const keys = el.getAttribute("data-i18n-html").split(".");
+    let v = t; for (const k of keys) v = v && v[k];
+    if (typeof v === "string") el.innerHTML = v;
+  });
+  document.querySelectorAll("[data-i18n-attr-aria-label]").forEach(el => {
+    const keys = el.getAttribute("data-i18n-attr-aria-label").split(".");
+    let v = t; for (const k of keys) v = v && v[k];
+    if (typeof v === "string") el.setAttribute("aria-label", v);
+  });
+
+  renderArticle(lang);
+
+  const cur = document.getElementById("langCurrent");
+  if (cur) cur.textContent = lang.toUpperCase();
+  document.querySelectorAll("#langMenu button[data-lang]").forEach(b => {
+    b.classList.toggle("active", b.getAttribute("data-lang") === lang);
+  });
+}
+
+function renderLangMenu() {
+  const menu = document.getElementById("langMenu");
+  if (!menu) return;
+  menu.innerHTML = LANGS.map(l => `
+    <li><button type="button" data-lang="${l.code}" class="${l.code === currentLang ? "active" : ""}">
+      <span>${l.flag} ${l.label}</span><span class="check">✓</span>
+    </button></li>`).join("");
+  menu.querySelectorAll("button[data-lang]").forEach(b => {
+    b.addEventListener("click", () => {
+      applyLanguage(b.getAttribute("data-lang"));
+      renderLangMenu();
+      document.getElementById("langSwitcher").classList.remove("open");
+      document.getElementById("langTrigger").setAttribute("aria-expanded","false");
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderLangMenu();
+  applyLanguage(currentLang);
+
+  const trigger = document.getElementById("langTrigger");
+  const switcher = document.getElementById("langSwitcher");
+  trigger.addEventListener("click", () => {
+    const open = switcher.classList.toggle("open");
+    trigger.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  document.addEventListener("click", e => {
+    if (!switcher.contains(e.target)) {
+      switcher.classList.remove("open");
+      trigger.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  /* Sync when localStorage.lang changes in another tab (e.g. main site) */
+  window.addEventListener("storage", e => {
+    if (e.key === "lang" && e.newValue && AVAILABLE.includes(e.newValue) && e.newValue !== currentLang) {
+      applyLanguage(e.newValue);
+      renderLangMenu();
+    }
+  });
+
+  /* Navbar hide-on-scroll (mêmes réglages que le site) */
+  const nav = document.getElementById("navbar");
+  let lastY = window.scrollY;
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    if (y > lastY && y > 120) nav.classList.add("nav-hidden");
+    else nav.classList.remove("nav-hidden");
+    lastY = y;
+    /* Back-to-top */
+    document.getElementById("toTop").classList.toggle("show", y > 500);
+  }, { passive:true });
+
+  document.getElementById("toTop").addEventListener("click", () => {
+    window.scrollTo({ top:0, behavior:"smooth" });
+  });
+});
+</script>
+<script src="gsap.min.js" defer></script><script src="ScrollTrigger.min.js" defer></script><script src="identity.js" defer></script><script src="text-motion.js?v=3" defer></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+document.querySelectorAll('[data-cfemail]').forEach(el=>{const hex=el.getAttribute('data-cfemail');if(!hex||hex.length<4)return;const key=parseInt(hex.slice(0,2),16);let email='';for(let i=2;i<hex.length;i+=2)email+=String.fromCharCode(parseInt(hex.slice(i,i+2),16)^key);el.textContent=email;if(el.tagName==='A')el.href='mailto:'+email;});

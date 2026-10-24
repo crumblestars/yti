@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio Sites Vitrines — WebStudio</title>
+<script>(function(){try{var L=['fr','en','de','es','it','ar'];var s=localStorage.getItem('lang');var l=(s&&L.indexOf(s)>-1)?s:((navigator.language||'en').slice(0,2).toLowerCase());if(L.indexOf(l)<0)l='en';window.__lang=l;var d=document.documentElement;d.lang=l;d.dir=l==='ar'?'rtl':'ltr';if(l!=='fr')d.setAttribute('data-lang-loading','');}catch(e){}})();</script><style>html[data-lang-loading] [data-i18n]{visibility:hidden!important}</style>
+<meta name="description" content="Découvrez notre portfolio de sites vitrines réalisés sur mesure : design moderne, performance et identité unique." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --navy: #03040a; --electric: #dce4f3; --white: #f6f7fb; --accent: #b6bfce; }
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+
+#bg-matrix-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+#bg-spotlight     { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: rgba(3,4,10,0.93); }
+#bg-plexus        { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+#bg-scanlines     { position: fixed; inset: 0; z-index: 3; pointer-events: none; background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px); }
+#bg-vignette      { position: fixed; inset: 0; z-index: 4; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(3,4,10,.55) 100%); }
+
+
+#cursor     { position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
+#cursor-dot { width:6px; height:6px; background:var(--electric); border-radius:50%; position:absolute; transform:translate(-50%,-50%); box-shadow:0 0 8px var(--electric),0 0 20px var(--electric); }
+#cursor-ring{ width:38px; height:38px; border:1px solid rgba(210,225,255,.35); border-radius:50%; position:absolute; transform:translate(-50%,-50%); }
+
+
+#navbar {
+  position:fixed; inset:0 0 auto 0; z-index:1000; padding:20px 40px;
+  transition:transform .45s cubic-bezier(.4,0,.2,1);
+}
+#navbar.nav-hidden { transform:translateY(-100%); }
+#navbar nav { display:flex; align-items:center; max-width:1200px; margin:0 auto; }
+.nav-pill {
+  display:flex; align-items:center; height:48px; padding:0 24px;
+  border-radius:999px; background:rgba(14,14,23,0.8); border:1px solid rgba(210,225,255,0.2);
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  text-decoration:none; transition:border-color .2s;
+}
+.nav-pill:hover { border-color:rgba(210,225,255,0.4); }
+.nav-line { flex:1; height:1px; background:linear-gradient(90deg, rgba(210,225,255,0.3), rgba(210,225,255,0.1), rgba(210,225,255,0.3)); margin:0 8px; }
+#navbar .logo { font-family:'DM Serif Display',serif; font-size:20px; letter-spacing:1px; color:var(--white); }
+#navbar .logo span { font-style:italic; color:var(--electric); text-shadow:0 0 20px rgba(210,225,255,0.4); }
+#navbar .logo-img { height:32px; width:auto; display:block; filter:drop-shadow(0 0 20px rgba(210,225,255,0.4)); }
+.nav-links { gap:28px; }
+.nav-links a { color:rgba(245,247,250,0.75); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; transition:color .2s; white-space:nowrap; }
+.nav-links a:hover { color:var(--electric); }
+
+
+.lang-switcher { position:relative; font-family:'Montserrat',sans-serif; }
+.lang-trigger {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(14,14,23,0.8); border:1px solid rgba(210,225,255,0.2);
+  color:var(--white); padding:0 20px; height:48px; border-radius:999px;
+  font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
+  cursor:pointer; transition:border-color .2s;
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  font-family:inherit;
+}
+.lang-trigger:hover { border-color:rgba(210,225,255,0.4); }
+.lang-trigger .caret { transition:transform .25s ease; display:inline-block; font-size:10px; opacity:.7; }
+.lang-trigger[aria-expanded="true"] .caret { transform:rotate(180deg); }
+.lang-menu {
+  position:absolute; top:calc(100% + 10px); right:0; min-width:180px;
+  background:rgba(14,14,23,0.92); border:1px solid rgba(210,225,255,0.18);
+  border-radius:14px; padding:8px; list-style:none;
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 12px 40px rgba(0,0,0,0.55), 0 0 24px rgba(210,225,255,0.08);
+  opacity:0; transform:translateY(-6px) scale(.98); pointer-events:none;
+  transition:opacity .18s ease, transform .22s cubic-bezier(.2,.9,.3,1.4);
+  z-index:1001;
+}
+.lang-switcher.open .lang-menu { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+.lang-menu li { margin:0; }
+.lang-menu button {
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  width:100%; background:none; border:none; padding:10px 14px; border-radius:10px;
+  color:rgba(245,247,250,0.78); font-family:inherit; font-size:13px; font-weight:500;
+  cursor:pointer; text-align:left; transition:background .15s, color .15s;
+}
+.lang-menu button:hover { background:rgba(210,225,255,0.08); color:var(--white); }
+.lang-menu button.active { color:var(--electric); }
+.lang-menu button .check { opacity:0; font-size:12px; color:var(--electric); }
+.lang-menu button.active .check { opacity:1; }
+
+
+section { position:relative; z-index:10; background:transparent; }
+.section-inner { max-width:1140px; margin:0 auto; padding:110px 32px; }
+.section-label { font-size:11px; letter-spacing:3.5px; text-transform:uppercase; color:var(--electric); margin-bottom:14px; }
+.section-title { font-family:'DM Serif Display',serif; font-size:clamp(28px,4vw,46px); line-height:1.18; color:var(--white); margin-bottom:56px; }
+
+
+#hero { min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding-top:80px; }
+.hero-content { max-width:860px; padding:0 24px; animation:heroFadeIn 1.2s ease forwards; }
+@keyframes heroFadeIn { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)} }
+.hero-tag { display:inline-block; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--electric); border:1px solid rgba(210,225,255,0.3); padding:6px 18px; border-radius:30px; margin-bottom:28px; background:rgba(210,225,255,0.05); backdrop-filter:blur(4px); }
+.hero-title { font-family:'DM Serif Display',serif; font-size:clamp(36px,6vw,72px); line-height:1.12; color:var(--white); margin-bottom:22px; text-shadow:0 2px 40px rgba(0,0,0,0.5); }
+.hero-title em { font-style:italic; color:var(--electric); text-shadow:0 0 30px rgba(210,225,255,0.4); }
+.hero-subtitle { font-size:clamp(14px,1.8vw,18px); color:rgba(245,247,250,0.72); line-height:1.7; max-width:620px; margin:0 auto 44px; }
+.hero-scroll { display:flex; align-items:center; gap:10px; justify-content:center; color:rgba(245,247,250,0.4); font-size:12px; letter-spacing:2px; text-transform:uppercase; animation:bounce 2s infinite; }
+.hero-scroll svg { width:20px; height:20px; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+
+.divider { height:1px; background:linear-gradient(90deg,transparent,rgba(210,225,255,0.15),transparent); }
+
+
+
+.mockup-pc-screen video.mk-video,
+.mockup-phone-screen video.mk-video { width:100%; height:100%; object-fit:cover; object-position:top; display:block; background:#000; opacity:0; transition:opacity .5s ease; }
+.mockup-pc-screen video.mk-video.ready,
+.mockup-phone-screen video.mk-video.ready { opacity:1; }
+.scroll-frame { position:absolute; inset:0; overflow:hidden; background:#fff; border-radius:inherit; }
+.mockup-pc-screen .scroll-frame, .mockup-phone-screen .scroll-frame { position:relative; width:100%; height:100%; }
+.scroll-img { display:block; width:100%; height:auto; transform:translate3d(0,0,0); will-change:transform; }
+@keyframes wsPortfolioScroll {
+  0%   { transform: translate3d(0, 0, 0); }
+  2.5% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(0, var(--scroll-max, 0px), 0); }
+}
+.scroll-img.play { animation: wsPortfolioScroll 40s cubic-bezier(0.42, 0, 0.58, 1) infinite; }
+.scroll-img.paused { animation-play-state: paused; }
+
+
+.portfolio-row { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; margin-bottom:140px; }
+.portfolio-row.reverse .portfolio-text { order:2; }
+.portfolio-row.reverse .portfolio-mockup { order:1; }
+.portfolio-text .section-label { margin-bottom:14px; }
+.portfolio-text .portfolio-title { font-family:'DM Serif Display',serif; font-size:clamp(28px,3.4vw,42px); line-height:1.15; color:var(--white); margin-bottom:20px; }
+.portfolio-text .portfolio-desc { font-size:15px; color:rgba(245,247,250,0.65); line-height:1.75; margin-bottom:26px; }
+.portfolio-text ul { list-style:none; padding:0; margin:0 0 32px; }
+.portfolio-text ul li { font-size:14px; color:rgba(245,247,250,0.78); padding:8px 0 8px 28px; position:relative; }
+.portfolio-text ul li::before { content:''; position:absolute; left:0; top:14px; width:14px; height:8px; border-left:2px solid var(--electric); border-bottom:2px solid var(--electric); transform:rotate(-45deg); }
+.btn-visit { display:inline-flex; align-items:center; gap:10px; background:linear-gradient(135deg,#b6bfce,#4774ff); color:#fff; font-weight:700; font-size:14px; letter-spacing:1.2px; text-transform:uppercase; padding:14px 32px; border-radius:50px; text-decoration:none; box-shadow:0 4px 24px rgba(197,163,239,0.32); transition:opacity .2s,transform .2s; }
+.btn-visit:hover { opacity:.88; transform:translateY(-2px); }
+.btn-visit svg { width:14px; height:14px; }
+
+.portfolio-mockup { position:relative; width:100%; aspect-ratio: 1.15 / 1; max-width:560px; margin:0 auto; }
+.mockup-pc { position:absolute; top:6%; left:0; width:92%; background:#10121c; border:1px solid rgba(210,225,255,0.18); border-radius:14px; padding:22px 14px 14px; box-shadow:0 30px 80px rgba(0,0,0,0.55), 0 0 50px rgba(210,225,255,0.06); }
+.mockup-pc::before { content:''; position:absolute; top:8px; left:14px; width:8px; height:8px; border-radius:50%; background:#ff5f56; box-shadow:14px 0 0 #ffbd2e, 28px 0 0 #27c93f; }
+.mockup-pc-screen { width:100%; aspect-ratio: 16/10; border-radius:6px; overflow:hidden; background:#000; }
+.mockup-pc-stand { position:absolute; bottom:-22px; left:50%; transform:translateX(-50%); width:34%; height:14px; background:linear-gradient(180deg,#141520,#080911); border-radius:0 0 12px 12px; border:1px solid rgba(210,225,255,0.12); border-top:none; }
+.mockup-phone { position:absolute; bottom:-4%; right:-2%; width:30%; background:#10121c; border:1px solid rgba(210,225,255,0.22); border-radius:22px; padding:8px 6px; box-shadow:0 24px 60px rgba(0,0,0,0.65), 0 0 40px rgba(210,225,255,0.1); z-index:2; }
+.mockup-phone::before { content:''; position:absolute; top:8px; left:50%; transform:translateX(-50%); width:36%; height:6px; background:#000; border-radius:4px; }
+.mockup-phone-screen { width:100%; aspect-ratio: 9/19; border-radius:14px; overflow:hidden; background:#000; margin-top:14px; }
+.mockup-pc-screen video, .mockup-phone-screen video, .mockup-pc-screen .fill, .mockup-phone-screen .fill { width:100%; height:100%; object-fit:cover; object-position:top; display:block; background:#000; }
+
+@media (max-width:880px) {
+  .portfolio-row { grid-template-columns:1fr; gap:48px; margin-bottom:96px; }
+  .portfolio-row .portfolio-text { order:0 !important; }
+  .portfolio-row .portfolio-mockup { order:1 !important; }
+  .portfolio-mockup { max-width:420px; }
+}
+
+
+.faq-list { max-width:820px; margin:0 auto; }
+.faq-item { border:1px solid rgba(210,225,255,0.12); background:rgba(255,255,255,0.025); border-radius:14px; margin-bottom:14px; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); transition:border-color .25s, background .25s; overflow:hidden; }
+.faq-item.open { border-color:rgba(210,225,255,0.35); background:rgba(210,225,255,0.04); }
+.faq-question { display:flex; align-items:center; justify-content:space-between; padding:22px 26px; cursor:none; font-size:15px; font-weight:600; color:var(--white); letter-spacing:.3px; background:none; border:none; width:100%; text-align:left; font-family:inherit; }
+.faq-question .faq-icon { width:24px; height:24px; flex-shrink:0; position:relative; transition:transform .3s; }
+.faq-question .faq-icon::before,
+.faq-question .faq-icon::after { content:''; position:absolute; top:50%; left:50%; background:var(--electric); border-radius:2px; transform:translate(-50%,-50%); }
+.faq-question .faq-icon::before { width:14px; height:2px; }
+.faq-question .faq-icon::after  { width:2px; height:14px; transition:opacity .3s; }
+.faq-item.open .faq-question .faq-icon::after { opacity:0; }
+.faq-answer { max-height:0; overflow:hidden; transition:max-height .35s ease; }
+.faq-answer-inner { padding:0 26px 22px; color:rgba(245,247,250,0.65); font-size:14px; line-height:1.75; }
+.faq-item.open .faq-answer { max-height:400px; }
+
+
+.pricing-grid { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:28px; align-items:stretch; }
+.pricing-card-wrap { perspective:1200px; }
+.pricing-card { position:relative; height:100%; min-height:420px; padding:32px 28px; border-radius:24px; border:1px solid rgba(210,225,255,0.14); background:linear-gradient(180deg, rgba(14,14,23,0.84) 0%, rgba(4,12,28,0.92) 100%); box-shadow:0 20px 60px rgba(0,0,0,0.35); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); transform-style:preserve-3d; transition:transform .14s ease-out, box-shadow .2s ease, border-color .2s ease; will-change:transform; overflow:hidden; display:flex; flex-direction:column; }
+.pricing-card::before { content:''; position:absolute; inset:-30% auto auto -20%; width:180px; height:180px; background:radial-gradient(circle, rgba(210,225,255,0.16), transparent 70%); pointer-events:none; }
+.pricing-card:hover { border-color:rgba(210,225,255,0.32); box-shadow:0 26px 80px rgba(0,0,0,0.42), 0 0 32px rgba(210,225,255,0.08); }
+.pricing-badge { display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:999px; border:1px solid rgba(210,225,255,0.18); background:rgba(255,255,255,0.04); color:var(--white); font-size:14px; font-weight:700; letter-spacing:.4px; margin-bottom:24px; align-self:flex-start; }
+.pricing-price { font-family:'DM Serif Display',serif; font-size:clamp(34px, 4vw, 48px); line-height:1; color:var(--white); margin-bottom:20px; }
+.pricing-price span { display:block; margin-top:8px; font-family:'Montserrat',sans-serif; font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(245,247,250,0.58); }
+.pricing-features { list-style:none; padding:0; margin:0 0 24px; }
+.pricing-features li { position:relative; padding:0 0 0 26px; margin-bottom:14px; font-size:15px; line-height:1.65; color:rgba(245,247,250,0.78); }
+.pricing-features li::before { content:''; position:absolute; left:0; top:9px; width:12px; height:7px; border-left:2px solid var(--electric); border-bottom:2px solid var(--electric); transform:rotate(-45deg); }
+.pricing-note { margin-top:auto; font-size:14px; line-height:1.75; color:rgba(245,247,250,0.72); padding-top:18px; border-top:1px solid rgba(210,225,255,0.12); }
+.pricing-disclaimer { max-width:880px; margin:36px auto 0; padding:26px 30px; border-radius:18px; border:1px solid rgba(210,225,255,0.12); background:rgba(255,255,255,0.03); color:rgba(245,247,250,0.72); font-size:15px; line-height:1.8; text-align:center; }
+.pricing-disclaimer strong { color:var(--white); }
+@media (max-width:980px) { .pricing-grid { grid-template-columns:1fr; } .pricing-card { min-height:auto; } }
+
+
+#contact { background:#070911; z-index:20; }
+#contact .section-inner { padding-bottom:80px; text-align:center; }
+.contact-card { background:rgba(255,255,255,0.04); border:1px solid rgba(210,225,255,0.14); border-radius:24px; padding:54px 44px; max-width:760px; margin:0 auto; text-align:left; }
+.contact-card .section-title { margin-bottom:14px; text-align:left; }
+.contact-card .section-label { text-align:left; }
+.contact-card .lead { color:rgba(245,247,250,0.65); font-size:15px; line-height:1.7; margin-bottom:36px; text-align:left; }
+.btn-cta { display:inline-block; background:linear-gradient(135deg,#b6bfce,#4774ff); color:#fff; font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; letter-spacing:1px; padding:16px 44px; border-radius:50px; text-decoration:none; border:none; cursor:none; box-shadow:0 4px 30px rgba(197,163,239,0.35); transition:opacity .2s,transform .2s; }
+.btn-cta:hover { opacity:.88; transform:translateY(-2px); }
+.btn-cta:disabled { opacity:.55; cursor:not-allowed; transform:none; }
+
+.contact-form { display:grid; grid-template-columns:1fr 1fr; gap:18px 20px; }
+.form-field { display:flex; flex-direction:column; }
+.form-field.full { grid-column:1 / -1; }
+.form-field label { font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(245,247,250,0.85); margin-bottom:8px; }
+.form-field label .req { color:var(--electric); margin-left:4px; }
+.form-field input,
+.form-field textarea,
+.form-field select {
+  background:rgba(3,4,10,0.55);
+  border:1px solid rgba(210,225,255,0.18);
+  border-radius:10px;
+  padding:13px 14px;
+  color:var(--white);
+  font-family:'Montserrat',sans-serif;
+  font-size:14px;
+  transition:border-color .2s, box-shadow .2s, background .2s;
+  outline:none;
+  width:100%;
+}
+.form-field textarea { resize:vertical; min-height:130px; line-height:1.55; }
+.form-field input::placeholder,
+.form-field textarea::placeholder { color:rgba(245,247,250,0.32); }
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus { border-color:var(--electric); box-shadow:0 0 0 3px rgba(210,225,255,0.12); background:rgba(3,4,10,0.75); }
+.phone-row { display:grid; grid-template-columns:120px 1fr; gap:8px; }
+.phone-row select { padding-right:6px; }
+.form-actions { grid-column:1 / -1; display:flex; align-items:center; justify-content:flex-start; gap:18px; margin-top:8px; flex-wrap:wrap; }
+.form-status { font-size:13px; color:rgba(245,247,250,0.7); }
+.form-status.ok  { color:var(--electric); }
+.form-status.err { color:#ff6b6b; }
+
+@media (max-width:680px) {
+  .contact-card { padding:38px 22px; }
+  .contact-form { grid-template-columns:1fr; }
+  .phone-row    { grid-template-columns:110px 1fr; }
+  #navbar { padding:16px 16px; }
+  .nav-pill { height:44px; padding:0 16px; }
+  .lang-trigger { height:44px; padding:0 16px; }
+}
+
+footer { position:relative; z-index:20; background:#03040a; text-align:center; padding:24px; font-size:12px; color:rgba(245,247,250,0.25); letter-spacing:1px; border-top:1px solid rgba(210,225,255,0.06); }
+
+
+@media (hover: none) {
+  body { cursor: auto; }
+  #cursor { display:none; }
+  .lang-trigger, .lang-menu button, .btn-cta, .faq-question { cursor: pointer; }
+}
+
+</style>
+ <link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="stylesheet" href="identity.css?v=3">
+<link rel="stylesheet" href="arabic.css?v=3">
+<style id="price-line-fix">
+.pricing-price{font-family:inherit;font-size:14px;line-height:1.4}
+.pricing-price .price-amount{display:block;white-space:nowrap;font-family:'DM Serif Display',serif;font-size:clamp(28px,3vw,44px);font-weight:400;line-height:1.2;letter-spacing:0;margin-top:6px;word-break:normal;overflow-wrap:normal}
+</style><link rel="preload" as="image" href="mobile-background.webp" media="(max-width:900px)">
+<link rel="stylesheet" href="mobile-background.css">
+</head>
+<body>
+<canvas id="bg-matrix-canvas"></canvas>
+<div id="bg-spotlight"></div>
+<div id="bg-plexus"></div>
+<div id="bg-scanlines"></div>
+<div id="bg-vignette"></div>
+<div id="cursor"><div id="cursor-dot"></div><div id="cursor-ring"></div></div>
+
+<header id="navbar">
+  <nav aria-label="Navigation principale">
+    <a href="index.html" class="nav-pill logo"><img class="logo-img" src="digital-concepts-logo.webp" alt="Digital Concepts"></a>
+    <div class="nav-line" aria-hidden="true"></div>
+    <div class="lang-switcher" id="langSwitcher">
+      <button type="button" class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false">
+        <span id="langCurrent">FR</span>
+        <span class="caret">▾</span>
+      </button>
+      <ul class="lang-menu" role="listbox" id="langMenu"></ul>
+    </div>
+  </nav>
+</header>
+<script>
+/* ═══ HEADER SCROLL BEHAVIOR — hide on scroll down, show on scroll up (identique à index.html) ═══ */
+(function () {
+  const header = document.getElementById('navbar');
+  if (!header) return;
+  const REVEAL_THRESHOLD = 80; // toujours visible tant qu'on est proche du haut
+  let lastY = window.scrollY;
+  let ticking = false;
+
+  function update() {
+    const y = window.scrollY;
+    if (y <= REVEAL_THRESHOLD) {
+      header.classList.remove('nav-hidden');
+    } else if (y > lastY) {
+      header.classList.add('nav-hidden');
+    } else if (y < lastY) {
+      header.classList.remove('nav-hidden');
+    }
+    lastY = y;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+</script>
+
+<main id="app"></main>
+
+
+<script>
+const DICTS = {"ar":{"meta":{"title":"المواقع التعريفية — أعمال Digital Concepts","description":"اكتشف مواقعنا التعريفية المصمّمة حسب الطلب، بتصميم حديث وأداء فعّال وهوية مميّزة."},"nav":{"home":"الرئيسية","portfolio":"أعمالنا","faq":"الأسئلة الشائعة","contact":"تواصل معنا"},"langSwitcher":{"label":"تغيير اللغة"},"hero":{"tag":"أعمالنا · المواقع التعريفية","titleBefore":"موقع تعريفي ","titleEm":"يعكس هويتك","titleAfter":" ويبرز خبرتك","subtitle":"عرّف بخدماتك وأعمالك من خلال موقع أنيق وسهل التصفّح. اكتشف نماذج من أعمالنا.","scroll":"استعرض أعمالنا"},"portfolio":{"label":"مشروعاتنا التجريبية","title":"خمسة مواقع رقمية. خمس هويات مميزة.","visit":"اكتشف المشروع","items":[{"title":"KERNFORM","label":"مشروع تجريبي · التدريب الشخصي واللياقة","desc":"يستكشف KERNFORM هوية رقمية حيوية لاستوديو تدريب شخصي، بطابع بصري مميز وعرض واضح لأسلوب التدريب ومسار يقود إلى التواصل. هذا المشروع يعرض أعمالنا التصميمية ولم يُنفذ بتكليف من عميل حقيقي.","features":["هوية بصرية مميزة","عرض الخدمات","مسار استكشاف","نسختا الحاسوب والهاتف"]},{"title":"AURELIS DRIVE","label":"مشروع تجريبي · تأجير السيارات الفاخرة","desc":"يقدم AURELIS DRIVE تصوراً لتأجير السيارات الفاخرة. تبرز المعالجة البصرية الغامرة السيارات وتخلق أجواء حصرية حول عرض منظم للخدمات. هذا المشروع يعرض أعمالنا التصميمية ولم يُنفذ بتكليف من عميل حقيقي.","features":["هوية بصرية مميزة","عرض الخدمات","مسار استكشاف","نسختا الحاسوب والهاتف"]},{"title":"Studio Zürich","label":"مشروع تجريبي · العمارة والتصميم الداخلي","desc":"يستكشف Studio Zürich موقعاً لاستوديو عمارة وتصميم داخلي. يترك الأسلوب البسيط والتحريري للمساحات والخامات والمشروعات التعبير عن هوية الاستوديو. هذا المشروع يعرض أعمالنا التصميمية ولم يُنفذ بتكليف من عميل حقيقي.","features":["هوية بصرية مميزة","عرض الخدمات","مسار استكشاف","نسختا الحاسوب والهاتف"]},{"title":"Aurel","label":"مشروع تجريبي · الخدمات الائتمانية والمحاسبة","desc":"يستكشف Aurel الهوية الرقمية لشركة خدمات ائتمانية سويسرية، بعرض رصين ومدروس يوضح مجالات الخبرة عبر تجربة استكشاف واضحة ومطمئنة. هذا المشروع يعرض أعمالنا التصميمية ولم يُنفذ بتكليف من عميل حقيقي.","features":["هوية بصرية مميزة","عرض الخدمات","مسار استكشاف","نسختا الحاسوب والهاتف"]},{"title":"Maison Aurèle","label":"مشروع تجريبي · تصفيف الشعر والجمال","desc":"يتصور Maison Aurèle عالماً رقمياً لصالون شعر وجمال. تقدم جمالية أنيقة ومرحبة الخدمات وأجواء الصالون مع عناية دقيقة بالتفاصيل. هذا المشروع يعرض أعمالنا التصميمية ولم يُنفذ بتكليف من عميل حقيقي.","features":["هوية بصرية مميزة","عرض الخدمات","مسار استكشاف","نسختا الحاسوب والهاتف"]}]},"faq":{"label":"الأسئلة الشائعة","title":"كل ما تحتاج إلى معرفته","items":[{"q":"كم يستغرق إنشاء موقع تعريفي؟","a":"عادةً ما يستغرق من 5 أيام إلى 3 أسابيع حسب تعقيد المشروع. نعمل بسرعة مع تقديم نتيجة احترافية ومتقنة."},{"q":"هل يمكنني تفويض المشروع بالكامل دون معرفة تقنية؟","a":"نعم. نتولّى التخطيط والتصميم والإطلاق والمرافقة من البداية إلى النهاية. لا تحتاج إلى خبرة تقنية."},{"q":"هل يمكن طلب تعديلات إذا لم يناسبني تصميم الموقع؟","a":"بالتأكيد. نعمل معك في كل مرحلة ونجري تعديلات لتطابق النتيجة النهائية توقعاتك. رضاك أولوية لدينا."},{"q":"هل سيكون الموقع مناسبًا للهاتف؟","a":"نعم، جميع مواقعنا متجاوبة بالكامل لتقديم تجربة سلسة واحترافية على الهاتف والجهاز اللوحي والحاسوب."},{"q":"هل سيكون الموقع مهيّأً للظهور على Google؟","a":"نهيّئ كل موقع لمحركات البحث عبر تحسين البنية والسرعة والمحتوى وتطبيق الممارسات الجيدة لتعزيز ظهوره على Google."},{"q":"هل تتولّون الاستضافة واسم النطاق؟","a":"نعم. نتولّى حجز اسم النطاق والاستضافة والإطلاق والإعدادات، لتستلم موقعًا متكاملًا دون تعقيدات تقنية."}]},"pricing":{"label":"الأسعار","title":"الباقة المناسبة لمشروعك","disclaimerTitle":"ملاحظة مهمة","disclaimerBody":"كل مشروع يُصمّم بالكامل حسب احتياجاتك. الأسعار المعروضة هي أسعار ابتدائية، ويُحدّد عرض السعر النهائي وفق أهدافك والوظائف المطلوبة.","plans":[{"badge":"🟢 الأساسية","price":"ابتداءً من 2 500 درهم","priceNote":"سعر ابتدائي — لانطلاقة سريعة","features":["من صفحة إلى 3 صفحات","تصميم بسيط واحترافي","تصميم متجاوب للهاتف","الإطلاق مشمول"],"note":"مثالية لبناء حضور فعّال على الإنترنت."},{"badge":"🔵 المتكاملة","price":"ابتداءً من 4 500 درهم","priceNote":"سعر ابتدائي — التوازن المناسب","features":["من 3 إلى 6 صفحات","تصميم حديث ومخصّص","تهيئة أساسية لمحركات البحث","موقع سريع ومتجاوب"],"note":"توازن بين الأداء والميزانية."},{"badge":"🟣 المتميّزة","price":"ابتداءً من 7 500 درهم","priceNote":"سعر ابتدائي — لطموحات أكبر","features":["تصميم متقدّم حسب الطلب","حركات وتأثيرات تفاعلية","تهيئة متقدّمة لمحركات البحث","تجربة استخدام محسّنة"],"note":"لبناء صورة راقية ومؤثّرة."}]},"contact":{"label":"احصل على عرض سعر مجاني","title":"هل لديك مشروع في ذهنك؟ لنتحدّث عنه.","lead":"نحوّل أفكارك إلى موقع إلكتروني فعّال. أخبرنا عن مشروعك لتحصل على عرض واضح وسريع يناسب أهدافك.","firstName":"الاسم الأول","firstNamePh":"محمد","lastName":"اسم العائلة","lastNamePh":"العلوي","email":"البريد الإلكتروني","emailPh":"example@domain.com","phone":"رقم الهاتف","phonePh":"0 00 00 00 00","dialAria":"رمز الاتصال الدولي","message":"رسالتك","messagePh":"أسئلتك أو ملاحظاتك","submit":"إرسال الرسالة","submitting":"جارٍ الإرسال…","ok":"✓ تم إرسال رسالتك. سنرد عليك خلال 24 ساعة.","err":"✗ حدث خطأ. حاول مجددًا أو تواصل معنا مباشرة.","netErr":"✗ تعذّر الاتصال. تحقّق من اتصالك بالإنترنت وحاول مجددًا.","required":"*"},"footer":"© Digital Concepts 2026 — جميع الحقوق محفوظة"},"fr":{"meta":{"title":"Portfolio Sites Vitrines — WebStudio","description":"Découvrez notre portfolio de sites vitrines réalisés sur mesure : design moderne, performance et identité unique."},"nav":{"home":"Accueil","portfolio":"Portfolio","faq":"FAQ","contact":"Contact"},"langSwitcher":{"label":"Changer de langue"},"hero":{"tag":"Portfolio · Sites Vitrines","titleBefore":"Une présence en ligne qui ","titleEm":"reflète","titleAfter":" votre savoir-faire","subtitle":"Découvrez quelques-unes de nos réalisations sur mesure : design unique, performance et expérience utilisateur soignée.","scroll":"Voir le portfolio"},"portfolio":{"label":"Nos projets de démonstration","title":"Cinq présences digitales. Cinq identités singulières.","visit":"Découvrir le projet","items":[{"label":"Projet de démonstration · Coaching sportif & fitness","title":"KERNFORM","desc":"Projet de démonstration, conçu pour illustrer notre savoir-faire et non pour un client réel. KERNFORM explore une présence en ligne énergique pour un studio de coaching sportif : une identité affirmée, une présentation claire de l’accompagnement et un parcours orienté vers la prise de contact.","features":["Identité visuelle dédiée","Présentation des prestations","Parcours de découverte","Versions ordinateur & mobile"]},{"label":"Projet de démonstration · Location automobile premium","title":"AURELIS DRIVE","desc":"Projet de démonstration, conçu pour illustrer notre savoir-faire et non pour un client réel. AURELIS DRIVE met en scène un univers de location automobile haut de gamme. Une direction visuelle immersive valorise les véhicules et installe une atmosphère exclusive, avec une présentation structurée de l’offre.","features":["Identité visuelle dédiée","Présentation des prestations","Parcours de découverte","Versions ordinateur & mobile"]},{"label":"Projet de démonstration · Architecture & design intérieur","title":"Studio Zürich","desc":"Projet de démonstration, conçu pour illustrer notre savoir-faire et non pour un client réel. Studio Zürich propose un concept de site pour un studio d’architecture et de design intérieur. Une approche minimaliste et éditoriale laisse les espaces, les matières et les projets porter l’identité du studio.","features":["Identité visuelle dédiée","Présentation des prestations","Parcours de découverte","Versions ordinateur & mobile"]},{"label":"Projet de démonstration · Fiduciaire & comptabilité","title":"Aurel","desc":"Projet de démonstration, conçu pour illustrer notre savoir-faire et non pour un client réel. Aurel explore la présence digitale d’une fiduciaire suisse. Une présentation sobre et soignée met en valeur les domaines d’accompagnement et construit un parcours de découverte clair et rassurant.","features":["Identité visuelle dédiée","Présentation des prestations","Parcours de découverte","Versions ordinateur & mobile"]},{"label":"Projet de démonstration · Coiffure & beauté","title":"Maison Aurèle","desc":"Projet de démonstration, conçu pour illustrer notre savoir-faire et non pour un client réel. Maison Aurèle imagine un univers digital pour un salon de coiffure et de beauté. Une esthétique élégante et chaleureuse présente les prestations et l’atmosphère du salon avec une attention particulière aux détails.","features":["Identité visuelle dédiée","Présentation des prestations","Parcours de découverte","Versions ordinateur & mobile"]}]},"faq":{"label":"Questions fréquentes","title":"Les réponses à vos questions","items":[{"q":"Combien de temps faut-il pour créer un site vitrine ?","a":"La création d'un site vitrine prend généralement entre 5 jours et 3 semaines selon la complexité du projet. Nous avançons rapidement tout en garantissant un résultat professionnel et soigné."},{"q":"Est-ce que je peux vous confier entièrement mon projet sans connaissances techniques ?","a":"Oui, absolument. Nous nous occupons de tout de A à Z : conception, design, mise en ligne et accompagnement. Vous n'avez besoin d'aucune compétence technique."},{"q":"Puis-je demander des modifications si le site ne me plaît pas ?","a":"Bien sûr. Nous travaillons avec vous à chaque étape et incluons des ajustements afin que le résultat final corresponde parfaitement à vos attentes. Votre satisfaction est une priorité."},{"q":"Est-ce que mon site sera optimisé pour mobile ?","a":"Oui, tous nos sites sont entièrement responsive. Ils sont conçus pour offrir une expérience fluide et professionnelle sur mobile, tablette et ordinateur."},{"q":"Est-ce que mon site sera bien référencé sur Google ?","a":"Nous optimisons chaque site pour le référencement naturel (SEO) : structure, vitesse, bonnes pratiques et optimisation des contenus afin d'améliorer votre visibilité sur Google."},{"q":"Gérez-vous l'hébergement et le nom de domaine ?","a":"Oui, nous nous occupons de tout : réservation du nom de domaine, hébergement, mise en ligne et configuration. Vous bénéficiez d'un site clé en main, sans aucune contrainte technique."}]},"pricing":{"label":"Tarifs","title":"Choisissez la formule qui vous correspond","plans":[{"badge":"🟢 Essentiel","price":"À partir de 2 500 DH","priceNote":"Pour démarrer vite","features":["1 à 3 pages","Design simple et professionnel","Version mobile responsive","Mise en ligne incluse"],"note":"👉 Idéal pour démarrer avec une présence en ligne efficace"},{"badge":"🔵 Standard","price":"À partir de 4 500 DH","priceNote":"L'équilibre idéal","features":["3 à 6 pages","Design moderne et personnalisé","Optimisation SEO de base","Site rapide et responsive"],"note":"👉 Le meilleur équilibre entre performance et budget"},{"badge":"🟣 Premium","price":"À partir de 7 500 DH","priceNote":"Pour viser plus haut","features":["Design sur mesure avancé","Animations et effets interactifs","Optimisation SEO avancée","Expérience utilisateur optimisée"],"note":"👉 Pour une image haut de gamme et impactante"}],"disclaimerTitle":"Mention importante","disclaimerBody":"Chaque projet est 100% sur mesure. Les tarifs indiqués sont des prix de départ. Un devis personnalisé vous sera proposé en fonction de vos besoins, objectifs et fonctionnalités souhaitées."},"contact":{"label":"Obtenez votre devis gratuitement","title":"Un projet en tête ? Parlons-en.","lead":"Nous transformons vos idées en un site web performant. Parlez-nous de votre projet et recevez une proposition claire, rapide et adaptée à vos objectifs.","firstName":"Prénom","firstNamePh":"John","lastName":"Nom","lastNamePh":"Doe","email":"Email","emailPh":"exemple@domaine.com","phone":"Téléphone","phonePh":"0 00 00 00 00","dialAria":"Indicatif pays","message":"Message","messagePh":"Vos questions ou commentaires","submit":"Envoyer le message","submitting":"Envoi en cours…","ok":"✓ Message envoyé. Nous vous répondons sous 24h.","err":"✗ Une erreur est survenue. Réessayez ou écrivez-nous directement.","netErr":"✗ Connexion impossible. Vérifiez votre réseau et réessayez.","required":"*"},"footer":"© Digital Concepts 2026 — Tous droits réservés"},"en":{"meta":{"title":"Showcase Website Portfolio — WebStudio","description":"Explore our portfolio of bespoke showcase websites: modern design, real performance, and brand identities that stand out."},"nav":{"home":"Home","portfolio":"Work","faq":"FAQ","contact":"Contact"},"langSwitcher":{"label":"Change language"},"hero":{"tag":"Portfolio · Showcase Websites","titleBefore":"An online presence that ","titleEm":"matches","titleAfter":" the quality of your work","subtitle":"A curated look at some of our custom-built websites — original design, fast performance, and a user experience that feels effortless.","scroll":"See the work"},"portfolio":{"label":"Our demo projects","title":"Five digital experiences. Five distinct identities.","visit":"Explore the project","items":[{"label":"Demo project · Personal training & fitness","title":"KERNFORM","desc":"A demonstration project created to showcase our design work, not commissioned by a real client. KERNFORM explores an energetic online identity for a personal training studio, with a distinctive visual character, a clear introduction to its coaching approach and a journey towards getting in touch.","features":["Distinct visual identity","Service presentation","Discovery journey","Desktop & mobile versions"]},{"label":"Demo project · Premium car rental","title":"AURELIS DRIVE","desc":"A demonstration project created to showcase our design work, not commissioned by a real client. AURELIS DRIVE presents a premium car rental concept. Immersive art direction highlights the vehicles and creates an exclusive atmosphere around a structured presentation of the offering.","features":["Distinct visual identity","Service presentation","Discovery journey","Desktop & mobile versions"]},{"label":"Demo project · Architecture & interior design","title":"Studio Zürich","desc":"A demonstration project created to showcase our design work, not commissioned by a real client. Studio Zürich explores a website concept for an architecture and interior design studio. A minimal, editorial approach lets spaces, materials and projects express the studio’s identity.","features":["Distinct visual identity","Service presentation","Discovery journey","Desktop & mobile versions"]},{"label":"Demo project · Fiduciary & accounting","title":"Aurel","desc":"A demonstration project created to showcase our design work, not commissioned by a real client. Aurel explores the digital identity of a Swiss fiduciary firm. A restrained, considered presentation introduces its areas of expertise through a clear and reassuring discovery journey.","features":["Distinct visual identity","Service presentation","Discovery journey","Desktop & mobile versions"]},{"label":"Demo project · Hair & beauty","title":"Maison Aurèle","desc":"A demonstration project created to showcase our design work, not commissioned by a real client. Maison Aurèle imagines a digital world for a hair and beauty salon. An elegant, welcoming aesthetic introduces its services and atmosphere with careful attention to detail.","features":["Distinct visual identity","Service presentation","Discovery journey","Desktop & mobile versions"]}]},"faq":{"label":"FAQ","title":"Everything you were about to ask","items":[{"q":"How long does it take to build a showcase website?","a":"Most showcase sites go live in 5 days to 3 weeks, depending on scope. We move fast without cutting corners — the final result stays polished and professional."},{"q":"Can I hand the whole project over if I'm not tech-savvy?","a":"Absolutely. We handle everything end-to-end: strategy, design, launch and follow-up. Zero technical knowledge required on your side."},{"q":"What if I want changes once the site is built?","a":"Of course. We iterate with you at every step and include revisions so the final result matches exactly what you had in mind. Your satisfaction is the whole point."},{"q":"Will my site work well on mobile?","a":"Yes — every site we ship is fully responsive and designed to feel smooth and professional on phones, tablets and desktops."},{"q":"Will my site rank on Google?","a":"We build every site with SEO in mind: clean structure, fast load times, technical best practices and content optimization to grow your visibility on Google."},{"q":"Do you take care of hosting and the domain name?","a":"Yes — domain registration, hosting, launch and configuration are all included. You get a turnkey site with zero technical hassle."}]},"pricing":{"label":"Pricing","title":"Pick the package that fits","plans":[{"badge":"🟢 Essential","price":"From 2 500 DH","priceNote":"Get live fast","features":["1 to 3 pages","Clean, professional design","Fully mobile responsive","Launch included"],"note":"👉 Perfect for getting online with a sharp, effective presence"},{"badge":"🔵 Standard","price":"From 4 500 DH","priceNote":"The sweet spot","features":["3 to 6 pages","Modern, custom design","Foundational SEO","Fast and responsive"],"note":"👉 The best balance of performance and budget"},{"badge":"🟣 Premium","price":"From 7 500 DH","priceNote":"Aim higher","features":["Advanced custom design","Animations and interactive effects","Advanced SEO optimization","Optimized user experience"],"note":"👉 For a high-end, unmistakable brand presence"}],"disclaimerTitle":"One important note","disclaimerBody":"Every project is 100% custom. The prices above are starting points — you'll get a tailored quote based on your goals, scope and features."},"contact":{"label":"Get your free quote","title":"Got a project in mind? Let's talk.","lead":"We turn ideas into websites that perform. Tell us about your project and we'll come back with a clear proposal, quickly, tailored to your goals.","firstName":"First name","firstNamePh":"John","lastName":"Last name","lastNamePh":"Doe","email":"Email","emailPh":"you@example.com","phone":"Phone","phonePh":"000 000 0000","dialAria":"Country code","message":"Message","messagePh":"Your questions or comments","submit":"Send message","submitting":"Sending…","ok":"✓ Message sent. We'll get back to you within 24h.","err":"✗ Something went wrong. Try again or email us directly.","netErr":"✗ Connection failed. Check your network and try again.","required":"*"},"footer":"© Digital Concepts 2026 — All rights reserved"},"de":{"meta":{"title":"Portfolio One-Pager & Websites — WebStudio","description":"Unser Portfolio maßgeschneiderter Websites: modernes Design, echte Performance und eine Markenidentität, die im Kopf bleibt."},"nav":{"home":"Start","portfolio":"Portfolio","faq":"FAQ","contact":"Kontakt"},"langSwitcher":{"label":"Sprache wechseln"},"hero":{"tag":"Portfolio · Websites & One-Pager","titleBefore":"Ein Webauftritt, der ","titleEm":"zeigt","titleAfter":", was Sie wirklich können","subtitle":"Ein Blick auf einige unserer individuell entwickelten Websites: eigenständiges Design, spürbare Performance und eine Nutzererfahrung, die einfach passt.","scroll":"Zum Portfolio"},"portfolio":{"label":"Unsere Demoprojekte","title":"Fünf digitale Auftritte. Fünf eigene Identitäten.","visit":"Projekt entdecken","items":[{"label":"Demoprojekt · Personal Training & Fitness","title":"KERNFORM","desc":"Ein eigenständiges Demoprojekt, das unsere gestalterische Arbeit zeigt und kein realer Kundenauftrag ist. KERNFORM erkundet einen energiegeladenen Webauftritt für ein Personal-Training-Studio: eine markante Identität, eine klare Darstellung des Coachings und ein Weg zur Kontaktaufnahme.","features":["Eigenständige visuelle Identität","Leistungspräsentation","Klarer Entdeckungspfad","Desktop- & Mobilversion"]},{"label":"Demoprojekt · Premium-Autovermietung","title":"AURELIS DRIVE","desc":"Ein eigenständiges Demoprojekt, das unsere gestalterische Arbeit zeigt und kein realer Kundenauftrag ist. AURELIS DRIVE inszeniert ein Konzept für die gehobene Autovermietung. Eine immersive Bildsprache stellt die Fahrzeuge in den Mittelpunkt und verbindet eine exklusive Atmosphäre mit einer strukturierten Angebotspräsentation.","features":["Eigenständige visuelle Identität","Leistungspräsentation","Klarer Entdeckungspfad","Desktop- & Mobilversion"]},{"label":"Demoprojekt · Architektur & Innenarchitektur","title":"Studio Zürich","desc":"Ein eigenständiges Demoprojekt, das unsere gestalterische Arbeit zeigt und kein realer Kundenauftrag ist. Studio Zürich zeigt ein Website-Konzept für ein Architektur- und Interior-Design-Studio. Eine minimalistische, editoriale Gestaltung lässt Räume, Materialien und Projekte die Identität des Studios vermitteln.","features":["Eigenständige visuelle Identität","Leistungspräsentation","Klarer Entdeckungspfad","Desktop- & Mobilversion"]},{"label":"Demoprojekt · Treuhand & Buchhaltung","title":"Aurel","desc":"Ein eigenständiges Demoprojekt, das unsere gestalterische Arbeit zeigt und kein realer Kundenauftrag ist. Aurel erkundet den digitalen Auftritt einer Schweizer Treuhandgesellschaft. Eine ruhige, sorgfältige Gestaltung stellt die Beratungsbereiche übersichtlich vor und schafft einen klaren, vertrauensvollen Einstieg.","features":["Eigenständige visuelle Identität","Leistungspräsentation","Klarer Entdeckungspfad","Desktop- & Mobilversion"]},{"label":"Demoprojekt · Hair & Beauty","title":"Maison Aurèle","desc":"Ein eigenständiges Demoprojekt, das unsere gestalterische Arbeit zeigt und kein realer Kundenauftrag ist. Maison Aurèle entwirft eine digitale Welt für einen Hair-&-Beauty-Salon. Eine elegante, warme Gestaltung präsentiert Leistungen und Salonatmosphäre mit besonderer Aufmerksamkeit für Details.","features":["Eigenständige visuelle Identität","Leistungspräsentation","Klarer Entdeckungspfad","Desktop- & Mobilversion"]}]},"faq":{"label":"Häufige Fragen","title":"Antworten auf das, was Sie wissen möchten","items":[{"q":"Wie lange dauert die Umsetzung einer Website?","a":"Je nach Umfang liegt die Umsetzung meist zwischen 5 Tagen und 3 Wochen. Wir arbeiten zügig, ohne Abstriche beim Ergebnis zu machen."},{"q":"Kann ich das Projekt komplett abgeben, auch ohne technisches Know-how?","a":"Selbstverständlich. Wir übernehmen alles: Konzept, Design, Umsetzung, Go-Live und Betreuung. Sie müssen technisch nichts können."},{"q":"Kann ich noch Änderungen wünschen, wenn mir etwas nicht gefällt?","a":"Natürlich. Wir stimmen uns in jeder Phase mit Ihnen ab und planen Korrekturschleifen fest ein — das Ergebnis soll genau zu Ihnen passen."},{"q":"Ist meine Website auf dem Handy optimiert?","a":"Ja. Jede Website wird vollständig responsive umgesetzt und funktioniert auf Smartphone, Tablet und Desktop gleichermaßen professionell."},{"q":"Wird meine Website bei Google gut gefunden?","a":"Wir bauen jede Website mit sauberem Aufbau, schneller Ladezeit und technischen SEO-Best-Practices, damit Sie bei Google Sichtbarkeit gewinnen."},{"q":"Kümmern Sie sich um Hosting und Domain?","a":"Ja. Domain, Hosting, Go-Live und Konfiguration sind inklusive. Sie bekommen eine schlüsselfertige Lösung — komplett ohne technischen Aufwand."}]},"pricing":{"label":"Preise","title":"Wählen Sie das passende Paket","plans":[{"badge":"🟢 Essential","price":"Ab 2 500 DH","priceNote":"Schnell online","features":["1 bis 3 Seiten","Klares, professionelles Design","Vollständig responsive","Go-Live inklusive"],"note":"👉 Ideal, um mit einem klaren Auftritt online zu starten"},{"badge":"🔵 Standard","price":"Ab 4 500 DH","priceNote":"Der Sweet Spot","features":["3 bis 6 Seiten","Modernes, individuelles Design","SEO-Grundlagen inklusive","Schnell und responsive"],"note":"👉 Das beste Verhältnis aus Leistung und Budget"},{"badge":"🟣 Premium","price":"Ab 7 500 DH","priceNote":"Eine Klasse höher","features":["Anspruchsvolles Custom-Design","Animationen und interaktive Effekte","Fortgeschrittene SEO-Optimierung","Optimierte User Experience"],"note":"👉 Für einen hochwertigen Auftritt mit Wirkung"}],"disclaimerTitle":"Wichtiger Hinweis","disclaimerBody":"Jedes Projekt ist zu 100 % individuell. Die genannten Preise sind Startpreise — ein passgenaues Angebot erstellen wir Ihnen auf Basis Ihrer Ziele, des Umfangs und der gewünschten Funktionen."},"contact":{"label":"Kostenloses Angebot anfordern","title":"Ein Projekt im Kopf? Reden wir darüber.","lead":"Wir machen aus Ideen Websites, die funktionieren. Erzählen Sie uns von Ihrem Vorhaben — Sie erhalten schnell einen klaren, auf Sie zugeschnittenen Vorschlag.","firstName":"Vorname","firstNamePh":"Max","lastName":"Nachname","lastNamePh":"Muster","email":"E-Mail","emailPh":"sie@beispiel.de","phone":"Telefon","phonePh":"000 000 000","dialAria":"Ländervorwahl","message":"Nachricht","messagePh":"Ihre Fragen oder Anmerkungen","submit":"Nachricht senden","submitting":"Wird gesendet…","ok":"✓ Nachricht gesendet. Wir melden uns innerhalb von 24 Stunden.","err":"✗ Da ist etwas schiefgelaufen. Bitte erneut versuchen oder direkt per E-Mail schreiben.","netErr":"✗ Keine Verbindung. Bitte Netzwerk prüfen und erneut versuchen.","required":"*"},"footer":"© Digital Concepts 2026 — Alle Rechte vorbehalten"},"es":{"meta":{"title":"Portfolio de webs corporativas — WebStudio","description":"Descubre nuestro portfolio de webs corporativas hechas a medida: diseño moderno, rendimiento real e identidad propia."},"nav":{"home":"Inicio","portfolio":"Portfolio","faq":"FAQ","contact":"Contacto"},"langSwitcher":{"label":"Cambiar idioma"},"hero":{"tag":"Portfolio · Webs corporativas","titleBefore":"Una presencia online a la ","titleEm":"altura","titleAfter":" de lo que haces","subtitle":"Una selección de nuestras webs a medida: diseño con carácter, rendimiento sólido y una experiencia de usuario que se siente natural.","scroll":"Ver el portfolio"},"portfolio":{"label":"Nuestros proyectos de demostración","title":"Cinco presencias digitales. Cinco identidades singulares.","visit":"Descubrir el proyecto","items":[{"title":"KERNFORM","label":"Proyecto de demostración · Entrenamiento personal y fitness","desc":"KERNFORM explora una identidad digital enérgica para un estudio de entrenamiento personal, con un carácter visual propio, una explicación clara del método y un recorrido hacia el contacto. Este proyecto muestra nuestro trabajo de diseño y no fue encargado por un cliente real.","features":["Identidad visual propia","Presentación de servicios","Recorrido de descubrimiento","Versiones de escritorio y móvil"]},{"title":"AURELIS DRIVE","label":"Proyecto de demostración · Alquiler de coches premium","desc":"AURELIS DRIVE presenta un concepto de alquiler de coches premium. Una dirección artística inmersiva realza los vehículos y crea una atmósfera exclusiva en torno a una oferta estructurada. Este proyecto muestra nuestro trabajo de diseño y no fue encargado por un cliente real.","features":["Identidad visual propia","Presentación de servicios","Recorrido de descubrimiento","Versiones de escritorio y móvil"]},{"title":"Studio Zürich","label":"Proyecto de demostración · Arquitectura e interiorismo","desc":"Studio Zürich explora un sitio para un estudio de arquitectura e interiorismo. El enfoque minimalista y editorial deja que espacios, materiales y proyectos expresen la identidad del estudio. Este proyecto muestra nuestro trabajo de diseño y no fue encargado por un cliente real.","features":["Identidad visual propia","Presentación de servicios","Recorrido de descubrimiento","Versiones de escritorio y móvil"]},{"title":"Aurel","label":"Proyecto de demostración · Servicios fiduciarios y contabilidad","desc":"Aurel explora la identidad digital de una firma fiduciaria suiza. Una presentación sobria y cuidada introduce sus especialidades mediante un recorrido claro y tranquilizador. Este proyecto muestra nuestro trabajo de diseño y no fue encargado por un cliente real.","features":["Identidad visual propia","Presentación de servicios","Recorrido de descubrimiento","Versiones de escritorio y móvil"]},{"title":"Maison Aurèle","label":"Proyecto de demostración · Peluquería y belleza","desc":"Maison Aurèle imagina un universo digital para un salón de peluquería y belleza. Una estética elegante y acogedora presenta sus servicios y ambiente con atención al detalle. Este proyecto muestra nuestro trabajo de diseño y no fue encargado por un cliente real.","features":["Identidad visual propia","Presentación de servicios","Recorrido de descubrimiento","Versiones de escritorio y móvil"]}]},"faq":{"label":"Preguntas frecuentes","title":"Las respuestas que buscas","items":[{"q":"¿Cuánto se tarda en crear una web corporativa?","a":"Normalmente entre 5 días y 3 semanas, según el alcance del proyecto. Avanzamos rápido sin renunciar a un resultado profesional y cuidado."},{"q":"¿Puedo delegaros el proyecto entero aunque no tenga conocimientos técnicos?","a":"Por supuesto. Nos encargamos de todo de principio a fin: conceptualización, diseño, publicación y acompañamiento. No necesitas saber nada técnico."},{"q":"¿Puedo pedir cambios si algo no me convence?","a":"Claro. Trabajamos contigo en cada fase e incluimos rondas de ajustes para que el resultado final encaje al 100 % con lo que buscas."},{"q":"¿Mi web se verá bien en el móvil?","a":"Sí. Todas nuestras webs son totalmente responsive y están pensadas para funcionar de forma fluida en móvil, tablet y ordenador."},{"q":"¿Mi web posicionará bien en Google?","a":"Optimizamos cada web para SEO: estructura, velocidad, buenas prácticas técnicas y optimización de contenidos para ganar visibilidad en Google."},{"q":"¿Os encargáis del hosting y del dominio?","a":"Sí. Gestionamos dominio, hosting, publicación y configuración. Recibes una web llave en mano, sin quebraderos técnicos."}]},"pricing":{"label":"Tarifas","title":"Elige el plan que se adapta a ti","plans":[{"badge":"🟢 Essential","price":"Desde 2 500 DH","priceNote":"Arranca rápido","features":["De 1 a 3 páginas","Diseño limpio y profesional","Totalmente responsive","Publicación incluida"],"note":"👉 Perfecto para empezar con una presencia online efectiva"},{"badge":"🔵 Standard","price":"Desde 4 500 DH","priceNote":"El equilibrio ideal","features":["De 3 a 6 páginas","Diseño moderno y a medida","SEO básico incluido","Rápida y responsive"],"note":"👉 El mejor equilibrio entre rendimiento y presupuesto"},{"badge":"🟣 Premium","price":"Desde 7 500 DH","priceNote":"Apunta más alto","features":["Diseño a medida avanzado","Animaciones y efectos interactivos","SEO avanzado","Experiencia de usuario optimizada"],"note":"👉 Para una imagen premium con impacto real"}],"disclaimerTitle":"Aviso importante","disclaimerBody":"Cada proyecto es 100 % a medida. Los precios son puntos de partida — te haremos un presupuesto personalizado según tus objetivos, el alcance y las funcionalidades que necesites."},"contact":{"label":"Consigue tu presupuesto gratis","title":"¿Tienes un proyecto? Hablemos.","lead":"Convertimos ideas en webs que funcionan. Cuéntanos tu proyecto y recibirás una propuesta clara, rápida y ajustada a tus objetivos.","firstName":"Nombre","firstNamePh":"Juan","lastName":"Apellidos","lastNamePh":"Pérez","email":"Email","emailPh":"tu@ejemplo.com","phone":"Teléfono","phonePh":"000 00 00 00","dialAria":"Prefijo del país","message":"Mensaje","messagePh":"Tus preguntas o comentarios","submit":"Enviar mensaje","submitting":"Enviando…","ok":"✓ Mensaje enviado. Te respondemos en menos de 24 h.","err":"✗ Ha ocurrido un error. Vuelve a intentarlo o escríbenos directamente.","netErr":"✗ Sin conexión. Revisa tu red e inténtalo de nuevo.","required":"*"},"footer":"© Digital Concepts 2026 — Todos los derechos reservados"},"it":{"meta":{"title":"Portfolio siti vetrina — WebStudio","description":"Il nostro portfolio di siti vetrina su misura: design moderno, performance vera e un'identità che si fa notare."},"nav":{"home":"Home","portfolio":"Portfolio","faq":"FAQ","contact":"Contatti"},"langSwitcher":{"label":"Cambia lingua"},"hero":{"tag":"Portfolio · Siti vetrina","titleBefore":"Una presenza online all'","titleEm":"altezza","titleAfter":" di quello che fai","subtitle":"Una selezione dei nostri siti su misura: design con carattere, performance reale e un'esperienza utente che scorre naturale.","scroll":"Vedi il portfolio"},"portfolio":{"label":"I nostri progetti dimostrativi","title":"Cinque presenze digitali. Cinque identità uniche.","visit":"Scopri il progetto","items":[{"title":"KERNFORM","label":"Progetto dimostrativo · Personal training e fitness","desc":"KERNFORM esplora un’identità digitale energica per uno studio di personal training, con un carattere visivo distintivo, una presentazione chiara del metodo e un percorso verso il contatto. Questo progetto illustra il nostro lavoro di design e non è stato commissionato da un cliente reale.","features":["Identità visiva dedicata","Presentazione dei servizi","Percorso di scoperta","Versioni desktop e mobile"]},{"title":"AURELIS DRIVE","label":"Progetto dimostrativo · Noleggio auto premium","desc":"AURELIS DRIVE presenta un concept di noleggio auto di alta gamma. Una direzione artistica immersiva valorizza i veicoli e crea un’atmosfera esclusiva intorno a un’offerta strutturata. Questo progetto illustra il nostro lavoro di design e non è stato commissionato da un cliente reale.","features":["Identità visiva dedicata","Presentazione dei servizi","Percorso di scoperta","Versioni desktop e mobile"]},{"title":"Studio Zürich","label":"Progetto dimostrativo · Architettura e interior design","desc":"Studio Zürich esplora un sito per uno studio di architettura e interior design. Un approccio minimale ed editoriale lascia che spazi, materiali e progetti esprimano l’identità dello studio. Questo progetto illustra il nostro lavoro di design e non è stato commissionato da un cliente reale.","features":["Identità visiva dedicata","Presentazione dei servizi","Percorso di scoperta","Versioni desktop e mobile"]},{"title":"Aurel","label":"Progetto dimostrativo · Servizi fiduciari e contabilità","desc":"Aurel esplora l’identità digitale di una fiduciaria svizzera. Una presentazione sobria e curata introduce le competenze attraverso un percorso chiaro e rassicurante. Questo progetto illustra il nostro lavoro di design e non è stato commissionato da un cliente reale.","features":["Identità visiva dedicata","Presentazione dei servizi","Percorso di scoperta","Versioni desktop e mobile"]},{"title":"Maison Aurèle","label":"Progetto dimostrativo · Parrucchiere e bellezza","desc":"Maison Aurèle immagina un universo digitale per un salone di parrucchiere e bellezza. Un’estetica elegante e accogliente presenta servizi e atmosfera con attenzione ai dettagli. Questo progetto illustra il nostro lavoro di design e non è stato commissionato da un cliente reale.","features":["Identità visiva dedicata","Presentazione dei servizi","Percorso di scoperta","Versioni desktop e mobile"]}]},"faq":{"label":"Domande frequenti","title":"Le risposte che cerchi","items":[{"q":"Quanto tempo serve per realizzare un sito vetrina?","a":"In genere tra 5 giorni e 3 settimane, in base alla complessità del progetto. Andiamo veloci senza rinunciare a un risultato curato e professionale."},{"q":"Posso affidarvi il progetto anche se non sono un esperto tecnico?","a":"Assolutamente sì. Ci occupiamo di tutto dalla A alla Z: strategia, design, messa online e supporto. Non serve nessuna competenza tecnica."},{"q":"Posso chiedere modifiche se qualcosa non mi convince?","a":"Certo. Lavoriamo insieme in ogni fase e prevediamo giri di revisione, così il risultato finale rispecchia esattamente quello che avevi in mente."},{"q":"Il sito sarà ottimizzato per mobile?","a":"Sì, tutti i nostri siti sono completamente responsive e pensati per funzionare in modo fluido e professionale su smartphone, tablet e desktop."},{"q":"Il sito sarà ben posizionato su Google?","a":"Ottimizziamo ogni sito per la SEO: struttura, velocità, best practice tecniche e contenuti curati per far crescere la tua visibilità su Google."},{"q":"Vi occupate di hosting e nome a dominio?","a":"Sì, gestiamo tutto: dominio, hosting, messa online e configurazione. Ricevi un sito chiavi in mano, senza pensieri tecnici."}]},"pricing":{"label":"Tariffe","title":"Scegli la formula giusta per te","plans":[{"badge":"🟢 Essential","price":"A partire da 2 500 DH","priceNote":"Online in tempi rapidi","features":["Da 1 a 3 pagine","Design pulito e professionale","Completamente responsive","Messa online inclusa"],"note":"👉 Perfetto per partire con una presenza online efficace"},{"badge":"🔵 Standard","price":"A partire da 4 500 DH","priceNote":"Il giusto equilibrio","features":["Da 3 a 6 pagine","Design moderno e su misura","SEO di base inclusa","Sito veloce e responsive"],"note":"👉 Il miglior equilibrio tra performance e budget"},{"badge":"🟣 Premium","price":"A partire da 7 500 DH","priceNote":"Punta più in alto","features":["Design su misura avanzato","Animazioni ed effetti interattivi","SEO avanzata","Esperienza utente ottimizzata"],"note":"👉 Per un'immagine premium che lascia il segno"}],"disclaimerTitle":"Nota importante","disclaimerBody":"Ogni progetto è 100% su misura. I prezzi indicati sono di partenza — riceverai un preventivo personalizzato in base a obiettivi, ambito e funzionalità richieste."},"contact":{"label":"Ricevi il tuo preventivo gratuito","title":"Hai un progetto in mente? Parliamone.","lead":"Trasformiamo le idee in siti web che funzionano. Raccontaci il tuo progetto e riceverai una proposta chiara, rapida e su misura per i tuoi obiettivi.","firstName":"Nome","firstNamePh":"Marco","lastName":"Cognome","lastNamePh":"Rossi","email":"Email","emailPh":"tu@esempio.it","phone":"Telefono","phonePh":"000 000 0000","dialAria":"Prefisso paese","message":"Messaggio","messagePh":"Le tue domande o richieste","submit":"Invia il messaggio","submitting":"Invio in corso…","ok":"✓ Messaggio inviato. Ti rispondiamo entro 24 ore.","err":"✗ Qualcosa è andato storto. Riprova o scrivici direttamente.","netErr":"✗ Connessione assente. Controlla la rete e riprova.","required":"*"},"footer":"© Digital Concepts 2026 — Tutti i diritti riservati"}};
+
+const PORTFOLIO_MEDIA = [{"key":"kernform","url":"https://crumblestars.github.io/exemple4/","desktopMp4":"https://res.cloudinary.com/dijigqru/video/upload/v1791065651/d3314a02a53799aa_xihvnj.webm","mobileMp4":"https://res.cloudinary.com/dijigqru/video/upload/v1791065655/66213361a46bd683_l8hkwv.webm","desktopPoster":"87161d0b99d83ce3.jpg","mobilePoster":"6cb29e7aec313169.jpg"},{"key":"aurelis-drive","url":"https://crumblestars.github.io/exemple5/","desktopMp4":"https://res.cloudinary.com/dijigqru/video/upload/v1791065642/28f33a0f2b3696bc_becgn2.webm","mobileMp4":"https://res.cloudinary.com/dijigqru/video/upload/v1791065640/89e59b7afd6775e5_rzxuro.webm","desktopPoster":"7ef11eb07367f240.jpg","mobilePoster":"21bbca087e93edcd.jpg"},{"key":"studio-zurich","url":"https://crumblestars.github.io/exemple6/","desktopMp4":"https://res.cloudinary.com/dijigqru/video/upload/v1791065646/973fa8e722f2a115_ukf71y.webm","mobileMp4":"https://res.cloudinary.com/dijigqru/video/upload/v1791065645/950826cbbc679e57_dvm54e.webm","desktopPoster":"5c699ad0be6115fc.jpg","mobilePoster":"ad7f05fb5174f5d0.jpg"},{"key":"aurel","url":"https://crumblestars.github.io/exemple7/","desktopMp4":"https://res.cloudinary.com/dijigqru/video/upload/v1791065632/39b1e6143fccea93_ltewhu.webm","mobileMp4":"https://res.cloudinary.com/dijigqru/video/upload/v1791065637/8e73f9b3567864d0_ybgxsi.webm","desktopPoster":"884713c2945b2d12.jpg","mobilePoster":"b012f8809c860d65.jpg"},{"key":"maison-aurele","url":"https://crumblestars.github.io/exemple8/","desktopMp4":"https://res.cloudinary.com/dijigqru/video/upload/v1791065647/cb96f94187308ab1_bpzwys.webm","mobileMp4":"https://res.cloudinary.com/dijigqru/video/upload/v1791065640/814bf919a52c381e_izhzxa.webm","desktopPoster":"e8f389d8b7006dc5.jpg","mobilePoster":"af4dac3359a2dcd1.jpg"}];
+const DIAL_CODES = [
+  { code: "+33", flag: "🇫🇷", iso: "FR" },
+  { code: "+32", flag: "🇧🇪", iso: "BE" },
+  { code: "+41", flag: "🇨🇭", iso: "CH" },
+  { code: "+1", flag: "🇨🇦", iso: "CA" },
+  { code: "+1", flag: "🇺🇸", iso: "US" },
+  { code: "+44", flag: "🇬🇧", iso: "GB" },
+  { code: "+49", flag: "🇩🇪", iso: "DE" },
+  { code: "+34", flag: "🇪🇸", iso: "ES" },
+  { code: "+39", flag: "🇮🇹", iso: "IT" },
+  { code: "+351", flag: "🇵🇹", iso: "PT" },
+  { code: "+212", flag: "🇲🇦", iso: "MA" },
+  { code: "+213", flag: "🇩🇿", iso: "DZ" },
+  { code: "+216", flag: "🇹🇳", iso: "TN" },
+  { code: "+221", flag: "🇸🇳", iso: "SN" },
+  { code: "+225", flag: "🇨🇮", iso: "CI" },
+  { code: "+971", flag: "🇦🇪", iso: "AE" },
+  { code: "+86", flag: "🇨🇳", iso: "CN" },
+  { code: "+81", flag: "🇯🇵", iso: "JP" },
+  { code: "+61", flag: "🇦🇺", iso: "AU" },
+  { code: "+55", flag: "🇧🇷", iso: "BR" },
+];
+
+// ---- Contact form: phone dial-code auto-detection via IP geolocation ----
+// Detects the visitor's country from their IP address and preselects the
+// matching dial code. Falls back to +41 (Switzerland) if detection fails.
+// The visitor can always change the selection manually afterwards.
+let __detectedDialCode = null; // cached so we don't re-fetch on every re-render (lang switch, etc.)
+
+function applyDialCode(select, code, iso){
+  if (!select) return;
+  if (iso){
+    const opt = Array.from(select.options).find(o => o.dataset.iso === iso);
+    if (opt){ select.value = opt.value; return; }
+  }
+  const opt2 = Array.from(select.options).find(o => o.value === code);
+  select.value = opt2 ? opt2.value : (code || '+41');
+}
+
+function detectAndSetDialCode(){
+  const select = document.getElementById('dialCode');
+  if (!select) return;
+
+  if (__detectedDialCode){
+    applyDialCode(select, __detectedDialCode.code, __detectedDialCode.iso);
+    return;
+  }
+
+  // Sensible immediate default while detection is in progress
+  applyDialCode(select, '+41', 'CH');
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 4000);
+
+  fetch('https://ipapi.co/json/', { signal: controller.signal })
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(data => {
+      clearTimeout(timeout);
+      const iso = data && data.country_code ? String(data.country_code).toUpperCase() : null;
+      const code = data && data.country_calling_code ? data.country_calling_code : null;
+      __detectedDialCode = (iso || code) ? { code: code || '+41', iso: iso } : { code: '+41', iso: 'CH' };
+      const sel = document.getElementById('dialCode');
+      applyDialCode(sel, __detectedDialCode.code, __detectedDialCode.iso);
+    })
+    .catch(() => {
+      clearTimeout(timeout);
+      __detectedDialCode = { code: '+41', iso: 'CH' };
+      const sel = document.getElementById('dialCode');
+      applyDialCode(sel, '+41', 'CH');
+    });
+}
+
+const LANGS = [{"code":"ar","label":"العربية","flag":""},
+  { code: 'fr', label: 'Français', flag: '🇫🇷' },
+  { code: 'en', label: 'English',  flag: '🇬🇧' },
+  { code: 'de', label: 'Deutsch',  flag: '🇩🇪' },
+  { code: 'es', label: 'Español',  flag: '🇪🇸' },
+  { code: 'it', label: 'Italiano', flag: '🇮🇹' },
+];
+const AVAILABLE = LANGS.map(l => l.code);
+
+function detectLang() {
+  if (typeof window!=='undefined' && window.__lang && AVAILABLE.includes(window.__lang)) return window.__lang;
+  const saved = localStorage.getItem('lang');
+  if (saved && AVAILABLE.includes(saved)) return saved;
+  const nav = (navigator.language || 'en').slice(0,2).toLowerCase();
+  return AVAILABLE.includes(nav) ? nav : 'en';
+}
+
+let currentLang = detectLang();
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function mockupHtml(i){
+  const m = PORTFOLIO_MEDIA[i];
+  const startAt = m.startAt ?? 0;
+  const vid = (src, poster) => `<video class="mk-video" muted loop playsinline preload="none" data-start="${startAt}" data-src="${src}" data-poster="${poster||''}"></video>`;
+  const scr = (src) => `<div class="scroll-frame"><img class="scroll-img" src="${src}" alt="" loading="lazy"/></div>`;
+  const desktopInner = m.desktopMp4 ? vid(m.desktopMp4, m.desktopPoster) : (m.scrollDesktop ? scr(m.scrollDesktop) : `<div class="fill" style="background:${m.placeholderTint||'#10121c'}"></div>`);
+  const phoneInner   = m.mobileMp4  ? vid(m.mobileMp4, m.mobilePoster)  : (m.scrollMobile  ? scr(m.scrollMobile)  : `<div class="fill" style="background:${m.placeholderTint||'#10121c'}"></div>`);
+  return `<div class="portfolio-mockup" data-portfolio-mockup>
+    <div class="mockup-pc"><div class="mockup-pc-screen">${desktopInner}</div><div class="mockup-pc-stand"></div></div>
+    <div class="mockup-phone"><div class="mockup-phone-screen">${phoneInner}</div></div>
+  </div>`;
+}
+
+function renderApp(){
+  const t = DICTS[currentLang];
+  (document.documentElement.lang=currentLang,document.documentElement.dir=(currentLang==="ar"?"rtl":"ltr"));
+  document.documentElement.removeAttribute('data-lang-loading');
+  if (typeof window.wsSpyUpdateLabels === 'function') window.wsSpyUpdateLabels(currentLang);
+  document.title = t.meta.title;
+  const md = document.querySelector('meta[name="description"]');
+  if (md) md.setAttribute('content', t.meta.description);
+
+  // Nav labels
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n').split('.');
+    let v = t; for (const k of key) v = v && v[k];
+    if (v) el.textContent = v;
+  });
+
+  const portfolioRows = t.portfolio.items.map((item,i)=>{
+    const media = PORTFOLIO_MEDIA[i];
+    const reverse = i%2===1;
+    const text = `<div class="portfolio-text">
+      <div class="section-label">${escapeHtml(item.label)}</div>
+      <h3 class="portfolio-title">${escapeHtml(item.title)}</h3>
+      <p class="portfolio-desc">${escapeHtml(item.desc)}</p>
+      <ul>${item.features.map(f=>`<li>${escapeHtml(f)}</li>`).join('')}</ul>
+      <a href="${media.url}" class="btn-visit" target="_blank" rel="noopener noreferrer">${escapeHtml(t.portfolio.visit)}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+    </div>`;
+    const mk = mockupHtml(i);
+    return `<div class="portfolio-row${reverse?' reverse':''}">${reverse?mk+text:text+mk}</div>`;
+  }).join('');
+
+  const faqItems = t.faq.items.map((it,i)=>`
+    <div class="faq-item" data-idx="${i}">
+      <button type="button" class="faq-question" aria-expanded="false">
+        <span>${escapeHtml(it.q)}</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">${escapeHtml(it.a)}</div></div>
+    </div>`).join('');
+
+  const pricingCards = t.pricing.plans.map(p=>`
+    <div class="pricing-card-wrap">
+      <article class="pricing-card">
+        <div class="pricing-badge">${escapeHtml(p.badge)}</div>
+        <div class="pricing-price">${escapeHtml(p.price).replace(/(\d[\d ]* (?:DH|درهم))$/, '<b class="price-amount">$1</b>')}<span>${escapeHtml(p.priceNote)}</span></div>
+        <ul class="pricing-features">${p.features.map(f=>`<li>${escapeHtml(f)}</li>`).join('')}</ul>
+        <p class="pricing-note">${escapeHtml(p.note)}</p>
+      </article>
+    </div>`).join('');
+
+  const dialOpts = DIAL_CODES.map(d=>`<option value="${d.code}" data-iso="${d.iso}">${d.flag} ${d.code}</option>`).join('');
+
+  document.getElementById('app').innerHTML = `
+    <section id="hero"><div class="hero-content">
+      <div class="hero-tag">${escapeHtml(t.hero.tag)}</div>
+      <h1 class="hero-title">${escapeHtml(t.hero.titleBefore)}<em>${escapeHtml(t.hero.titleEm)}</em>${escapeHtml(t.hero.titleAfter)}</h1>
+      <p class="hero-subtitle">${escapeHtml(t.hero.subtitle)}</p>
+      <div class="hero-scroll"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>${escapeHtml(t.hero.scroll)}</div>
+    </div></section>
+    <div class="divider"></div>
+    <section id="portfolio"><div class="section-inner">
+      <div style="text-align:center;margin-bottom:80px">
+        <div class="section-label">${escapeHtml(t.portfolio.label)}</div>
+        <div class="section-title" style="margin-bottom:0">${escapeHtml(t.portfolio.title)}</div>
+      </div>${portfolioRows}
+    </div></section>
+    <div class="divider"></div>
+    <section id="faq"><div class="section-inner">
+      <div style="text-align:center;margin-bottom:56px">
+        <div class="section-label">${escapeHtml(t.faq.label)}</div>
+        <div class="section-title" style="margin-bottom:0">${escapeHtml(t.faq.title)}</div>
+      </div>
+      <div class="faq-list">${faqItems}</div>
+    </div></section>
+    <div class="divider"></div>
+    <section id="pricing"><div class="section-inner">
+      <div style="text-align:center;margin-bottom:56px">
+        <div class="section-label">${escapeHtml(t.pricing.label)}</div>
+        <div class="section-title" style="margin-bottom:0">${escapeHtml(t.pricing.title)}</div>
+      </div>
+      <div class="pricing-grid">${pricingCards}</div>
+      <div class="pricing-disclaimer"><strong>${escapeHtml(t.pricing.disclaimerTitle)}</strong><br>${escapeHtml(t.pricing.disclaimerBody)}</div>
+    </div></section>
+    <div class="divider"></div>
+    <section id="contact"><div class="section-inner">
+      <div class="contact-card">
+        <div class="section-label">${escapeHtml(t.contact.label)}</div>
+        <div class="section-title">${escapeHtml(t.contact.title)}</div>
+        <p class="lead">${escapeHtml(t.contact.lead)}</p>
+        <form class="contact-form" id="contactForm" method="POST" action="https://formsubmit.co/digitalconcepts.info.contact@gmail.com" novalidate>
+          <input type="hidden" name="_subject" value="New WebStudio inquiry">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" id="formNext" value="">
+          <input type="hidden" name="Téléphone complet" id="phoneFull" value="">
+          <div class="form-field"><label for="firstName">${escapeHtml(t.contact.firstName)}</label>
+            <input id="firstName" name="Prénom" type="text" placeholder="${escapeHtml(t.contact.firstNamePh)}" autocomplete="given-name"></div>
+          <div class="form-field"><label for="lastName">${escapeHtml(t.contact.lastName)}</label>
+            <input id="lastName" name="Nom" type="text" placeholder="${escapeHtml(t.contact.lastNamePh)}" autocomplete="family-name"></div>
+          <div class="form-field"><label for="email">${escapeHtml(t.contact.email)} <span class="req">${escapeHtml(t.contact.required)}</span></label>
+            <input id="email" name="Email" type="email" required placeholder="${escapeHtml(t.contact.emailPh)}" autocomplete="email"></div>
+          <div class="form-field"><label for="phone">${escapeHtml(t.contact.phone)}</label>
+            <div class="phone-row">
+              <select id="dialCode" name="Indicatif" aria-label="${escapeHtml(t.contact.dialAria)}">${dialOpts}</select>
+              <input id="phone" name="Téléphone" type="tel" placeholder="${escapeHtml(t.contact.phonePh)}" autocomplete="tel">
+            </div></div>
+          <div class="form-field full"><label for="message">${escapeHtml(t.contact.message)} <span class="req">${escapeHtml(t.contact.required)}</span></label>
+            <textarea id="message" name="Message" required placeholder="${escapeHtml(t.contact.messagePh)}"></textarea></div>
+          <div class="form-actions">
+            <button type="submit" class="btn-cta" id="submitBtn">${escapeHtml(t.contact.submit)}</button>
+            <span class="form-status" id="formStatus" role="status" aria-live="polite"></span>
+          </div>
+        </form>
+      </div>
+    </div></section>
+    <footer><a data-i18n="footer" href="droit.html" style="color:inherit;text-decoration:underline;cursor:pointer;">© Digital Concepts 2026 — Tous droits réservés</a></footer>
+  `;
+
+  // Default dial code — auto-detected from visitor's IP, +41 (Switzerland) as fallback
+  detectAndSetDialCode();
+
+  // FAQ interactions
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const btn = item.querySelector('.faq-question');
+    btn.addEventListener('click',()=>{
+      const open = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open?'true':'false');
+    });
+  });
+
+  // Pricing tilt
+  document.querySelectorAll('.pricing-card-wrap').forEach(wrap=>{
+    const card = wrap.querySelector('.pricing-card');
+    wrap.addEventListener('mousemove',e=>{
+      const r = wrap.getBoundingClientRect();
+      const px = (e.clientX-r.left)/r.width, py = (e.clientY-r.top)/r.height;
+      card.style.transform = `rotateX(${(0.5-py)*10}deg) rotateY(${(px-0.5)*10}deg) translateY(-6px)`;
+    });
+    wrap.addEventListener('mouseleave',()=>{ card.style.transform='rotateX(0) rotateY(0) translateY(0)'; });
+  });
+
+  // Contact form — classic HTML POST submission to FormSubmit (no AJAX, no preventDefault).
+  // We only pre-fill a couple of hidden helper fields right before the browser
+  // performs its normal navigation/submission.
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', () => {
+    const dialEl = document.getElementById('dialCode');
+    const phoneEl = document.getElementById('phone');
+    const dial = dialEl ? dialEl.value : '';
+    const phone = phoneEl ? phoneEl.value.trim() : '';
+    const phoneFull = document.getElementById('phoneFull');
+    if (phoneFull) phoneFull.value = phone ? (dial + ' ' + phone) : '';
+    const nextEl = document.getElementById('formNext');
+    if (nextEl) nextEl.value = window.location.href;
+    // No e.preventDefault(): the browser submits the form normally to FormSubmit.
+  });
+}
+
+function renderLangMenu(){
+  const menu = document.getElementById('langMenu');
+  menu.innerHTML = LANGS.map(l=>`
+    <li><button type="button" data-lang="${l.code}" class="${l.code===currentLang?'active':''}">
+      <span>${l.flag} ${l.label}</span><span class="check">✓</span>
+    </button></li>`).join('');
+  document.getElementById('langCurrent').textContent = currentLang.toUpperCase();
+  menu.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      currentLang = b.getAttribute('data-lang');
+      localStorage.setItem('lang', currentLang);
+      document.getElementById('langSwitcher').classList.remove('open');
+      document.getElementById('langTrigger').setAttribute('aria-expanded','false');
+      renderLangMenu(); renderApp();
+    });
+  });
+}
+
+document.getElementById('langTrigger').addEventListener('click',()=>{
+  const sw = document.getElementById('langSwitcher');
+  const open = sw.classList.toggle('open');
+  document.getElementById('langTrigger').setAttribute('aria-expanded', open?'true':'false');
+});
+document.addEventListener('click',e=>{
+  const sw = document.getElementById('langSwitcher');
+  if (!sw.contains(e.target)){ sw.classList.remove('open'); document.getElementById('langTrigger').setAttribute('aria-expanded','false'); }
+});
+
+renderLangMenu();
+renderApp();
+
+</script>
+
+<style>
+  .ws-spy{position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:900;padding:10px 6px;opacity:0;transition:opacity .6s ease .2s;font-family:'Montserrat',system-ui,sans-serif}
+  .ws-spy.is-ready{opacity:1}
+  .ws-spy ul{position:relative;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:22px}
+  .ws-spy ul::before{content:"";position:absolute;top:4px;bottom:4px;right:11px;width:1px;background:rgba(210,225,255,.22)}
+  .ws-spy button{all:unset;cursor:none;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:4px 6px 4px 12px;color:rgba(245,247,250,.55);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:color .3s ease}
+  .ws-spy button:focus-visible{outline:1px solid #dce4f3;outline-offset:4px;border-radius:2px}
+  .ws-spy .lbl{display:inline-block;opacity:0;transform:translateX(8px);transition:opacity .32s cubic-bezier(.22,1,.36,1),transform .32s cubic-bezier(.22,1,.36,1),color .3s ease;white-space:nowrap;pointer-events:none}
+  .ws-spy:hover .lbl,.ws-spy button:focus-visible .lbl,.ws-spy button.is-active .lbl{opacity:1;transform:translateX(0)}
+  .ws-spy button.is-active .lbl{color:#dce4f3}
+  .ws-spy .tick{display:inline-block;width:14px;height:1px;background:rgba(245,247,250,.45);transition:width .38s cubic-bezier(.22,1,.36,1),background-color .3s ease,box-shadow .3s ease}
+  .ws-spy button:hover .tick{width:22px;background:#f6f7fb}
+  .ws-spy button.is-active .tick{width:28px;background:#dce4f3;box-shadow:0 0 8px rgba(210,225,255,.7)}
+  @media (max-width:900px){.ws-spy{right:14px}.ws-spy button{font-size:10px}.ws-spy .tick{width:10px}.ws-spy button.is-active .tick{width:20px}}
+  @media (max-width:600px){.ws-spy{right:8px;padding:8px 4px}.ws-spy ul{gap:16px}.ws-spy ul::before{right:8px}.ws-spy .lbl{display:none}.ws-spy button:focus-visible .lbl{display:inline-block}.ws-spy .tick{width:8px}.ws-spy button.is-active .tick{width:16px}}
+  @media (prefers-reduced-motion:reduce){.ws-spy,.ws-spy *{transition:none!important}}
+</style>
+<nav class="ws-spy" aria-label="Navigation des sections" id="wsSpy">
+  <ul role="list">
+    <li><button type="button" data-target="hero"      aria-label="Aller a Accueil"><span class="lbl">Accueil</span><span class="tick"></span></button></li>
+    <li><button type="button" data-target="portfolio" aria-label="Aller au Portfolio"><span class="lbl">Portfolio</span><span class="tick"></span></button></li>
+    <li><button type="button" data-target="faq"       aria-label="Aller a FAQ"><span class="lbl">FAQ</span><span class="tick"></span></button></li>
+    <li><button type="button" data-target="pricing"   aria-label="Aller a Tarifs"><span class="lbl">Tarifs</span><span class="tick"></span></button></li>
+    <li><button type="button" data-target="contact"   aria-label="Aller a Contact"><span class="lbl">Contact</span><span class="tick"></span></button></li>
+  </ul>
+</nav>
+<script>
+(function(){
+  var IDS=['hero','portfolio','faq','pricing','contact'];
+  var nav=document.getElementById('wsSpy'); if(!nav) return;
+  var btns={};
+  nav.querySelectorAll('button[data-target]').forEach(function(b){btns[b.dataset.target]=b;});
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- i18n pour le scrollspy (aligné sur les langues du site) ---
+  var SPY_I18N={ar:{"nav":"التنقّل بين الأقسام","go":"انتقل إلى ","labels":{"hero":"الرئيسية","services":"خدماتنا","pourquoi":"لماذا نحن؟","equipe":"فريقنا","contact":"تواصل معنا","portfolio":"أعمالنا","faq":"الأسئلة الشائعة","pricing":"الأسعار"}},
+    fr:{nav:"Navigation des sections",go:"Aller à ",labels:{hero:"Accueil",portfolio:"Portfolio",faq:"FAQ",pricing:"Tarifs",contact:"Contact"}},
+    en:{nav:"Section navigation",go:"Go to ",labels:{hero:"Home",portfolio:"Portfolio",faq:"FAQ",pricing:"Pricing",contact:"Contact"}},
+    de:{nav:"Abschnittsnavigation",go:"Gehe zu ",labels:{hero:"Start",portfolio:"Portfolio",faq:"FAQ",pricing:"Preise",contact:"Kontakt"}},
+    es:{nav:"Navegación de secciones",go:"Ir a ",labels:{hero:"Inicio",portfolio:"Portfolio",faq:"FAQ",pricing:"Precios",contact:"Contacto"}},
+    it:{nav:"Navigazione delle sezioni",go:"Vai a ",labels:{hero:"Home",portfolio:"Portfolio",faq:"FAQ",pricing:"Prezzi",contact:"Contatti"}}
+  };
+  function applySpyLabels(lang){
+    var dict=SPY_I18N[lang]||SPY_I18N.fr;
+    nav.setAttribute('aria-label',dict.nav);
+    IDS.forEach(function(id){
+      var b=btns[id]; if(!b) return;
+      var lbl=b.querySelector('.lbl');
+      var text=dict.labels[id];
+      if(lbl && text) lbl.textContent=text;
+      if(text) b.setAttribute('aria-label',dict.go+text);
+    });
+  }
+  window.wsSpyUpdateLabels=applySpyLabels;
+  // Applique la langue déjà active au chargement (currentLang vient du script principal)
+  applySpyLabels(typeof currentLang!=='undefined'?currentLang:'fr');
+  function setActive(id){IDS.forEach(function(k){if(btns[k]) btns[k].classList.toggle('is-active',k===id);});}
+  nav.querySelectorAll('button[data-target]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var el=document.getElementById(b.dataset.target); if(!el) return;
+      el.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
+      setActive(b.dataset.target);
+    });
+  });
+  function mount(){
+    var visibility=new Map(); var current=null;
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){visibility.set(e.target.id,e.isIntersecting?e.intersectionRatio:0);});
+      var bestId=current,best=-1;
+      visibility.forEach(function(r,id){if(r>best){best=r;bestId=id;}});
+      if(best>0&&bestId!==current){current=bestId;setActive(bestId);}
+    },{rootMargin:'-35% 0px -55% 0px',threshold:[0,.25,.5,.75,1]});
+    var found=0;
+    IDS.forEach(function(id){var el=document.getElementById(id); if(el){io.observe(el);found++;}});
+    if(found>0) requestAnimationFrame(function(){nav.classList.add('is-ready');});
+  }
+  var app=document.getElementById('app');
+  if(app && IDS.every(function(id){return !document.getElementById(id);})){
+    var mo=new MutationObserver(function(){
+      if(IDS.some(function(id){return document.getElementById(id);})){mo.disconnect();mount();}
+    });
+    mo.observe(app,{childList:true,subtree:true});
+    setTimeout(function(){try{mo.disconnect();}catch(e){} mount();},4000);
+  } else { mount(); }
+})();
+</script>
+
+
+<script>
+/* === Lovable unified IP dial-code detection (identical logic on all pages) === */
+(function(){
+  function selectByCountry(cc){
+    var dial = document.getElementById('dialCode');
+    if (!dial || !cc) return false;
+    cc = String(cc).toUpperCase();
+    var opt = dial.querySelector('option[data-country="'+cc+'"]')
+           || dial.querySelector('option[data-iso="'+cc+'"]');
+    if (opt){ dial.value = opt.value; try{ dial.dispatchEvent(new Event('change',{bubbles:true})); }catch(e){} return true; }
+    return false;
+  }
+  function selectByDial(code){
+    var dial = document.getElementById('dialCode');
+    if (!dial || !code) return false;
+    code = String(code); if (code.charAt(0)!=='+') code = '+' + code.replace(/^\+/,'');
+    for (var i=0;i<dial.options.length;i++){
+      if (dial.options[i].value === code){ dial.value = code; try{ dial.dispatchEvent(new Event('change',{bubbles:true})); }catch(e){} return true; }
+    }
+    return false;
+  }
+  function applyFallback(){
+    var dial = document.getElementById('dialCode');
+    if (dial && !dial.value) dial.value = '+41';
+  }
+  function tryProvider(url, extract){
+    return fetch(url).then(function(r){ return r.ok ? r.json() : Promise.reject(new Error('http')); }).then(function(data){
+      var info = extract(data);
+      if (!info) throw new Error('no-data');
+      if (selectByCountry(info.country)) return true;
+      if (selectByDial(info.dial)) return true;
+      throw new Error('no-match');
+    });
+  }
+  function detect(){
+    var dial = document.getElementById('dialCode');
+    if (!dial) return;
+    applyFallback();
+    tryProvider('https://ipapi.co/json/', function(d){
+      return { country: d && (d.country_code || d.country), dial: d && d.country_calling_code };
+    }).catch(function(){
+      return tryProvider('https://ipwho.is/', function(d){
+        if (!d || d.success === false) return null;
+        return { country: d.country_code, dial: d.calling_code };
+      });
+    }).catch(function(){
+      return tryProvider('https://get.geojs.io/v1/ip/country.json', function(d){
+        return { country: d && (d.country || d.country_code), dial: null };
+      });
+    }).catch(function(){ applyFallback(); });
+  }
+  function init(){
+    if (document.getElementById('dialCode')) { detect(); return; }
+    var mo = new MutationObserver(function(){
+      if (document.getElementById('dialCode')){ mo.disconnect(); detect(); }
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    setTimeout(function(){ try{ mo.disconnect(); }catch(e){} if (document.getElementById('dialCode')) detect(); }, 20000);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+<script src="gsap.min.js" defer></script><script src="ScrollTrigger.min.js" defer></script><script src="background-loader.js" defer></script><script src="identity.js" defer></script><script src="text-motion.js?v=3" defer></script><script src="portfolio-effects.js" defer></script>
+<script src="portfolio-media.js" defer></script></body>
+
+<script src="contact-submit.js" defer></script>
+</html>

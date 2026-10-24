@@ -1,0 +1,70 @@
+/* Arabic is typeset as connected text; visual shells retain their geometry. */
+html[lang="ar"] body{font-family:Tahoma,"Noto Sans Arabic","Segoe UI",Arial,sans-serif;line-height:1.9;direction:rtl}
+html[lang="ar"] body :is(h1,h2,h3,p,a,button,label,input,textarea,select,em,span,.section-label,.card-title,.card-text,.tl-heading,.tl-desc,.tl-stat,.pricing-price,.pricing-badge,.pricing-note,.team-name,.team-role,.team-bio){font-family:Tahoma,"Noto Sans Arabic","Segoe UI",Arial,sans-serif!important;letter-spacing:0!important;text-transform:none!important}
+html[lang="ar"] :is(h1,h2,h3,p,.hero-title,.section-title,.portfolio-title,.page-title,.pricing-price){word-break:normal!important;overflow-wrap:break-word;white-space:normal}
+html[lang="ar"] body .hero-title{font-size:clamp(32px,4.5vw,58px);line-height:1.65;max-width:850px;margin-inline:auto}
+html[lang="ar"] body .hero-title em{display:inline!important;font-style:normal!important;font-weight:700;animation:none;filter:none}
+html[lang="ar"] :is(.section-title,.portfolio-title,.page-title){font-size:clamp(27px,3.2vw,42px);line-height:1.65}
+html[lang="ar"] :is(.hero-subtitle,.portfolio-desc,.card-text,.tl-desc,.team-bio,.faq-answer-inner,.lead){line-height:1.95}
+html[lang="ar"] :is(.dc-text-title,.dc-text-copy){background:none!important;color:#f6f7fb!important;opacity:1!important;translate:none!important;-webkit-text-fill-color:currentColor}
+html[lang="ar"] :is(.section-title,.page-title) em{font-style:normal}
+html[lang="ar"] :is(.team-person,.contact-card,.faq-question,.portfolio-text,.pricing-card,.tl-card){text-align:start}
+html[lang="ar"] #contact :is(.section-title,.section-label){text-align:start}
+/* Keep the logo, language control and preview devices in their original positions. */
+html[lang="ar"] #navbar nav,html[lang="ar"] .portfolio-mockup{direction:ltr}
+html[lang="ar"] #navbar .nav-links{direction:rtl}
+html[lang="ar"] #navbar .lang-switcher{margin-left:auto!important;margin-right:0!important}
+html[lang="ar"] .lang-menu{left:auto;right:0;direction:rtl;text-align:right}
+html[lang="ar"] .lang-menu button{text-align:right;justify-content:space-between}
+html[lang="ar"] :is(.portfolio-text ul li,.pricing-features li){padding-left:0;padding-right:28px;line-height:1.85}
+html[lang="ar"] :is(.portfolio-text ul li,.pricing-features li)::before{left:auto;right:0}
+html[lang="ar"] :is(input[type="email"],input[type="tel"],.phone-row,a[href^="mailto:"],a[href^="tel:"]){direction:ltr;unicode-bidi:isolate}
+html[lang="ar"] .phone-row select{direction:ltr}
+html[lang="ar"] input:not([type="email"]):not([type="tel"]),html[lang="ar"] textarea{text-align:right}
+html[lang="ar"] :is(.mockup-pc,.mockup-phone,.logo-img){direction:ltr}
+html[lang="ar"] .btn-visit svg{transform:scaleX(-1)}
+html[lang="ar"] .ws-spy{direction:rtl;right:auto;left:20px}
+html[lang="ar"] .ws-spy ul::before{right:auto;left:11px}
+html[lang="ar"] .pricing-price{font-size:clamp(24px,2.4vw,34px);line-height:1.7}
+html[lang="ar"] .pricing-price span{display:block;font-size:14px;line-height:1.8}
+html[lang="ar"] .pricing-badge{white-space:normal;line-height:1.6}
+html[lang="ar"] .page-meta a{display:inline-block;direction:ltr;unicode-bidi:isolate}
+html[lang="ar"] article ul li{padding-left:0;padding-right:22px}
+html[lang="ar"] article ul li::before{left:auto;right:0;content:"←"}
+html[lang="ar"] .faq-question{gap:16px;line-height:1.8}
+html[lang="ar"] .faq-question>span:first-child{min-width:0;flex:1}
+html[lang="ar"] .faq-item.open .faq-answer{max-height:none}
+@media(max-width:900px){
+ html[lang="ar"] body:not(.dc-legal) #hero{height:auto;min-height:100svh;padding-top:155px;padding-bottom:56px}
+ html[lang="ar"] body:not(.dc-legal) .hero-title{font-size:clamp(29px,6.6vw,44px);line-height:1.65}
+ html[lang="ar"] .hero-subtitle{font-size:16px}
+ html[lang="ar"] body:not(.dc-legal) .hero-tag{font-size:12px;line-height:1.8}
+ html[lang="ar"] body:not(.dc-legal) #navbar .nav-links a{font-size:12px;line-height:1.6}
+ html[lang="ar"] .section-inner{min-width:0}
+}
+@media(max-width:600px){html[lang="ar"] #equipe .team-person{text-align:center}html[lang="ar"] #equipe .team-bio{text-align:right}}
+
+/* RTL root overflow: the anti-spam field must not create a 10,000px canvas. */
+html[lang="ar"]{overflow-x:clip}
+html[lang="ar"] body{overflow-x:clip}
+html[lang="ar"] .hp-field{left:0;right:auto;top:0;clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap}
+/* Arabic stays connected and readable, including accent words and numbers. */
+html[lang="ar"] body :is(.hero-title,.hero-title em,.section-title,.section-title em,.portfolio-title,.page-title,.page-title em){font-family:Tahoma,"Noto Sans Arabic","Segoe UI",Arial,sans-serif!important;letter-spacing:0!important;font-style:normal!important;font-weight:700}
+html[lang="ar"] body .hero-title{font-size:48px;line-height:1.65}
+html[lang="ar"] body :is(.section-title,.portfolio-title,.page-title){font-size:36px;line-height:1.65}
+html[lang="ar"] .tl-stat{font-size:26px;line-height:1.7;white-space:normal;overflow-wrap:normal;unicode-bidi:plaintext}
+html[lang="ar"] :is(.pricing-price,.team-name,.portfolio-title,.tl-stat){unicode-bidi:plaintext}
+html[lang="ar"] .timeline-wrap{direction:ltr}
+html[lang="ar"] .tl-card{direction:rtl}
+html[lang="ar"] .hero-content{animation:none;opacity:1;transform:none}
+html[lang="ar"] .tl-row :is(.tl-card,.tl-mid){opacity:1;transform:none}
+html[lang="ar"] .ws-spy .lbl{transform:none}
+html[lang="ar"] #langMenu{visibility:hidden}
+html[lang="ar"] .lang-switcher.open #langMenu,html[lang="ar"] #langSwitcher.open #langMenu{visibility:visible}
+@media(max-width:900px){
+ html[lang="ar"] body .hero-title{font-size:36px}
+ html[lang="ar"] body :is(.section-title,.portfolio-title,.page-title){font-size:30px}
+ html[lang="ar"] body .tl-stat{font-size:24px}
+ html[lang="ar"] :is(.btn-cta,.card-btn,.btn-visit){white-space:normal;line-height:1.7;max-width:100%}
+}
+@media(max-width:600px){html[lang="ar"] body .hero-title{font-size:30px}}
